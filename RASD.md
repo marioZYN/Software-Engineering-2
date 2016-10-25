@@ -33,4 +33,15 @@ Assuming all the domain properties hold and we derive the correspondong requirem
   * The system must create and mantain only one password per credential
   * The system must check whether the password is correct under the credential
   * The system must allow users to login when provided with the correct credential and password
+* [G2]Registered users can find the locations of available cars within a certain distance from their current location or from a specified address
+ * The system must be able to get all the locations of the cars
+ * The system has a default range which identifies the term "nearby"
+ * The system must be able to get all the information of the nearby cars with a certain locaiton as input
+* [G3]Among the available cars in a certain geographical region, users must be able to reserve a single car for up to one hour before they pick it up.
+ * The system must allow users to reserve a single car
+ * The system maintains a clock for each car. Once the car is resvered by a user, a one-hours time clock starts
+* [G4]If a car is not picked‐up within one hour from the reservation, the system tags the car as available again, and the reservation expires; the user pays a fee of 1 EUR.
+ * The system must allow the user who has made a reservation for a car to stop the clock of that car
+ * The system must charge the user 1 euro for not being able to stop the clock within one hour
+ * The system will make the car state changed to available if the clock is not stopped within in one hour
   
