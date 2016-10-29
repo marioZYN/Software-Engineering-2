@@ -79,6 +79,35 @@ Assuming all the domain properties hold and we derive the correspondong requirem
  * The system must charge the user 1 euro for not being able to stop the clock within one hour
  * The system will make the car state changed to available if the clock is not stopped within in one hour
  
+* [G5]A user that reaches a reserved car must be able to tell the system she’s nearby, so the system unlocks the car and the user may enter.
+ * The system must be able to check the position of the user according to the user's GPS
+ * The system must be able to check the position of the car according to the car's GPS
+ * The system should be able to receive the messages which are sent by different users as the same time
+ * The system should be able to check whether the postition of the user is the same as the corresponding car
+ * If the user and the corresponding car are in the same position, the system must transfer the control information to the appropriate car for unlocking the car
+ * If the user and the corresponding car are not in the same position, the system must be able to keep the car locked
+  
+* [G6]As soon as the engine ignites, the system starts charging the user for a given amount of money per minute; the user is notified of the current charges through a screen on the car.
+ * The system must be able to detect whether the engine of the car is ignited or not
+ * The system must be able to record the total using time
+ * The system must be able to estimate the total fee during the renting servece
+ * The system must be able to transfer the charging informatin to the appropriate car
+  
+* [G7]The system stops charging the user as soon as the car is parked in a safe area and the user exits the car; at this point, the system locks the car automatically.
+ * The system must be able to check the position of the car according to the car's GPS
+ * The system must be able to detect whether the car is parked or not
+ * The system must be able to check whether the car is parked in the safe area
+ * The system must be able to detect whether the user has exited the car
+ * if the user still stay in the car, the system must be able to keep the car in the unlocked state
+ * if the car is not parked in the safe area, the system must be able to keep the car in the unlocked state
+ * if the car is parked in the safe and the user has exited the car, the system must be able to transfer the control information for locking the car
+  
+* [G8]The set of safe areas for parking cars is pre-defined by the management system.
+ * The system must be able to insert the area in the safe area set
+ * The system must be able to delect the area in the safe area set
+ * The system must be able to retrieve the area in the safe area set
+ * The system must be able to replace the area in the safe area set
+ 
 * [G9] If the system detects the user took at least two other passengers onto the car, the system applies a discount of 10% on the last ride.
  * The system will receive and will analyze the information retuned from people detection sensor whether more than two passengers onto the cars or not, if it actually go beyond, the system will register a discount of 10% on the last ride
 * [G10]If a car is left with no more than 50% of the battery empty, the system applies a discount of 20% on the last ride.
