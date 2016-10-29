@@ -1,5 +1,19 @@
+## Content
+* 1. Introduction
+ * 1.1 Description of the given system
+ * 1.2 Goals
+ * 1.3 Domain Properties
+ * 1.4 Glossary
+ * 1.5 Stakeholders
+* 2. Actors Identifying
+* 3. Requirements
+* 4. Scenario Identifying
+* 5. UML models
+* 6. Alloy model
+* 7. Working time
+ 
 ## Introduction
-### The description of the problem
+### The description of the system
 We are required to deveplop a digital management system for a car-sharing service. More precisely, this system can be accessed by the clients from a mobile deivce and processed by a server. The system provides electric cars renting service. The registered users can search available cars, make reservations, acquire current charging fees.
 Moreover, the system has certain mechanics to incentivize the virtuous behaviours of the users, which includes creating discount of the charging fees or increasing the charging fees.
 
@@ -18,13 +32,32 @@ Moreover, the system has certain mechanics to incentivize the virtuous behaviour
 * [G12]If a car is left at more than 3 KM from the nearest power grid station or with more than 80% of the battery empty, the system charges 30% more on the last ride to compensate for the cost required to re-charge the car on-site.
 * [G13]If the user enables the money saving option, he/she can input his/her final destination and the system provides information about the station where to leave the car to get a discount. This station is determined to ensure a uniform distribution of cars in the city and depends both on the destination of the user and on the availability of power plugs at the selected station.
 
-### Domain properties
+### Domain properties  
 We suppose the following statements hold in the analyzed world.
 * The credentials and payment information provided by the users are correct.
 * Assume that the credits in the users credit cards or bank accounts are always enough.
 * Each car and users' mobile devices contain GPS and the GPS works correctly.
 * There will not be a case when the user is driving and the car is out of power.
 * Each car has a people detection sensor,as soon as the engine ignites, sensor detects the number of people into the car.
+* There will be no car accident which interrupts the users while driving.
+* Cars are always connected to the network.
+
+### Glossary
+Here presents the detail defination of some common used terms.
+* User
+* Crendentials
+* payment information
+* Driver
+* Passenger
+* Safe area
+
+### Stakeholders
+
+### Actors Identifying
+The actors involved in our system is described below:
+* User: User logs into the system and performs the payment.(A user can either be a driver or a passenger)
+* Driver: The person who dirves the car.
+* Passenger: The persons in the car who are not driving.
 
 ### Requirements
 Assuming all the domain properties hold and we derive the correspondong requirements from the goals.
@@ -56,3 +89,15 @@ Assuming all the domain properties hold and we derive the correspondong requirem
  * system must be able to get always the positin of the cars and all position of power grid station.
  * system will register a increase of 30% on the fee of last ride, if there are not any power grid station within 3KM from the position of car,where is left after using, and the battery will remain less than 20%.
  * system must notice the position of car out of range to the staff, that take care to re-charge these car on-site.
+ 
+
+### Scenario identifying
+#### Scenario 1
+Mario is a college student who possesses a driving licence. He saw the ads about PowerEnJoy and decided to try this service. He uses his laptop to access the website of PowerEnjoy and proceeds the registering procedure. He provides his credentials and payment information. After the system analyzes his data, Mario receives a password. He logs into the system and finds some available cars near his place. He selects one car and makes a reservation. 30 minutes later, Mario arrives at the car position and he uses his laptop to notify the system that he is near the car. The system checks his position and unlocks the car. Mario drives home and on the car screen he can see his current driving route and safe areas nearby. He stops the car in one of the safe areas near home and finishes his journey.
+
+#### Scenario 2
+Tom is an old user of the PowerEnJoy. After work, he decides to reserve a car to go home. He uses his smart phone to reserve a car and head to it. However, he encounters his colleague on his way and they chat for a while. Before he manages to get to the car, one hour has passed. He receives a message on his phone that tells him his reservation is cancelled and he is charged one euro for punishment. Tom has to log in the system and reserve a car again.
+
+### UML model
+
+### Alloy model
