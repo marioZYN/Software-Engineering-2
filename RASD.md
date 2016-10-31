@@ -64,12 +64,14 @@ There are some information that is not clear in the specification document, so h
 ### 1.6 Stakeholders
 
 ### Actors Identifying
-The actors involved in our system is described below:
+The actors involved in our system is described below
+
+* Guest: A potential user who has not registered yet
 * User: User logs into the system and performs the payment.(The driver can only be the user)
-* Passenger: The persons in the car who are not driving.
 
 ### Requirements
 Assuming all the domain properties hold and we derive the correspondong requirements from the goals.
+
 * [G1]Users can register to the system and get the password by providing credentials and payment information
   * The system must let only one registeration per credential.
   * The system must be able to check whether the payment information is correct or not
@@ -145,16 +147,34 @@ Tom is an old user of the PowerEnJoy. After work, he decides to reserve a car to
 ### 5 UML model
 
 #### 5.1 Use case description
-(1)**Name**: Register  
-**Actor**: User  
-**Entry Condition**: No  
+(1)Register  
+**Name**: Register  
+**Actor**: Guest  
+**Entry condition**: No  
 **Flow of events**:  
+
 * The user enters the web home page or opens the mobile app and clicks "Sign up"
 * The user fills in the credentials
 * The user fills in the payment information
 
-**Exit condition**: The user receives password from his/her email box  
+**Exit condition**: The user receives password from his/her email box.  
 **Exceptions**: The user misses information during filling blanks. The user has already registered with the same credentials. Or the user's crenetials or payment information are not correct.  
 **Exceptions handling**: The user can either continue filling all the correct information or terminates the registering process.
 
+(2)Log in  
+**Name**: Log in  
+**Actor**: User  
+**Entry condition**: The user provides correct email address and password  
+**Flow of events**:  
+
+* The user enters his/her email address and password
+* The user pushes the "log in " button
+
+**Exict condition**: The user is redirected to the personal home page  
+**Exceptions**: 
+
+* The system database can not find registering information of this current email address.  
+* The user provides wrong match between email address and password.
+
+**Exception handlings**: In either case, the user can choose to continue filling the blanks until correct match occurs or the user can exit the process.
 ### Alloy model
