@@ -37,6 +37,7 @@ Moreover, the system has certain mechanics to incentivize the virtuous behaviour
 
 ### 1.3 Domain properties  
 We suppose the following statements hold in the analyzed world.
+
 * The credentials and payment information provided by the users are correct.
 * Assume that the credits in the users credit cards or bank accounts are always enough.
 * Each car and users' mobile devices contain GPS and the GPS works correctly.
@@ -44,15 +45,37 @@ We suppose the following statements hold in the analyzed world.
 * Each car has a people detection sensor,as soon as the engine ignites, sensor detects the number of people into the car.
 * There will be no car accident which interrupts the users while driving.
 * Cars are always connected to the network.
+* The user always take care of the message sent by the system
 
 ### 1.4 Glossary
 Here presents the detail defination of some common used terms.
+
 * User
-* Crendentials
-* payment information
+	* He is a client of the renting service.
+	* Before using the renting service,  he should register in the system and insert some personal information
+
+* Credentials
+	* Some personal information about each user, including:
+	* Name
+	* E_mail address
+	* Phone number
+	* Number of drive license
+
+* Payment information
+	* Number of the bank acount or credit card
+	* Expired time
+	* Security code 
+	* Holder name
+
 * Driver
+	* He is the driver of the renting car.
+
 * Passenger
+	* The passenger on the car
+	* The passenger is not the driver 
+
 * Safe area
+	* a set of location predefined as being safe
 
 ### 1.5 Assumption
 There are some information that is not clear in the specification document, so here lists the assumptions which make the specification more clear.
@@ -62,9 +85,12 @@ There are some information that is not clear in the specification document, so h
 
 
 ### 1.6 Stakeholders
+* There would be two main stakeholders
+	* One is the company who provides this service system and earns money from it
+	* The other is the government who wants to get a more usable and convenient renting system
 
 ### Actors Identifying
-The actors involved in our system is described below
+The actors involved in our system is described below  
 
 * Guest: A potential user who has not registered yet
 * User: User logs into the system and performs the payment.(The driver can only be the user)
@@ -144,11 +170,17 @@ Mario is a college student who possesses a driving licence. He saw the ads about
 #### Scenario 2
 Tom is an old user of the PowerEnJoy. After work, he decides to reserve a car to go home. He uses his smart phone to reserve a car and head to it. However, he encounters his colleague on his way and they chat for a while. Before he manages to get to the car, one hour has passed. He receives a message on his phone that tells him his reservation is cancelled and he is charged one euro for punishment. Tom has to log in the system and reserve a car again.
 
+#### Scenario 3  
+Nino is a college student. Meanwhile, he is also a user of the PowerEnjoy. He students in the university together with two of his roommates. Finishing his lectures at the afternoon, Nino comes back home together with his roommates. First of all, Nino login to the PowerEnJoy system using his smart phone. Then, he reserve a car and arrive at the position of the car. Nino pick it up and drive the car home. 40 minutes later, Nino stops the car at one the safe locations near his home. Since there are 2 passengers in the car in this renting service, Nino gets 10% discount for the total renting fee.
+
+#### Scenario 4
+Gino is a employee of the technology company. Everyday, Gino rents the electric car for commute. He is an old user of the PowerEnJoy. In the morning, He rents a car from th safe area nearby his home. Driving the renting car to the company, he stops the car in the safe area in front of the company. After exiting the car, Gino  takes care of plugging the car into the power grid. After work, Gino rents a electric car in PowerEnJoy system by his smartphone once again. When he arrives at home, he takes care of plugging the car into the power grid as the same as what he did in the morning. Therefore, he get 30% of discount for these two renting services in the whole day.
+
 ### 5 UML model
 
 #### 5.1 Use case description
-(1)Register  
-**Name**: Register  
+(1)Guest registers in the system   
+**Name**: Guest registers in the system 
 **Actor**: Guest  
 **Entry condition**: No  
 **Flow of events**:  
@@ -156,19 +188,26 @@ Tom is an old user of the PowerEnJoy. After work, he decides to reserve a car to
 * The user enters the web home page or opens the mobile app and clicks "Sign up"
 * The user fills in the credentials
 * The user fills in the payment information
+* The system gives the user a password for loging in 
 
 **Exit condition**: The user receives password from his/her email box.  
-**Exceptions**: The user misses information during filling blanks. The user has already registered with the same credentials. Or the user's crenetials or payment information are not correct.  
+**Exceptions**:
+ 
+* The user misses information during filling blanks. *
+* The user has already registered with the same credentials. 
+* the user's credentials or payment information are not correct.  
+
 **Exceptions handling**: The user can either continue filling all the correct information or terminates the registering process.
 
-(2)Log in  
-**Name**: Log in  
+(2)User logs in to the system   
+**Name**: User logs in  to the system
 **Actor**: User  
 **Entry condition**: The user provides correct email address and password  
 **Flow of events**:  
 
 * The user enters his/her email address and password
 * The user pushes the "log in " button
+* The system redirects the user to his personal home page
 
 **Exict condition**: The user is redirected to the personal home page  
 **Exceptions**: 
@@ -177,4 +216,9 @@ Tom is an old user of the PowerEnJoy. After work, he decides to reserve a car to
 * The user provides wrong match between email address and password.
 
 **Exception handlings**: In either case, the user can choose to continue filling the blanks until correct match occurs or the user can exit the process.
+
+(3)User reserves a electric car  
+**Name**: User reserves a electric car
+**Actor**: User
+ 
 ### Alloy model
