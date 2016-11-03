@@ -161,6 +161,12 @@ Assuming all the domain properties hold and we derive the correspondong requirem
  * system must be able to get always the positin of the cars and all position of power grid station.
  * system will register a increase of 30% on the fee of last ride, if there are not any power grid station within 3KM from the position of car,where is left after using, and the battery will remain less than 20%.
  * system must notice the position of car out of range to the staff, that take care to re-charge these car on-site.
+
+* [G13]If the user enables the money saving option, he/she can input his/her final destination and the system provides information about the station where to leave the car to get a discount. This station is determined to ensure a uniform distribution of cars in the city and depends both on the destination of the user and on the availability of power plugs at the selected station.
+	* The system must be able to get the distribution of the cars
+	* The system must be able to detect whether the user enable the money saving option or not
+	* The system must be able to select the station according to the user's destination for ensuring a uniform distribution of the cars
+	* The system must be able to detect the availability of power plugs at the selected station
  
 
 ### Scenario identifying
@@ -180,7 +186,7 @@ Gino is a employee of the technology company. Everyday, Gino rents the electric 
 
 #### 5.1 Use case description
 (1)Guest registers in the system   
-**Name**: Guest registers in the system 
+**Name**: Guest registers in the system  
 **Actor**: Guest  
 **Entry condition**: No  
 **Flow of events**:  
@@ -193,23 +199,23 @@ Gino is a employee of the technology company. Everyday, Gino rents the electric 
 **Exit condition**: The user receives password from his/her email box.  
 **Exceptions**:
  
-* The user misses information during filling blanks. *
+* The user misses information during filling blanks. 
 * The user has already registered with the same credentials. 
 * the user's credentials or payment information are not correct.  
 
 **Exceptions handling**: The user can either continue filling all the correct information or terminates the registering process.
 
-(2)User logs in to the system   
-**Name**: User logs in  to the system
-**Actor**: User  
-**Entry condition**: The user provides correct email address and password  
+(2)Guest logs in to the system   
+**Name**: Guest logs in  to the system  
+**Actor**: Guest  
+**Entry condition**: The guest provides correct email address and password  
 **Flow of events**:  
 
 * The user enters his/her email address and password
 * The user pushes the "log in " button
 * The system redirects the user to his personal home page
 
-**Exict condition**: The user is redirected to the personal home page  
+**Exit condition**: The user is redirected to the personal home page.  
 **Exceptions**: 
 
 * The system database can not find registering information of this current email address.  
@@ -217,8 +223,114 @@ Gino is a employee of the technology company. Everyday, Gino rents the electric 
 
 **Exception handlings**: In either case, the user can choose to continue filling the blanks until correct match occurs or the user can exit the process.
 
-(3)User reserves a electric car  
-**Name**: User reserves a electric car
-**Actor**: User
+(3)User reserves an available car   
+**Name**: User reserves an available car  
+**Actor**: User  
+**Entry condition**: The user successfully login with his/her e_mail address and password  
+**Flow of events**:  
+
+* The user clicks on the "From current address" button or sets the "From specified address" box to the desired value. 
+* The user sets the "Certain distance" to the desired value.
+* The system notifies the user with the available cars within the desired distance of desired address.
+* The user selects one of the available cars 
+* The user clicks on the "Reserve this car" button.
+* The system notifies the user for the reservation has been done.
+
+**Exit condition**: The user receives the notification about the reservation is completed and clicks the buttom "Confirm".  
+**Exception**:
+
+* There is no available car within desired distance of desired address.
+* The user does not want to reserve any of the available car
+* The desired car has been reserved before the user completes the reservation
+
+**Exception handing**: The user can reset the desired distance and desired address, or select another available car. The user can also cancel this reservation.
+
+(4)User starts renting   
+**Name**:User starts renting  
+**Actor**:User  
+**Entry condition**:The user has reserved a car and pick it up within 1 hour  
+**Flow of events**:
+
+* The user notifies the system with his/her nearby.
+* The system checks his/her location and unlocks the corresponding car.
+* The user enters the car and ignites the engine.
+* The system starts charging.
+
+**Exit condition**:The user is notified of the current charges through a screen on the car.
+**Exception**:The position of the user is not as the same as the position of the corresponding car.  
+**Exception handing**:The system should notify the user that he/she is not in the correct position
+
+
+(5)User ends renting  
+**Name**:User ends renting  
+**Actor**:User  
+**Entry condition**:The user has started the renting successfully  
+**Flow of events**:
+
+* The user parks the renting car in the safe area.
+* The user exits the car.
+* The system locks the car automatically.
+* The system detects the passenger in this renting service, if the passenger is no less then 2, applies 10% discount for this renting service.
+* The system detects the battery remaining amount, if the battery is no more than 50% empty, applies 20% discount for this renting service.
+* The system detects whether the car is plugged into the power gird or not, if yes, applies 30% discount for this renting service.
+* The system detects the position of the car, if the car is 3KM away from the power station and the battery is more than 80% empty, charges 30% more for this renting service. 
+
+**Exit condition**:The system calculate out the total fee for this renting servcie  
+**Exception**:The user does not park the car in the safe area.  
+**Exception handing**:The system notifies the user that he/she does not park the car in the correct position.  
+
+(6)User enables save option  
+**Name**:User enables save option   
+**Actor**:User   
+**Entry condition**:User has started the renting successfully  
+**Flow of events**:
+
+* The user clicks the "Money saving option" button.
+* The user sets the "Destination" to the desired value.
+* The system tells the user about the station where the user should park the car in.
+  
+**Exit condition**: The user receives the message about where to park the car. 
+**Exception**:There is no station for user to park the car.  
+**Exception handing**:The user can either reset the destination or cancel this application.  
+
+(7)Maintainer charges the electric car  
+**Name**:Maintainer charges the electric car  
+**Actor**:Maintainer  
+**Entry condition**:The user does not park the car in the power grid station or does not plug the car into the power grid.
+**Flow of events**:
+
+* The user parks the car in the station without power grid or leaves the car without charging.
+* The maintainer sent the message to the system for asking authotity.
+* The system unlocks the corresponding car.
+* The maintainer restart the car.
+* The maintainer plugs the power grid into the car.
+* The maintainer exits the car.
+* The system locks the car.
+  
+**Exit condition**:The system receives the confirmation about the car is plugged into the power grid.  
+**Exception**:
+
+* There is not available power grid in the corresponding station
+* The car is out of power in the way to the power grid station
+  
+**Exception handing**:  
+
+* The maintainer changes others power grid station for charging the car.
+* The maintainer asks for special assistance.
+
+(8)Maintainer records the user who does not charge the car  
+**Name**:Maintainer records the user who does not charge the car  
+**Actor**:Maintainer  
+**Entry condition**:The user does not park the car in the power grid station or does not plug the car into the power grid.  
+**Flow of events**:
+
+* The user does not park the car in the power grid station or does not plug the car into the power grid.
+* The maintainer send the message to the system for reporting the code of the car.
+* The system retrieves the car and the corresponding user.
+* The system send the confirmation to the maintainer. 
+  
+**Exit condition**:The maintainer receives the confirmation  
+**Exception**:There is no available power grid in the corresponding station.    
+**Exception handing**:The maintainer send the message to the system for reporing there is no power grid available.  
  
 ### Alloy model
