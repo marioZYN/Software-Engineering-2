@@ -39,13 +39,18 @@ Moreover, the system has certain mechanics to incentivize the virtuous behaviour
 We suppose the following statements hold in the analyzed world.
 
 * The credentials and payment information provided by the users are correct.
-* Assume that the credits in the users credit cards or bank accounts are always enough.
-* Each car and users' mobile devices contain GPS and the GPS works correctly.
-* There will not be a case when the user is driving and the car is out of power.
-* Each car has a people detection sensor,as soon as the engine ignites, sensor detects the number of people into the car.
-* There will be no car accident which interrupts the users while driving.
+* Each car and safe area and users' mobile devices contain GPS and the GPS works correctly.
+* Each car has a way to determine the number of people into the car.
+* Each car know when need to lock the care after user leave it.
+* Each car Know the own battery's state(percent of battery empty,charging).
 * Cars are always connected to the network.
+* Only registered users can operate with system.
+* The user can only reserve a car that does not reserve by any other.  
+* The reserved car can be unclocked only by user who reserve it.
+* The system sent always the message to user when it is necessary.
 * The user always take care of the message sent by the system
+* There are a timer to tack care the management of some operation.
+* There are staff to tack care of charging the battery of cars.
 
 ### 1.4 Glossary
 Here presents the detail defination of some common used terms.
@@ -76,12 +81,18 @@ Here presents the detail defination of some common used terms.
 
 * Safe area
 	* a set of location predefined as being safe
+	* it may has the power plug 
 
 ### 1.5 Assumption
 There are some information that is not clear in the specification document, so here lists the assumptions which make the specification more clear.
 
 * The available cars are the cars with full battery 
+* There will not be a case when the user is driving and the car is out of power.
 * Since only the user uploads the information of the driving licence, only the user can act as a driver while passengers can not.
+* Assume that the credits in the users credit cards or bank accounts are always enough.
+* There will be no car accident which interrupts the users while driving.
+* Assume that the users parks always the car into safa area.
+
 
 
 ### 1.6 Stakeholders
@@ -149,10 +160,10 @@ Assuming all the domain properties hold and we derive the correspondong requirem
  * The system must be able to replace the area in the safe area set
  
 * [G9] If the system detects the user took at least two other passengers onto the car, the system applies a discount of 10% on the last ride.
- * The system will receive and will analyze the information retuned from people detection sensor whether more than two passengers onto the cars or not, if it actually go beyond, the system will register a discount of 10% on the last ride
+ * The system will analyze whether more than two passengers,excluding driver, onto the cars or not, if it actually go beyond, the system will register a discount of 10% on the last ride
 
 * [G10]If a car is left with no more than 50% of the battery empty, the system applies a discount of 20% on the last ride.
- * After the lock of car, the system will examine the level of battery using battery fuel gauge IC, if over half the battery is remained, then the system will register a discount of 20% on the last ride
+ * After the lock of car, the system will examine the level of battery, if over half the battery is remained, then the system will register a discount of 20% on the last ride
 
 * [G11]If a car is left at special parking areas where they can be recharged and the user takes care of plugging the car into the power grid, the system applies a discount of 30% on the last ride.
  * system will register a discount of 30% on the last ride if it recognize the car is parked at special area, and it's charging the battery within a determined time. 
@@ -161,7 +172,9 @@ Assuming all the domain properties hold and we derive the correspondong requirem
  * system must be able to get always the positin of the cars and all position of power grid station.
  * system will register a increase of 30% on the fee of last ride, if there are not any power grid station within 3KM from the position of car,where is left after using, and the battery will remain less than 20%.
  * system must notice the position of car out of range to the staff, that take care to re-charge these car on-site.
- 
+* [G13]If the user enables the money saving option, he/she can input his/her final destination and the system provides information about the station where to leave the car to get a discount. This station is determined to ensure a uniform distribution of cars in the city and depends both on the destination of the user and on the availability of power plugs at the selected station.
+ * system must be able to get the position from the information provided by user.
+ * system must be able to advise user the best position to park the car for taking a discount, based on the destination and analysis of position of all safe areas and cars
 
 ### Scenario identifying
 #### Scenario 1
