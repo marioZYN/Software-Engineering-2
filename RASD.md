@@ -172,19 +172,11 @@ Assuming all the domain properties hold and we derive the correspondong requirem
  * system must be able to get always the positin of the cars and all position of power grid station.
  * system will register a increase of 30% on the fee of last ride, if there are not any power grid station within 3KM from the position of car,where is left after using, and the battery will remain less than 20%.
  * system must notice the position of car out of range to the staff, that take care to re-charge these car on-site.
-<<<<<<< HEAD
-* [G13]If the user enables the money saving option, he/she can input his/her final destination and the system provides information about the station where to leave the car to get a discount. This station is determined to ensure a uniform distribution of cars in the city and depends both on the destination of the user and on the availability of power plugs at the selected station.
- * system must be able to get the position from the information provided by user.
- * system must be able to advise user the best position to park the car for taking a discount, based on the destination and analysis of position of all safe areas and cars
-=======
-
 * [G13]If the user enables the money saving option, he/she can input his/her final destination and the system provides information about the station where to leave the car to get a discount. This station is determined to ensure a uniform distribution of cars in the city and depends both on the destination of the user and on the availability of power plugs at the selected station.
 	* The system must be able to get the distribution of the cars
 	* The system must be able to detect whether the user enable the money saving option or not
 	* The system must be able to select the station according to the user's destination for ensuring a uniform distribution of the cars
 	* The system must be able to detect the availability of power plugs at the selected station
- 
->>>>>>> fa9132c941b72d742338ebaf0e7d567477c89e9b
 
 ### Scenario identifying
 #### Scenario 1
