@@ -39,10 +39,11 @@ Moreover, the system has certain mechanics to incentivize the virtuous behaviour
 We suppose the following statements hold in the analyzed world.
 
 * The credentials and payment information provided by the users are correct.
+* Assume that the credits in the users credit cards or bank accounts are always enough.
 * Each car and safe area and users' mobile devices contain GPS and the GPS works correctly.
 * Each car has a way to determine the number of people into the car.
-* Each car know when need to lock the care after user leave it.
-* Each car Know the own battery's state(percent of battery empty,charging).
+* Each car knows when to lock the car after user leaves it.
+* Each car Knows the own battery's state(percent of battery empty,charging).
 * Cars are always connected to the network.
 * Only registered users can operate with system.
 * The user can only reserve a car that does not reserve by any other.  
@@ -87,12 +88,10 @@ Here presents the detail defination of some common used terms.
 There are some information that is not clear in the specification document, so here lists the assumptions which make the specification more clear.
 
 * The available cars are the cars with full battery 
+* The available cars are the cars in the safe areas
 * There will not be a case when the user is driving and the car is out of power.
 * Since only the user uploads the information of the driving licence, only the user can act as a driver while passengers can not.
-* Assume that the credits in the users credit cards or bank accounts are always enough.
 * There will be no car accident which interrupts the users while driving.
-* Assume that the users parks always the car into safa area.
-
 
 
 ### 1.6 Stakeholders

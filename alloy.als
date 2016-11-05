@@ -1,5 +1,8 @@
+open util/boolean
+
 sig Float { }
 sig Astring { }
+
 sig Credential {
 	email : one Astring,
 	password : one Astring,
@@ -20,7 +23,7 @@ sig PaymentInfo {
 sig User {
 	credential : one Credential,
 	paymentInfo : set PaymentInfo,
-	car : lone Car
+
 } {
 	paymentInfo != none
 }
@@ -58,12 +61,19 @@ sig Car {
 	state : one CarState,
 	battery : one BatteryState,
 	currentPosition : one Position,
-	user : lone User
 } {
 	capacity > 0 and capacity <= 4
 	state = AVAILABLE or state = RESERVED <=> battery = FULL 
-	#user = 1 <=> (state = RESERVED or state = WORKING)
-	#user = 0 <=> (state = AVAILABLE or state = NOTAVAILABLE)
+	state = NOTAVAILABLE <=> (currentPosition in UnSafeArea.points or battery != FULL)
+	currentPosition in SafeArea.points <=> state = AVAILABLE or state = RESERVED
+	state = RESERVED <=> this in Reservation.car
+}
+
+sig Reservation {
+	user : one User,
+	car : one Car,
+} {
+	car.state = RESERVED
 }
 
 one sig System {
@@ -76,18 +86,34 @@ one sig System {
 	all sa : SafeArea | sa in safeAreas 
 }
 
+sig Ride {
+	user : one User,
+	car : one Car,
+	number : one Int,
+	currentCharge : one Float,
+	moneySaveOption : one Bool,
+	discountDest : lone Position,
+	discount : one Discount
+} {
+	number >=1
+	car.state = WORKING or car.state = NOTAVAILABLE
+	moneySaveOption = True <=> #discountDest = 1
+}
 
-// facts
+abstract sig Discount { }
+one sig NONE extends Discount { }
+one sig MinusTen extends Discount { }
+one sig MinusTwenty extends Discount { }
+one sig MinusThirty extends Discount { }
+one sig PlusThirty extends Discount { }
+
+// -----------FACTS-------------
 fact NoSameCredential {
 	no disjoint u1,u2 : User | u1.credential = u2.credential
 }
 
 fact NoSamePaymentInfo {
 	no disjoint u1,u2 : User | u1.paymentInfo & u2.paymentInfo != none
-}
-
-fact OneUserOneCar {
-	no disjoint u1,u2 : User | u1.car in u2.car 
 }
 
 fact NoSameArea {
@@ -101,11 +127,31 @@ fact UserCarRelation {
 fact NoCarAtSamePlace {
 	no disjoint c1,c2 : Car | c1.currentPosition = c2.currentPosition
 }	
+
+fact NoSameReservationUserAndCar {
+	no disjoint r1,r2 : Reservation | r1.user = r2.user
+	no disjoint r1,r2 : Reservation | r1.car = r2.car
+}
+
 pred example {
 	
 }
 
 run example  
+
+
+//------------ASSERTIONS----------------
+
+assert AvailableCarPosition {
+	no c : Car | c.state = AVAILABLE and c.currentPosition in UnSafeArea.points
+}
+check AvailableCarPosition
+
+assert ReservedCarPosition {
+	no c : Car | c.state = RESERVED and c.currentPosition in UnSafeArea.points
+}
+check ReservedCarPosition
+
 
 
 
