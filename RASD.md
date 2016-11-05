@@ -194,7 +194,7 @@ Gino is a employee of the technology company. Everyday, Gino rents the electric 
 ####Scenario 5
 Matteo is a college student who lives in a university residence,where is placed into another city different from his parents' one. At Christmas hoiday, he decide to go back to parents' home with PowerEnjoy. After being restered and logged in  the system, he reserves a car extremaly close to the residence. He take immediately the car and drive at home. He arrives almost at 22:00, unfortunately, there is not any safe area with power plugs within 3km from his home, and the battery is less than 15%. So Matteo parks the car at near safe area without plugs. Due to a scarce battery remained and large distance from power plugs, Matteo pay 30% more on the trip.
 
-###Scenario 6
+####Scenario 6
 Andrea is new emploee of a company and he is a expert user, and he have already enabled the money saving option. During a holiday, he organize a picnic at outside the city with other 4 friends. They decide to meet at railroad station and then go to others place together. Before Andrea arrive station, he inserts the position of station into system, and he reserve a car near the address given, and the destination they want to go, then system gives several option to take discount. They successfully pick up the car within one hour, and begin their journey. After they arrive the destination, Andrea parks the car into safe area and plugging the car into power grid,even though the car has still more than 70% of battery. Therefore, he get 10% for taking more than two passegers, 20% for using less battery, and 30 % for plugging the care, all bonus into once ride.
 ### 5 UML model
 
