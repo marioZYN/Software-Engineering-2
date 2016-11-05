@@ -39,13 +39,18 @@ Moreover, the system has certain mechanics to incentivize the virtuous behaviour
 We suppose the following statements hold in the analyzed world.
 
 * The credentials and payment information provided by the users are correct.
-* Assume that the credits in the users credit cards or bank accounts are always enough.
-* Each car and users' mobile devices contain GPS and the GPS works correctly.
-* There will not be a case when the user is driving and the car is out of power.
-* Each car has a people detection sensor,as soon as the engine ignites, sensor detects the number of people into the car.
-* There will be no car accident which interrupts the users while driving.
+* Each car and safe area and users' mobile devices contain GPS and the GPS works correctly.
+* Each car has a way to determine the number of people into the car.
+* Each car know when need to lock the care after user leave it.
+* Each car Know the own battery's state(percent of battery empty,charging).
 * Cars are always connected to the network.
+* Only registered users can operate with system.
+* The user can only reserve a car that does not reserve by any other.  
+* The reserved car can be unclocked only by user who reserve it.
+* The system sent always the message to user when it is necessary.
 * The user always take care of the message sent by the system
+* There are a timer to tack care the management of some operation.
+* There are staff to tack care of charging the battery of cars.
 
 ### 1.4 Glossary
 Here presents the detail defination of some common used terms.
@@ -76,12 +81,18 @@ Here presents the detail defination of some common used terms.
 
 * Safe area
 	* a set of location predefined as being safe
+	* it may has the power plug 
 
 ### 1.5 Assumption
 There are some information that is not clear in the specification document, so here lists the assumptions which make the specification more clear.
 
 * The available cars are the cars with full battery 
+* There will not be a case when the user is driving and the car is out of power.
 * Since only the user uploads the information of the driving licence, only the user can act as a driver while passengers can not.
+* Assume that the credits in the users credit cards or bank accounts are always enough.
+* There will be no car accident which interrupts the users while driving.
+* Assume that the users parks always the car into safa area.
+
 
 
 ### 1.6 Stakeholders
@@ -149,10 +160,10 @@ Assuming all the domain properties hold and we derive the correspondong requirem
  * The system must be able to replace the area in the safe area set
  
 * [G9] If the system detects the user took at least two other passengers onto the car, the system applies a discount of 10% on the last ride.
- * The system will receive and will analyze the information retuned from people detection sensor whether more than two passengers onto the cars or not, if it actually go beyond, the system will register a discount of 10% on the last ride
+ * The system will analyze whether more than two passengers,excluding driver, onto the cars or not, if it actually go beyond, the system will register a discount of 10% on the last ride
 
 * [G10]If a car is left with no more than 50% of the battery empty, the system applies a discount of 20% on the last ride.
- * After the lock of car, the system will examine the level of battery using battery fuel gauge IC, if over half the battery is remained, then the system will register a discount of 20% on the last ride
+ * After the lock of car, the system will examine the level of battery, if over half the battery is remained, then the system will register a discount of 20% on the last ride
 
 * [G11]If a car is left at special parking areas where they can be recharged and the user takes care of plugging the car into the power grid, the system applies a discount of 30% on the last ride.
  * system will register a discount of 30% on the last ride if it recognize the car is parked at special area, and it's charging the battery within a determined time. 
@@ -161,17 +172,15 @@ Assuming all the domain properties hold and we derive the correspondong requirem
  * system must be able to get always the positin of the cars and all position of power grid station.
  * system will register a increase of 30% on the fee of last ride, if there are not any power grid station within 3KM from the position of car,where is left after using, and the battery will remain less than 20%.
  * system must notice the position of car out of range to the staff, that take care to re-charge these car on-site.
-
 * [G13]If the user enables the money saving option, he/she can input his/her final destination and the system provides information about the station where to leave the car to get a discount. This station is determined to ensure a uniform distribution of cars in the city and depends both on the destination of the user and on the availability of power plugs at the selected station.
 	* The system must be able to get the distribution of the cars
 	* The system must be able to detect whether the user enable the money saving option or not
 	* The system must be able to select the station according to the user's destination for ensuring a uniform distribution of the cars
 	* The system must be able to detect the availability of power plugs at the selected station
- 
 
 ### Scenario identifying
 #### Scenario 1
-Mario is a college student who possesses a driving licence. He saw the ads about PowerEnJoy and decided to try this service. He uses his laptop to access the website of PowerEnjoy and proceeds the registering procedure. He provides his credentials and payment information. After the system analyzes his data, Mario receives a password. He logs into the system and finds some available cars near his place. He selects one car and makes a reservation. 30 minutes later, Mario arrives at the car position and he uses his laptop to notify the system that he is near the car. The system checks his position and unlocks the car. Mario drives home and on the car screen he can see his current driving route and safe areas nearby. He stops the car in one of the safe areas near home and finishes his journey.
+Mario is a college student who possesses a driving licence. He saw the ads about PowerEnJoy and decided to try this service. He uses his laptop to access the website of PowerEnjoy and proceeds the registering procedure. He provides his credentials and payment information. After the system analyzes his data, Mario receives a password. He logs into the system and finds some available cars near his place. He selects one car and makes a reservation. 30 minutes later, Mario arrives at the car position and he uses his laptop to notify the system that he is near the car. The system checks his position and unlocks the car. Mario drives home and on the car screen he can see his current driving route,charges and safe areas nearby. He stops the car in one of the safe areas near home and finishes his journey.
 
 #### Scenario 2
 Tom is an old user of the PowerEnJoy. After work, he decides to reserve a car to go home. He uses his smart phone to reserve a car and head to it. However, he encounters his colleague on his way and they chat for a while. Before he manages to get to the car, one hour has passed. He receives a message on his phone that tells him his reservation is cancelled and he is charged one euro for punishment. Tom has to log in the system and reserve a car again.
@@ -182,6 +191,11 @@ Nino is a college student. Meanwhile, he is also a user of the PowerEnjoy. He st
 #### Scenario 4
 Gino is a employee of the technology company. Everyday, Gino rents the electric car for commute. He is an old user of the PowerEnJoy. In the morning, He rents a car from th safe area nearby his home. Driving the renting car to the company, he stops the car in the safe area in front of the company. After exiting the car, Gino  takes care of plugging the car into the power grid. After work, Gino rents a electric car in PowerEnJoy system by his smartphone once again. When he arrives at home, he takes care of plugging the car into the power grid as the same as what he did in the morning. Therefore, he get 30% of discount for these two renting services in the whole day.
 
+####Scenario 5
+Matteo is a college student who lives in a university residence,where is placed into another city different from his parents' one. At Christmas hoiday, he decide to go back to parents' home with PowerEnjoy. After being restered and logged in  the system, he reserves a car extremaly close to the residence. He take immediately the car and drive at home. He arrives almost at 22:00, unfortunately, there is not any safe area with power plugs within 3km from his home, and the battery is less than 15%. So Matteo parks the car at near safe area without plugs. Due to a scarce battery remained and large distance from power plugs, Matteo pay 30% more on the trip.
+
+###Scenario 6
+Andrea is new emploee of a company and he is a expert user, and he have already enabled the money saving option. During a holiday, he organize a picnic at outside the city with other 4 friends. They decide to meet at railroad station and then go to others place together. Before Andrea arrive station, he inserts the position of station into system, and he reserve a car near the address given, and the destination they want to go, then system gives several option to take discount. They successfully pick up the car within one hour, and begin their journey. After they arrive the destination, Andrea parks the car into safe area and plugging the car into power grid,even though the car has still more than 70% of battery. Therefore, he get 10% for taking more than two passegers, 20% for using less battery, and 30 % for plugging the care, all bonus into once ride.
 ### 5 UML model
 
 #### 5.1 Use case description
