@@ -42,13 +42,15 @@ abstract sig Area {
 }
 sig SafeArea extends Area { }
 sig UnSafeArea extends Area { }
-sig ChargeArea in SafeArea { }
+sig Station extends SafeArea { }
+sig NonStation extends SafeArea { }
 
 abstract sig CarState { }
 one sig AVAILABLE extends CarState { }
 one sig RESERVED extends CarState { }
 one sig WORKING extends CarState { }
-one sig NOTAVAILABLE extends CarState { }
+one sig CHARGING extends CarState { }
+one sig UNCHARGING extends CarState { }
 
 abstract sig BatteryState { }
 one sig FULL extends BatteryState { }
@@ -63,10 +65,11 @@ sig Car {
 	currentPosition : one Position,
 } {
 	capacity > 0 and capacity <= 4
-	state = AVAILABLE or state = RESERVED <=> battery = FULL 
-	state = NOTAVAILABLE <=> (currentPosition in UnSafeArea.points or battery != FULL)
-	currentPosition in SafeArea.points <=> state = AVAILABLE or state = RESERVED
-	state = RESERVED <=> this in Reservation.car
+	state = AVAILABLE and state = RESERVED <=> battery = FULL
+	state = AVAILABLE implies currentPosition in Station.points
+	state = RESERVED implies currentPosition in Station.points
+	state = CHARGING implies currentPosition in Station.points
+	state = UNCHARGING implies currentPosition in NonStation.points
 }
 
 sig Reservation {
@@ -89,15 +92,19 @@ one sig System {
 sig Ride {
 	user : one User,
 	car : one Car,
-	number : one Int,
+	numberOfPassenger : one Int,
 	currentCharge : one Float,
 	moneySaveOption : one Bool,
 	discountDest : lone Position,
-	discount : one Discount
+	discount : lone Discount,
+	completed : Bool 
 } {
-	number >=1
-	car.state = WORKING or car.state = NOTAVAILABLE
+	car.state = WORKING or car.state = CHARGING or car.state = UNCHARGING
+	car.state = WORKING implies completed = False and #discount = 0
+	car.state != WORKING implies completed = True and #discount = 1
 	moneySaveOption = True <=> #discountDest = 1
+	discountDest in Station.points
+	
 }
 
 abstract sig Discount { }
@@ -120,10 +127,6 @@ fact NoSameArea {
 	no disjoint a1,a2 : Area | a1.points & a2.points != none
 }
 
-fact UserCarRelation {
-	all u : User | u.car.user = u
-}
-
 fact NoCarAtSamePlace {
 	no disjoint c1,c2 : Car | c1.currentPosition = c2.currentPosition
 }	
@@ -133,11 +136,36 @@ fact NoSameReservationUserAndCar {
 	no disjoint r1,r2 : Reservation | r1.car = r2.car
 }
 
-pred example {
+//There should be no intersection between {user,car} in Reservation and {user,car} in Ride
+fact ReservationRideDistinction {
+	all r1 : Reservation, r2 : Ride | r1.user != r2.user and r1.car != r2.car
+}
+
+//No user and car can reserve and drive simuteneously
+fact NoBusyUserCar {
+	all r1 : Reservation, r2 : Ride | r1.user != r2.user
+	all r1 : Reservation, r2 : Ride | r1.car != r2.car
+	no disjoint r1,r2 : Reservation | r1.user = r2.user
+	no disjoint r1,r2 : Reservation | r1.car = r2.car
+	no disjoint r1,r2 : Ride | r1.user = r2.user
+	no disjoint r1,r2 : Ride | r1.car = r2.car
 	
 }
 
-run example  
+pred example {
+/*
+	some c : Car | c.state = AVAILABLE 
+	some c : Car | c.state = RESERVED
+   some c : Car | c.state = CHARGING
+	some c : Car | c.state = WORKING
+	some c : Car | c.state = UNCHARGING
+*/
+
+	#Ride > 3
+	
+}
+
+run example  for 6
 
 
 //------------ASSERTIONS----------------
