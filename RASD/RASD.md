@@ -20,8 +20,9 @@
  * 6.3 Reserve
  * 6.4 Pick up the car
  * 6.5 Maintainer
-* 6. Alloy model
-* 7. Working time
+* 7. Class diagram
+* 8. Alloy model
+* 9. Working time
  
 ## 1 Introduction
 ### 1.1 The description of the system
@@ -193,6 +194,10 @@ Assuming all the domain properties hold and we derive the correspondong requirem
 	* The system must be able to detect the availability of power plugs at the selected station
 
 ### 3.2 Non functional requirements
+#### Client interface
+![mobile1](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/Login%20and%20Register.png)
+
+![mobile2](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/Communication%2C%20reservation%26pickup.png)
 
 
 ## 4 Scenario identifying
@@ -368,6 +373,15 @@ Andrea is new emploee of a company and he is a expert user, and he have already 
 **Exception handing**:The maintainer send the message to the system for reporing there is no power grid available.  
 
 ## 6 Sequence diagram
-
+### 6.1 Register
+![Register](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/register.png)
+### 6.2 Log in
+![Log in ](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/log%20in.png)
+### 6.3 Reserve
+![Reserve](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/reservation.png)
+### 6.4 Pick up the car
+![Pickup](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/pickup.png)
+### 6.5 Maintain
+![Maintain](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/maintain.png)
  
 ### Alloy model
