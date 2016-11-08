@@ -11,9 +11,15 @@
  * 3.1 Functional requirements
  * 3.2 Non functional requirements
 * 4. Scenario Identifying
-* 5. UML models
+* 5. Use case
  * 5.1 Use case diagram 
  * 5.2 Use case description
+* 6. Sequence diagram
+ * 6.1 Register
+ * 6.2 Log in
+ * 6.3 Reserve
+ * 6.4 Pick up the car
+ * 6.5 Maintainer
 * 6. Alloy model
 * 7. Working time
  
@@ -207,10 +213,10 @@ Matteo is a college student who lives in a university residence,where is placed 
 
 ####Scenario 6
 Andrea is new emploee of a company and he is a expert user, and he have already enabled the money saving option. During a holiday, he organize a picnic at outside the city with other 4 friends. They decide to meet at railroad station and then go to others place together. Before Andrea arrive station, he inserts the position of station into system, and he reserve a car near the address given, and the destination they want to go, then system gives several option to take discount. They successfully pick up the car within one hour, and begin their journey. After they arrive the destination, Andrea parks the car into safe area and plugging the car into power grid,even though the car has still more than 70% of battery. Therefore, he get 10% for taking more than two passegers, 20% for using less battery, and 30 % for plugging the care, all bonus into once ride.
-### 5 UML model
+## 5 Use case
 
 #### 5.1 Use case diagram
-![use case diagram][]
+![use case diagram](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/Use%20case.png)
 
 #### 5.2 Use case description
 (1)Guest registers in the system   
@@ -360,5 +366,8 @@ Andrea is new emploee of a company and he is a expert user, and he have already 
 **Exit condition**:The maintainer receives the confirmation  
 **Exception**:There is no available power grid in the corresponding station.    
 **Exception handing**:The maintainer send the message to the system for reporing there is no power grid available.  
+
+## 6 Sequence diagram
+
  
 ### Alloy model
