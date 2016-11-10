@@ -1,29 +1,31 @@
 
 ## Content
-* 1.Introduction...............................................................................................................................................................8
- * 1.1 Description of the given system......................................................................................................................8
- * 1.2 Goals...............................................................................................................................................................8
- * 1.3 Domain Properties...........................................................................................................................................8
- * 1.4 Glossary...........................................................................................................................................................8
- * 1.5 Assumpption....................................................................................................................................................8
- * 1.6 Stakeholders....................................................................................................................................................8
-* 2. Actors Identifying.......................................................................................................................................................8
-* 3. Requirements............................................................................................................................................................8
- * 3.1 Functional requirements..................................................................................................................................8
- * 3.2 Non functional requirements............................................................................................................................7
-* 4. Scenario Identifying...................................................................................................................................................7
-* 5. Use case....................................................................................................................................................................7
- * 5.1 Use case diagram ...........................................................................................................................................7
- * 5.2 Use case description........................................................................................................................................7
-* 6. Sequence diagram.....................................................................................................................................................7
- * 6.1 Register............................................................................................................................................................7
- * 6.2 Log in...............................................................................................................................................................7
- * 6.3 Reserve............................................................................................................................................................7
- * 6.4 Pick up the car..................................................................................................................................................7
- * 6.5 Maintainer.........................................................................................................................................................7
-* 7. Class diagram............................................................................................................................................................7
-* 8. Alloy model.................................................................................................................................................................7
-* 9. Working time...............................................................................................................................................................7
+* 1.Introduction
+ * 1.1 Description of the given system
+ * 1.2 Goals
+ * 1.3 Domain Properties
+ * 1.4 Glossary
+ * 1.5 Assumpption
+ * 1.6 Stakeholders
+* 2. Actors Identifying
+* 3. Requirements
+ * 3.1 Functional requirements 
+ * 3.2 Non functional requirements
+* 4. Scenario Identifying
+* 5. Use case
+ * 5.1 Use case diagram
+ * 5.2 Use case description
+* 6. Sequence diagram
+ * 6.1 Register
+ * 6.2 Log in
+ * 6.3 Reserve
+ * 6.4 Pick up the car
+ * 6.5 Maintainer7
+* 7. Class diagram
+* 8. Alloy model
+ * 8.1 Alloy code
+ * 8.2 Alloy graph
+* 9. Working time
  
 ## 1 Introduction
 ### 1.1 The description of the system
@@ -385,4 +387,217 @@ Andrea is new emploee of a company and he is a expert user, and he have already 
 ### 6.5 Maintain
 ![Maintain](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/maintain.png)
  
-### Alloy model
+### 8 Alloy model
+#### 8.1 Alloy code
+```
+open util/boolean
+
+sig Float { }
+sig Astring { }
+
+sig Credential {
+	email : one Astring,
+	password : one Astring,
+	username : one Astring,
+	drivingLicenseNo : one Astring,
+}
+sig PaymentInfo {
+	name : one Astring,
+	surname : one Astring, 
+	cardType : one Astring,
+	cardNo : one Astring,
+	cellphoneNo : one Astring,
+	taxCode : one Astring
+} {
+	all p : PaymentInfo | p in User.paymentInfo
+}
+
+sig User {
+	credential : one Credential,
+	paymentInfo : set PaymentInfo,
+
+} {
+	paymentInfo != none
+}
+
+sig Position {
+	latitude : one Float,
+	longitude : one Float
+} {
+	all p : Position | p in Area.points
+}
+
+//Area should be a range, but for simplicity we consider only a set of points
+
+abstract sig Area {
+	points : set Position
+}
+sig SafeArea extends Area { }
+sig UnSafeArea extends Area { }
+sig Station extends SafeArea { }
+sig NonStation extends SafeArea { }
+
+abstract sig CarState { }
+one sig AVAILABLE extends CarState { }
+one sig RESERVED extends CarState { }
+one sig WORKING extends CarState { }
+one sig CHARGING extends CarState { }
+one sig UNCHARGING extends CarState { }
+
+abstract sig BatteryState { }
+one sig FULL extends BatteryState { }
+one sig MEDIUM extends BatteryState { }
+one sig LOW extends BatteryState { } 
+
+sig Car {
+	plate : one Astring,
+	capacity : one Int,
+	state : one CarState,
+	battery : one BatteryState,
+	currentPosition : one Position,
+} {
+	capacity > 0 and capacity <= 4
+	state = AVAILABLE and state = RESERVED <=> battery = FULL
+	state = AVAILABLE implies currentPosition in Station.points
+	state = RESERVED implies currentPosition in Station.points
+	state = CHARGING implies currentPosition in Station.points
+	state = UNCHARGING implies currentPosition in NonStation.points
+}
+
+sig Reservation {
+	user : one User,
+	car : one Car,
+} {
+	car.state = RESERVED
+}
+
+one sig System {
+	users : set User,
+	cars : set Car,
+	safeAreas : set SafeArea
+} {
+	all u : User | u in users
+	all c : Car | c in cars
+	all sa : SafeArea | sa in safeAreas 
+}
+
+sig Ride {
+	user : one User,
+	car : one Car,
+	numberOfPassenger : one Int,
+	currentCharge : one Float,
+	moneySaveOption : one Bool,
+	discountDest : lone Position,
+	completed : one Bool,
+	dp : one DiscountAndPunish
+} {
+	car.state = WORKING or car.state = CHARGING or car.state = UNCHARGING
+	car.state = WORKING implies completed = False 
+	car.state != WORKING implies completed = True 
+	moneySaveOption = True <=> #discountDest = 1
+	discountDest in Station.points
+	dp.batteryDiscount = True implies completed = True
+	dp.rechargeDiscount = True implies completed = True
+	dp.distancePunishment = True implies completed = True
+	dp.lowBatteryPunishment = True implies completed = True
+}
+
+sig DiscountAndPunish { 
+	passengerDiscount : one Bool,
+	batteryDiscount : one Bool,
+	rechargeDiscount : one Bool,
+	distancePunishment : one Bool,
+	lowBatteryPunishment : one Bool	
+}
+
+// -----------FACTS-------------
+fact NoSameCredential {
+	no disjoint u1,u2 : User | u1.credential = u2.credential
+}
+
+fact NoSamePaymentInfo {
+	no disjoint u1,u2 : User | u1.paymentInfo & u2.paymentInfo != none
+}
+
+fact NoSameArea {
+	no disjoint a1,a2 : Area | a1.points & a2.points != none
+}
+
+fact NoCarAtSamePlace {
+	no disjoint c1,c2 : Car | c1.currentPosition = c2.currentPosition
+}	
+
+fact NoSameReservationUserAndCar {
+	no disjoint r1,r2 : Reservation | r1.user = r2.user
+	no disjoint r1,r2 : Reservation | r1.car = r2.car
+}
+
+fact DiscountAndPunishmentCondition {
+	no r : Ride | r.dp.passengerDiscount = True and r.numberOfPassenger <= 2
+	no r : Ride | r.dp.batteryDiscount = True and r.car.battery != MEDIUM
+	no r : Ride | r.dp.rechargeDiscount = True and r.car.currentPosition not in Station.points
+	no r : Ride | r.dp.rechargeDiscount = True and r.dp.distancePunishment = True
+	no r : Ride | r.dp.distancePunishment = True and r.car.currentPosition in Station.points
+	no r : Ride | r.dp.lowBatteryPunishment = True and r.car.battery != LOW
+}
+
+//There should be no intersection between {user,car} in Reservation and {user,car} in Ride
+fact ReservationRideDistinction {
+	all r1 : Reservation, r2 : Ride | r1.user != r2.user and r1.car != r2.car
+}
+
+//No user and car can reserve and drive simuteneously
+fact NoBusyUserCar {
+	all r1 : Reservation, r2 : Ride | r1.user != r2.user
+	all r1 : Reservation, r2 : Ride | r1.car != r2.car
+	no disjoint r1,r2 : Reservation | r1.user = r2.user
+	no disjoint r1,r2 : Reservation | r1.car = r2.car
+	no disjoint r1,r2 : Ride | r1.user = r2.user
+	no disjoint r1,r2 : Ride | r1.car = r2.car
+	
+}
+
+
+//------------ASSERTIONS----------------
+
+assert AvailableCarPosition {
+	no c : Car | c.state = AVAILABLE and c.currentPosition in UnSafeArea.points
+}
+
+assert ReservedCarPosition {
+	no c : Car | c.state = RESERVED and c.currentPosition in UnSafeArea.points
+}
+
+assert LowBatteryPunishmentCheck {
+	no r : Ride | r.dp.lowBatteryPunishment = True and r.car.battery = MEDIUM
+}
+
+//----------------SHOW----------------------
+
+pred example {
+
+/*
+	some c : Car | c.state = AVAILABLE 
+	some c : Car | c.state = RESERVED
+   some c : Car | c.state = CHARGING
+	some c : Car | c.state = WORKING
+	some c : Car | c.state = UNCHARGING
+*/
+
+	#Ride = 2
+	
+}
+
+run example  for 4
+
+
+check LowBatteryPunishmentCheck
+check AvailableCarPosition
+check ReservedCarPosition
+
+```
+#### 8.2 Alloy graph
+
+### 9 Work Time
+
+
