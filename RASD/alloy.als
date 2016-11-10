@@ -96,23 +96,27 @@ sig Ride {
 	currentCharge : one Float,
 	moneySaveOption : one Bool,
 	discountDest : lone Position,
-	discount : lone Discount,
-	completed : Bool 
+	completed : one Bool,
+	dp : one DiscountAndPunish
 } {
 	car.state = WORKING or car.state = CHARGING or car.state = UNCHARGING
-	car.state = WORKING implies completed = False and #discount = 0
-	car.state != WORKING implies completed = True and #discount = 1
+	car.state = WORKING implies completed = False 
+	car.state != WORKING implies completed = True 
 	moneySaveOption = True <=> #discountDest = 1
 	discountDest in Station.points
-	
+	dp.batteryDiscount = True implies completed = True
+	dp.rechargeDiscount = True implies completed = True
+	dp.distancePunishment = True implies completed = True
+	dp.lowBatteryPunishment = True implies completed = True
 }
 
-abstract sig Discount { }
-one sig NONE extends Discount { }
-one sig MinusTen extends Discount { }
-one sig MinusTwenty extends Discount { }
-one sig MinusThirty extends Discount { }
-one sig PlusThirty extends Discount { }
+sig DiscountAndPunish { 
+	passengerDiscount : one Bool,
+	batteryDiscount : one Bool,
+	rechargeDiscount : one Bool,
+	distancePunishment : one Bool,
+	lowBatteryPunishment : one Bool	
+}
 
 // -----------FACTS-------------
 fact NoSameCredential {
@@ -136,6 +140,15 @@ fact NoSameReservationUserAndCar {
 	no disjoint r1,r2 : Reservation | r1.car = r2.car
 }
 
+fact DiscountAndPunishmentCondition {
+	no r : Ride | r.dp.passengerDiscount = True and r.numberOfPassenger <= 2
+	no r : Ride | r.dp.batteryDiscount = True and r.car.battery != MEDIUM
+	no r : Ride | r.dp.rechargeDiscount = True and r.car.currentPosition not in Station.points
+	no r : Ride | r.dp.rechargeDiscount = True and r.dp.distancePunishment = True
+	no r : Ride | r.dp.distancePunishment = True and r.car.currentPosition in Station.points
+	no r : Ride | r.dp.lowBatteryPunishment = True and r.car.battery != LOW
+}
+
 //There should be no intersection between {user,car} in Reservation and {user,car} in Ride
 fact ReservationRideDistinction {
 	all r1 : Reservation, r2 : Ride | r1.user != r2.user and r1.car != r2.car
@@ -152,7 +165,25 @@ fact NoBusyUserCar {
 	
 }
 
+
+//------------ASSERTIONS----------------
+
+assert AvailableCarPosition {
+	no c : Car | c.state = AVAILABLE and c.currentPosition in UnSafeArea.points
+}
+
+assert ReservedCarPosition {
+	no c : Car | c.state = RESERVED and c.currentPosition in UnSafeArea.points
+}
+
+assert LowBatteryPunishmentCheck {
+	no r : Ride | r.dp.lowBatteryPunishment = True and r.car.battery = MEDIUM
+}
+
+//----------------SHOW----------------------
+
 pred example {
+
 /*
 	some c : Car | c.state = AVAILABLE 
 	some c : Car | c.state = RESERVED
@@ -161,24 +192,17 @@ pred example {
 	some c : Car | c.state = UNCHARGING
 */
 
-	#Ride > 3
+	#Ride = 2
 	
 }
 
-run example  for 6
+run example  for 4
 
 
-//------------ASSERTIONS----------------
-
-assert AvailableCarPosition {
-	no c : Car | c.state = AVAILABLE and c.currentPosition in UnSafeArea.points
-}
+check LowBatteryPunishmentCheck
 check AvailableCarPosition
-
-assert ReservedCarPosition {
-	no c : Car | c.state = RESERVED and c.currentPosition in UnSafeArea.points
-}
 check ReservedCarPosition
+
 
 
 
