@@ -65,12 +65,18 @@ sig Car {
 	currentPosition : one Position,
 } {
 	capacity > 0 and capacity <= 4
-	state = AVAILABLE and state = RESERVED <=> battery = FULL
+	state = AVAILABLE <=> battery = FULL 
+    state = RESERVED <=> battery = FULL
 	state = AVAILABLE implies currentPosition in Station.points
 	state = RESERVED implies currentPosition in Station.points
 	state = CHARGING implies currentPosition in Station.points
 	state = UNCHARGING implies currentPosition in NonStation.points
+	state = WORKING implies this in Ride.car
+	state = CHARGING implies this in Ride.car
+	state = UNCHARGING implies this in Ride.car
+	state = RESERVED implies this in Reservation.car
 }
+
 
 sig Reservation {
 	user : one User,
@@ -162,7 +168,6 @@ fact NoBusyUserCar {
 	no disjoint r1,r2 : Reservation | r1.car = r2.car
 	no disjoint r1,r2 : Ride | r1.user = r2.user
 	no disjoint r1,r2 : Ride | r1.car = r2.car
-	
 }
 
 
@@ -192,7 +197,7 @@ pred example {
 	some c : Car | c.state = UNCHARGING
 */
 
-	#Ride = 2
+	#Car = 3
 	
 }
 

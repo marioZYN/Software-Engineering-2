@@ -1,4 +1,6 @@
 
+
+
 ## Content
 * 1.Introduction
  * 1.1 Description of the given system
@@ -386,9 +388,12 @@ Andrea is new emploee of a company and he is a expert user, and he have already 
 ![Pickup](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/pickup.png)
 ### 6.5 Maintain
 ![Maintain](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/maintain.png)
+
+## 7 Class digram
+![class diagram](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/class%20diagram.png)
  
-### 8 Alloy model
-#### 8.1 Alloy code
+## 8 Alloy model
+### 8.1 Alloy code
 ```
 open util/boolean
 
@@ -596,8 +601,10 @@ check AvailableCarPosition
 check ReservedCarPosition
 
 ```
-#### 8.2 Alloy graph
+### 8.2 Alloy graph
 
-### 9 Work Time
+
+
+## 9 Work Time
 
 
