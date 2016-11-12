@@ -19,7 +19,7 @@
  * 6.2 Log in
  * 6.3 Reserve
  * 6.4 Pick up the car
- * 6.5 Maintainer7
+ * 6.5 Maintainer
 * 7. Class diagram
 * 8. Alloy model
  * 8.1 Alloy code
@@ -146,6 +146,7 @@ Assuming all the domain properties hold and we derive the correspondong requirem
 * [G5]If a car is not picked‐up within one hour from the reservation, the system tags the car as available again, and the reservation expires; the user pays a fee of 1 EUR.
  * The system must allow the user who has made a reservation for the car to stop the clock if he/she is nearby
  * The system must charge the user 1 euro for not being able to stop the clock within one hour
+ * The system will notify the user if he/she is charged by the fee
  * The system will make the car state changed to available if the clock is not stopped within in one hour
  
 * [G6]A user that reaches a reserved car must be able to tell the system she’s nearby, so the system unlocks the car and the user may enter.
@@ -212,25 +213,29 @@ The system is constrained by these as much as possible:
 
 ![mobile2](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/Communication%2C%20reservation%26pickup.png)
 
+![screen](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/screen.png)
+
+![maintainer](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/maintainer.png)
+
 
 ## 4 Scenario identifying
 #### Scenario 1
 Mario is a college student who possesses a driving licence. He saw the ads about PowerEnJoy and decided to try this service. He uses his laptop to access the website of PowerEnjoy and proceeds the registering procedure. He provides his credentials and payment information. After the system analyzes his data, Mario receives a password. He logs into the system and finds some available cars near his place. He selects one car and makes a reservation. 30 minutes later, Mario arrives at the car position and he uses his laptop to notify the system that he is near the car. The system checks his position and unlocks the car. Mario drives home and on the car screen he can see his current driving route,charges and safe areas nearby. He stops the car in one of the safe areas near home and finishes his journey.
 
 #### Scenario 2
-Tom is an old user of the PowerEnJoy. After work, he decides to reserve a car to go home. He uses his smart phone to reserve a car and head to it. However, he encounters his colleague on his way and they chat for a while. Before he manages to get to the car, one hour has passed. He receives a message on his phone that tells him his reservation is cancelled and he is charged one euro for punishment. Tom has to log in the system and reserve a car again.
+Tom is a previous user of the PowerEnJoy. After work, he decides to reserve a car to go home. He uses his smart phone to reserve a car and head to it. However, he encounters his colleague on his way and they chat for a while. Before he manages to get to the car, one hour has passed. He receives a message on his phone that tells him his reservation is cancelled and he is charged one euro for punishment. Tom has to log in the system and reserve a car again.
 
 #### Scenario 3  
-Nino is a college student. Meanwhile, he is also a user of the PowerEnjoy. He students in the university together with two of his roommates. Finishing his lectures at the afternoon, Nino comes back home together with his roommates. First of all, Nino login to the PowerEnJoy system using his smart phone. Then, he reserve a car and arrive at the position of the car. Nino pick it up and drive the car home. 40 minutes later, Nino stops the car at one the safe locations near his home. Since there are 2 passengers in the car in this renting service, Nino gets 10% discount for the total renting fee.
+Nino is a college student. Meanwhile, he is also a user of the PowerEnjoy. He studies in the university together with two of his roommates. Finishing his lectures in the afternoon, Nino comes back home together with his roommates. First of all, Nino logs into the PowerEnJoy system using his smart phone. Then, he reserve a car and arrives at the position of the car. Nino picks it up and drives the car home. 40 minutes later, Nino stops the car at one of the safe locations near his home. Since there are 2 passengers in the car in this renting service, Nino gets 10% discount for the total renting fee.
 
 #### Scenario 4
-Gino is a employee of the technology company. Everyday, Gino rents the electric car for commute. He is an old user of the PowerEnJoy. In the morning, He rents a car from th safe area nearby his home. Driving the renting car to the company, he stops the car in the safe area in front of the company. After exiting the car, Gino  takes care of plugging the car into the power grid. After work, Gino rents a electric car in PowerEnJoy system by his smartphone once again. When he arrives at home, he takes care of plugging the car into the power grid as the same as what he did in the morning. Therefore, he get 30% of discount for these two renting services in the whole day.
+Gino is an employee of the technology company. Everyday, Gino rents the electric car. He is an old user of the PowerEnJoy. In the morning, He rents a car from the station nearby his home. Driving the rented car to the company, he stops the car in the station in front of the company. After exiting the car, Gino  takes care of plugging the car into the power grid. After work, Gino rents an electric car in PowerEnJoy system by his smartphone again. When he arrives at home, he takes care of plugging the car into the power grid as the same as what he did in the morning. Therefore, he get 30% of discount for these two renting services in the whole day.
 
 ####Scenario 5
-Matteo is a college student who lives in a university residence,where is placed into another city different from his parents' one. At Christmas hoiday, he decide to go back to parents' home with PowerEnjoy. After being restered and logged in  the system, he reserves a car extremaly close to the residence. He take immediately the car and drive at home. He arrives almost at 22:00, unfortunately, there is not any safe area with power plugs within 3km from his home, and the battery is less than 15%. So Matteo parks the car at near safe area without plugs. Due to a scarce battery remained and large distance from power plugs, Matteo pay 30% more on the trip.
+Matteo is a college student who lives in a university residence. In Christmas hoiday, he decides to go back to his parents' home using the  PowerEnjoy car renting service. After registering and logging in the system, he reserves a car close to the residence. He picks up the car within an hour. He arrives at his parents' house at almost 22:00. Unfortunately, there are no stations nearby, and the battery is less than 15%. So Matteo parks the car in a safe area without charging the car. Due to a scarce battery remained and large distance from power plugs, Matteo pay 30% more on the trip.
 
 ####Scenario 6
-Andrea is new emploee of a company and he is a expert user, and he have already enabled the money saving option. During a holiday, he organize a picnic at outside the city with other 4 friends. They decide to meet at railroad station and then go to others place together. Before Andrea arrive station, he inserts the position of station into system, and he reserve a car near the address given, and the destination they want to go, then system gives several option to take discount. They successfully pick up the car within one hour, and begin their journey. After they arrive the destination, Andrea parks the car into safe area and plugging the car into power grid,even though the car has still more than 70% of battery. Therefore, he get 10% for taking more than two passegers, 20% for using less battery, and 30 % for plugging the care, all bonus into once ride.
+Andrea is an emploee of a company and he is an expert user. During a holiday, he organizes a picnic outside the city with 4 other friends. They decide to meet at railroad station and then go to other places together. He inserts the position of station into the system, and he reserves one of the cars offered by the system. They successfully pick up the car within one hour. Before beginning their journey, Andrea enables the money saving option. After they arrive at the destination, Andrea parks the car into the safe area given by the system and pluggs the car into power grid,even though the car has still more than 70% of battery. Therefore, he gets the accounts, 10% for taking more than two passegers, 20% for using little battery, and 30 % for plugging the care, all bonus into once ride.
 ## 5 Use case
 
 #### 5.1 Use case diagram
@@ -252,13 +257,12 @@ Andrea is new emploee of a company and he is a expert user, and he have already 
 **Exceptions**:
  
 * The user misses information during filling blanks. 
-* The user has already registered with the same credentials. 
-* the user's credentials or payment information are not correct.  
+* The user has already registered with the same credentials.  
 
 **Exceptions handling**: The user can either continue filling all the correct information or terminates the registering process.
 
 (2)Guest logs in to the system   
-**Name**: Guest logs in  to the system  
+**Name**: Guest logs into the system  
 **Actor**: Guest  
 **Entry condition**: The guest provides correct email address and password  
 **Flow of events**:  
@@ -278,7 +282,7 @@ Andrea is new emploee of a company and he is a expert user, and he have already 
 (3)User reserves an available car   
 **Name**: User reserves an available car  
 **Actor**: User  
-**Entry condition**: The user successfully login with his/her e_mail address and password  
+**Entry condition**: The user successfully login with his/her email address and password  
 **Flow of events**:  
 
 * The user clicks on the "From current address" button or sets the "From specified address" box to the desired value. 
@@ -327,7 +331,7 @@ Andrea is new emploee of a company and he is a expert user, and he have already 
 * The system detects whether the car is plugged into the power gird or not, if yes, applies 30% discount for this renting service.
 * The system detects the position of the car, if the car is 3KM away from the power station and the battery is more than 80% empty, charges 30% more for this renting service. 
 
-**Exit condition**:The system calculate out the total fee for this renting servcie  
+**Exit condition**:The system calculates the total fee for this renting servcie  
 **Exception**:The user does not park the car in the safe area.  
 **Exception handing**:The system notifies the user that he/she does not park the car in the correct position.  
 
@@ -351,10 +355,10 @@ Andrea is new emploee of a company and he is a expert user, and he have already 
 **Entry condition**:The user does not park the car in the power grid station or does not plug the car into the power grid.
 **Flow of events**:
 
-* The user parks the car in the station without power grid or leaves the car without charging.
-* The maintainer sent the message to the system for asking authotity.
+* The user does not park the car in the station or leaves the car without charging.
+* The maintainer sent the message to the system for asking authority.
 * The system unlocks the corresponding car.
-* The maintainer restart the car.
+* The maintainer restarts the car.
 * The maintainer plugs the power grid into the car.
 * The maintainer exits the car.
 * The system locks the car.
@@ -368,9 +372,10 @@ Andrea is new emploee of a company and he is a expert user, and he have already 
 **Exception handing**:  
 
 * The maintainer changes others power grid station for charging the car.
-* The maintainer asks for special assistance.
+* The maintainer asks for special assistance.  
+  
 
-(8)Maintainer records the user who does not charge the car  
+(8)Maintainer records the user who does not charge the car 
 **Name**:Maintainer records the user who does not charge the car  
 **Actor**:Maintainer  
 **Entry condition**:The user does not park the car in the power grid station or does not plug the car into the power grid.  
@@ -628,6 +633,60 @@ Here are some alloy graphs describing the logic relations
 ![Discount](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/DIscount%20info.png)
 
 ## 9 Work Time
+
+ZHOU YINAN 
+
+* **22/10/2016 1.5h** create RASD file, write introduction, goals,domain properties and some requirements    
+* **29/10/2016 2h** add content table, glossary, actor identifying, and first two scenario  
+* **31/10/2016 2.5h** add User cases
+* **4/11/2016 4h** start writing alloy 
+* **5/11/2016 4h** alloy 
+* **8/11/2016 4h** modify RASD documents and change alloy
+* **10/11/2016 2h**  alloy
+* **11/11/2016 1h** modify RASD 
+* **12/11/2016 3h** modify RASD for version 1.0  
+
+ZHAN YUAN
+
+* **25/10/2016 40m** add some requirements 
+* **4/11/2016 4H** adjourn the domain property, assumption, requirement and add two scenario 
+* **5/11/2016 5h** class diagram and sequential diagram
+* **6/11/2016 2.5h** complete sequential diagram and activity diagram
+* **8/11/2016 2.5h** state diagram and interface
+* **12/11/2016 2H** non functional requirement  
+
+ZHAO KAIXIN
+
+* **29/10/2016 2h** add some requirements 
+* **1/11/2016 3h** adjust the glossary  
+* **2/11/2016 3h** adjust the use case 
+* **3/11/2016 4h** adjust the use case and add use case description 
+* **4/11/2016 3h** class diagram 
+* **5/11/2016 3h** sequence diagram 
+* **11/11/2016 2h** adjust ClassDiagram  
+
+  
+   
+
+    
+
+ 
+  
+
+ 
+ 
+ 
+  
+  
+  
+  
+   
+   
+
+ 
+ 
+
+
 
 
 

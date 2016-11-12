@@ -1,21 +1,23 @@
-ZHOU YINAN 22/10/2016 1.5h create RASD file, write introduction, goals, domain properties and some requirements  
-ZHAN YUAN  25/10/2016 40m add some requirements  
-ZHOU YINAN 29/10/2016 2h add content table, glossary, actor identifying, and first two scenario  
-ZHAO KAIXIN 29/10/2016 2h add some requirements
-ZHOU YINAN 31/10/2016 2.5h add User cases  
-ZHAO KAIXIN 1/11/2016 3h adjust the glossary
-ZHAO KAIXIN 2/11/2016 3h adjust the use case
-ZHAN YUAN 4/11/2016 4H adjourn the domain property, assumprion, requirement and add two scenario 
-ZHAO KAIXIN 3/11/2016 4h adjust the use case and add use case description
-ZHAO KAIXIN 4/11/2016 3h class diagram
-ZHOU YINAN 4/11/2016 4h start writng alloy
-ZHAO kAIXIN 5/11/2016 3h sequence diagram
-ZHOU YINAN 5/11/2016 4h alloy
-ZHAN YUAN 5/11/2016 5h class diagram and sequential diagram
-ZHAN YUAN 6/11/2016 2.5h complete sequential diagram and activity diagram
-ZHAN YUAN 8/11/2016 2.5h statediagrame and interface
-ZHOU YINAN 8/11/2016 4h modify RASD documents and change alloy 
-ZHOU YINAN 10/11/2016 2h  alloy 
-ZHAO KAIXIN 11/11/2016 2h adjust ClassDiagram
-ZHOU YINAN 11/11/2016 1h modify RASD
-ZHAN YUAN  12/11/2016 2H non functional requirment
+ZHOU YINAN 22/10/2016 1.5h create RASD file, write introduction, goals, domain properties and some requirements     
+ZHAN YUAN  25/10/2016 40m add some requirements    
+ZHOU YINAN 29/10/2016 2h add content table, glossary, actor identifying, and first two scenario    
+ZHAO KAIXIN 29/10/2016 2h add some requirements  
+ZHOU YINAN 31/10/2016 2.5h add User cases    
+ZHAO KAIXIN 1/11/2016 3h adjust the glossary  
+ZHAO KAIXIN 2/11/2016 3h adjust the use case  
+ZHAN YUAN 4/11/2016 4H adjourn the domain property, assumption, requirement and add two scenario   
+ZHAO KAIXIN 3/11/2016 4h adjust the use case and add use case description  
+ZHAO KAIXIN 4/11/2016 3h class diagram  
+ZHOU YINAN 4/11/2016 4h start writing alloy  
+ZHAO kAIXIN 5/11/2016 3h sequence diagram  
+ZHOU YINAN 5/11/2016 4h alloy   
+ZHAN YUAN 5/11/2016 5h class diagram and sequential diagram  
+ZHAN YUAN 6/11/2016 2.5h complete sequential diagram and activity diagram  
+ZHAN YUAN 8/11/2016 2.5h state diagram and interface  
+ZHOU YINAN 8/11/2016 4h modify RASD documents and change alloy   
+ZHOU YINAN 10/11/2016 2h  alloy   
+ZHAO KAIXIN 11/11/2016 2h adjust ClassDiagram  
+ZHOU YINAN 11/11/2016 1h modify RASD  
+ZHAN YUAN  12/11/2016 2H non functional requirement  
+ZHOU YINAN 12/11/2016 3h modify RASD for version 1.0  
+
