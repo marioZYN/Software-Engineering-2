@@ -199,6 +199,17 @@ Assuming all the domain properties hold and we derive the correspondong requirem
 	* The system must be able to detect the availability of power plugs at the selected station
 
 ### 3.2 Non functional requirements
+The system is constrained by these as much as possible:
+
+* The system must be available 24 hour a day, 7 day a week.
+* The reliablity must be more than 99%
+* The response time must be less than 2 second.
+* The system must guarantees 99.999& of security and integrity of user's data.
+* The system must be able to cope the input error within 99.9% of case.
+* Determination of cars'position in real time.
+* Registration data must be stored within 100ms.
+* The system must be able to be updated within 1 day.
+
 #### Client interface
 ![mobile1](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/Login%20and%20Register.png)
 
