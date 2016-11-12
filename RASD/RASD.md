@@ -1,6 +1,3 @@
-
-
-
 ## Content
 * 1.Introduction
  * 1.1 Description of the given system
@@ -35,20 +32,21 @@ We are required to deveplop a digital management system for a car-sharing servic
 Moreover, the system has certain mechanics to incentivize the virtuous behaviours of the users, which includes creating discount of the charging fees or increasing the charging fees.
 
 ### 1.2 Goals
-* [G1]Users can register to the system and get the password by providing credentials and payment information  
-
-* [G2]Registered users can find the locations of available cars within a certain distance from their current location or from a specified address.
-* [G3]Among the available cars in a certain geographical region, users must be able to reserve a single car for up to one hour before they pick it up.
-* [G4]If a car is not picked‐up within one hour from the reservation, the system tags the car as available again, and the reservation expires; the user pays a fee of 1 EUR.
-* [G5]A user that reaches a reserved car must be able to tell the system he’s nearby, so the system unlocks the car and the user may enter.
-* [G6]As soon as the engine ignites, the system starts charging the user for a given amount of money per minute; the user is notified of the current charges through a screen on the car.
-* [G7]The system stops charging the user as soon as the car is parked in a safe area and the user exits the car; at this point, the system locks the car automatically.
-* [G8]The set of safe areas for parking cars is pre-defined by the management system.
-* [G9]If the system detects the user took at least two other passengers onto the car, the system applies a discount of 10% on the last ride.
-* [G10]If a car is left with no more than 50% of the battery empty, the system applies a discount of 20% on the last ride.
-* [G11]If a car is left at special parking areas where they can be recharged and the user takes care of plugging the car into the power grid, the system applies a discount of 30% on the last ride.
-* [G12]If a car is left at more than 3 KM from the nearest power grid station or with more than 80% of the battery empty, the system charges 30% more on the last ride to compensate for the cost required to re-charge the car on-site.
-* [G13]If the user enables the money saving option, he/she can input his/her final destination and the system provides information about the station where to leave the car to get a discount. This station is determined to ensure a uniform distribution of cars in the city and depends both on the destination of the user and on the availability of power plugs at the selected station.
+* [G1]Users can register to the system and get the password by providing credentials and payment information 
+* [G2]Registerd users can log in by providing the correct credentials  
+* [G3]Registered users can find the locations of available cars within a certain distance from their current location or from a specified address.
+* [G4]Among the available cars in a certain geographical region, users must be able to reserve a single car for up to one hour before they pick it up.
+* [G5]If a car is not picked‐up within one hour from the reservation, the system tags the car as available again, and the reservation expires; the user pays a fee of 1 EUR.
+* [G6]A user that reaches a reserved car must be able to tell the system he’s nearby, so the system unlocks the car and the user may enter.
+* [G7]As soon as the engine ignites, the system starts charging the user for a given amount of money per minute  
+* [G8]The user is notified of the current charges through a screen on the car  
+* [G9]The system stops charging the user as soon as the car is parked in a safe area and the user exits the car; at this point, the system locks the car automatically.
+* [G10]The users can know the locations of the safe areas  
+* [G11]If the system detects the user took at least two other passengers onto the car, the system applies a discount of 10% on the last ride.
+* [G12]If a car is left with no more than 50% of the battery empty, the system applies a discount of 20% on the last ride.
+* [G13]If a car is left at stations where they can be recharged and the user takes care of plugging the car into the power grid, the system applies a discount of 30% on the last ride.
+* [G14]If a car is left at more than 3 KM from the nearest power grid station or with more than 80% of the battery empty, the system charges 30% more on the last ride to compensate for the cost required to re-charge the car on-site.
+* [G15]If the user enables the money saving option, he/she can input his/her final destination and the system provides information about the station where to leave the car to get a discount. This station is determined to ensure a uniform distribution of cars in the city and depends both on the destination of the user and on the availability of power plugs at the selected station.
 
 ### 1.3 Domain properties  
 We suppose the following statements hold in the analyzed world.
@@ -61,7 +59,7 @@ We suppose the following statements hold in the analyzed world.
 * Each car knows its own battery's state(percent of battery empty,charging).
 * Users can not leave the car while driving.
 * Cars are always connected to the network.  
-* The system always sends the message to user when it is necessary.
+* The system always sends a message to user when it is necessary.
 * There is a timer to take care of the management of some operations.
 * There are maintainers to take care of charging the battery of cars.
 * There are maintainers in the stations.
@@ -79,8 +77,7 @@ Here presents the detail defination of some common used terms.
 * Credentials
 	* Some personal information about each user, including:
 	* Name
-	* E_mail address
-	* Phone number
+	* Email address
 	* Number of drive license
 
 * Payment information
@@ -88,6 +85,7 @@ Here presents the detail defination of some common used terms.
 	* Expired time
 	* Security code 
 	* Holder name
+	* Phone number
 
 * Driver
 	* He is the driver of the renting car. According to the regulations, only the user who rent the car can drive. 
@@ -96,8 +94,8 @@ Here presents the detail defination of some common used terms.
 	* People on the car, other than the driver.
 
 * Safe area
-	* a set of location predefined as being safe
-	* it may has the power plug or may not.
+	* a set of locations predefined by the system
+	* It may has the power plug or may not.
 
 * Station 
 	* stations are always safe areas with power plug. 
@@ -106,21 +104,19 @@ Here presents the detail defination of some common used terms.
 There are some information that is not clear in the specification document, so here lists the assumptions which make the specification more clear.
 
 * The available cars are the cars with full battery 
-* The available cars are the cars in the safe areas
+* The available cars are the cars in stations
 * Since only the user uploads the information of the driving licence, only the user can act as a driver while passengers can not.
 
 
 
 ### 1.6 Stakeholders
-* There would be two main stakeholders
-	* One is the company who provides this service system and earns money from it
-	* <del>The other is the government who wants to get a more usable and convenient renting system</del>
+Our main stakeholder is Pro.Mottola who requires a managing system for PowerJoy car sharing servive.  
 
 ## 2 Actors Identifying
 The actors involved in our system is described below  
 
 * Guest: A potential user who has not registered yet
-* User: User logs into the system and performs the payment.(The driver can only be the user)
+* User: User logs into the system and performs the payment
 
 ## 3 Requirements
 
@@ -129,74 +125,75 @@ The actors involved in our system is described below
 Assuming all the domain properties hold and we derive the correspondong requirements from the goals.
 
 * [G1]Users can register to the system and get the password by providing credentials and payment information
-  * The system must let only one registeration per credential.
-  * The system must be able to check whether the payment information is correct or not.
-  * The system must create and mantain only one password per credential
-  * The system must check whether the password is correct under the credential
-  * The system must allow users to login when provided with the correct credential and password
+  * The system must let only one registeration per email  
+  * The system must create and mantain only one password per email  
+  * The system must send the password to the corresonding email adress when the registeration is completed 
 
-* [G2]Registered users can find the locations of available cars within a certain distance from their current location or from a specified address
+* [G2]Registerd users can log in by providing the correct credentials
+  * The system must check whether the password and email address are matched
+  * The system must allow the user enter the system when the credentials are correct  
+
+* [G3]Registered users can find the locations of available cars within a certain distance from their current location or from a specified address
  * The system must be able to get all the locations of the cars
  * The system has a default range which identifies the term "nearby"
- * The system must be able to get all the information of the nearby cars with a certain locaiton as input
+ * The system must be able to get all the information of the nearby cars corresponding to a given location
 
-* [G3]Among the available cars in a certain geographical region, users must be able to reserve a single car for up to one hour before they pick it up.
+* [G4]Among the available cars in a certain geographical region, users must be able to reserve a single car for up to one hour before they pick it up.
  * The system must allow users to reserve a single car
  * The system maintains a clock for each car. Once the car is resvered by a user, a one-hours time clock starts
+ * The system must notify the user of the remaining reservation time
 
-* [G4]If a car is not picked‐up within one hour from the reservation, the system tags the car as available again, and the reservation expires; the user pays a fee of 1 EUR.
- * The system must allow the user who has made a reservation for a car to stop the clock of that car within one hour picking up time
+* [G5]If a car is not picked‐up within one hour from the reservation, the system tags the car as available again, and the reservation expires; the user pays a fee of 1 EUR.
+ * The system must allow the user who has made a reservation for the car to stop the clock if he/she is nearby
  * The system must charge the user 1 euro for not being able to stop the clock within one hour
  * The system will make the car state changed to available if the clock is not stopped within in one hour
  
-* [G5]A user that reaches a reserved car must be able to tell the system she’s nearby, so the system unlocks the car and the user may enter.
+* [G6]A user that reaches a reserved car must be able to tell the system she’s nearby, so the system unlocks the car and the user may enter.
  * The system must be able to check the position of the user according to the user's GPS
  * The system must be able to check the position of the car according to the car's GPS
- * The system should be able to receive the messages which are sent by different users as the same time
- * The system should be able to check whether the postition of the user is the same as the corresponding car
+ * The system should be able to check whether the position of the user is the same as the corresponding car
  * If the user and the corresponding car are in the same position, the system must transfer the control information to the appropriate car for unlocking the car
  * If the user and the corresponding car are not in the same position, the system must be able to keep the car locked
   
-* [G6]As soon as the engine ignites, the system starts charging the user for a given amount of money per minute; the user is notified of the current charges through a screen on the car.
+* [G7]As soon as the engine ignites, the system starts charging the user for a given amount of money per minute; the user is notified of the current charges through a screen on the car.
  * The system must be able to detect whether the engine of the car is ignited or not
  * The system must be able to record the total using time
- * The system must be able to estimate the total fee during the renting servece
+
+* [G8]The user is notified of the current charges through the screen on the car
+ * The system must be able to estimate the current fee during the renting servece
  * The system must be able to transfer the charging informatin to the appropriate car
   
-* [G7]The system stops charging the user as soon as the car is parked in a safe area and the user exits the car; at this point, the system locks the car automatically.
+* [G9]The system stops charging the user as soon as the car is parked in a safe area and the user exits the car; at this point, the system locks the car automatically.
  * The system must be able to check the position of the car according to the car's GPS
  * The system must be able to detect whether the car is parked or not
  * The system must be able to check whether the car is parked in the safe area
  * The system must be able to detect whether the user has exited the car
- * if the user still stay in the car, the system must be able to keep the car in the unlocked state
- * if the car is not parked in the safe area, the system must be able to keep the car in the unlocked state and keep charging
- * The system must let the user know whether the car is in the safe area
- * if the car is parked in the safe area and the user has exited the car, the system must be able to transfer the control information for locking the car
-  
-* [G8]The set of safe areas for parking cars is pre-defined by the management system.
- * The system must be able to insert the area in the safe area set
- * The system must be able to delete the area in the safe area set
- * The system must be able to retrieve the area in the safe area set
- * <del>The system must be able to replace the area in the safe area set</del>
+ * If the car is not parked in the safe area, the system must be able to keep the car in the unlocked state and keep charging
+ * If the car is parked in the safe area and the user has exited the car, the system must be able to transfer the control information for locking the car
  
-* [G9] If the system detects the user took at least two other passengers onto the car, the system applies a discount of 10% on the last ride.
- * The system will analyze whether more than two passengers,excluding driver, onto the cars or not, if it actually goes beyond, the system will register a discount of 10% on the last ride
+* [G10]The users can know the locations of the safe areas  
+  * The system must be able to show users the locations of the safe areas
+ 
+* [G11] If the system detects the user took at least two other passengers onto the car, the system applies a discount of 10% on the last ride.
+ * The system must be able to detect the number of passengers in the car  
+ * If the number is equal or more than 2, the system should register a 10% for the corresponding ride
 
-* [G10]If a car is left with no more than 50% of the battery empty, the system applies a discount of 20% on the last ride.
- * After the lock of car, the system will examine the level of battery, if over half the battery is remained, then the system will register a discount of 20% on the last ride
+* [G12]If a car is left with no more than 50% of the battery empty, the system applies a discount of 20% on the last ride.
+ * After the lock of car, the system will examine the level of battery, if over half the battery is remained, then the system will register a discount of 20% for the ride  
 
-* [G11]If a car is left at special parking areas where they can be recharged and the user takes care of plugging the car into the power grid, the system applies a discount of 30% on the last ride.
- * system will register a discount of 30% on the last ride if it recognize the car is parked at special area, and it's charging the battery within a determined time. 
+* [G13]If a car is left at special parking areas where they can be recharged and the user takes care of plugging the car into the power grid, the system applies a discount of 30% on the last ride.
+ * The system will register a discount of 30% on the last ride if it recognize the car is parked in stations and be plugged to the gird
 
-* [G12]If a car is left at more than 3 KM from the nearest power grid station or with more than 80% of the battery empty, the system charges 30% more on the last ride to compensate for the cost required to re-charge the car on-site.
+* [G14]If a car is left at more than 3 KM from the nearest power grid station or with more than 80% of the battery empty, the system charges 30% more on the last ride to compensate for the cost required to re-charge the car on-site.
  * system must be able to get the positions of the cars and all positions of power grid stations.
  * system will record an increase of 30% on the fee of last ride, if there are not any power grid stations within 3KM from the position of car or the car is left with no more than 20% of battery.
  * system must inform the maintainers to retrive the cars with low battery to the stations.
-* [G13]If the user enables the money saving option, he/she can input his/her final destination and the system provides information about the station where to leave the car to get a discount. This station is determined to ensure a uniform distribution of cars in the city and depends both on the destination of the user and on the availability of power plugs at the selected station.
+* [G15]If the user enables the money saving option, he/she can input his/her final destination and the system provides information about the station where to leave the car to get a discount. This station is determined to ensure a uniform distribution of cars in the city and depends both on the destination of the user and on the availability of power plugs at the selected station.
 	* The system must be able to get the distribution of the cars
 	* The system must be able to detect whether the user enables the money saving option or not
 	* The system must be able to select the station according to the user's destination for ensuring a uniform distribution of the cars
 	* The system must be able to detect the availability of power plugs at the selected station
+
 
 ### 3.2 Non functional requirements
 The system is constrained by these as much as possible:
@@ -206,7 +203,7 @@ The system is constrained by these as much as possible:
 * The response time must be less than 2 second.
 * The system must guarantees 99.999& of security and integrity of user's data.
 * The system must be able to cope the input error within 99.9% of case.
-* Determination of cars'position in real time.
+* Determination of car's position in real time.
 * Registration data must be stored within 100ms.
 * The system must be able to be updated within 1 day.
 
@@ -629,6 +626,8 @@ Here are some alloy graphs describing the logic relations
 ![Ride](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/Ride.png)
 4. Discount
 ![Discount](https://raw.githubusercontent.com/marioZhou/Software-Engineering-2/master/RASD/pictures/DIscount%20info.png)
+
 ## 9 Work Time
+
 
 
