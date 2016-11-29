@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{graphicx}
+\usepackage[fontsize=11pt]{scrextend}
 \title{PowerEnjoy Service - Design Document}
 \begin{document}
 
@@ -27,14 +28,43 @@ Authors:
 
 	
 	\section{INTRODUCTION}
-		This document is the DD document which describes the archtiecture
 	\subsection{Purpose}
+	The Design Document serves to describe the structure of the PowerEnJoy service. It provides all the detailed information for building the system. More precisely, it provides the information on the chosen architecture style and design pattern. It explains how the components are implemented and interacted in the system. The document also provides the verification of fulfilling the requirements listed in the RASD documents.
 	\subsection{Scope}
+	The Design Document shows how the system is built and explains how the functional requirements in the RASD file are realized. The document covers high level architecture design, interacting components,  algorithms and user interface design. 
 	\subsection{Definitions, Acronyms, Abbreviations}
+	\begin{itemize}
+		\item RASD : Requirement Analysis and Specification Document
+		\item DD : Design Document
+		\item MVC : Model View Controller
+		\item REST : Representational state transfer (REST) or RESTful web services are one way of providing interoperability between computer systems on the Internet.
+		\item JSON : JSON (JavaScript Object Notation) is a minimal, readable format for structuring data. 
+	\end{itemize}
 	\subsection{Reference Documents}
+	\begin{itemize}
+		\item Specification Document Assignments AA 2016-2017
+		\item RASD
+	\end{itemize}
+	\newpage
 	\subsection{Document Structure}
+	The Design Document is divided into 7 parts : 
+	\begin{itemize}
+		\item \textbf{Introduction} : This section introduces the structure of Design Document and some basic background knowledge to understand the document.
+		\item \textbf{Architecture Design}
+		\\1. High level components and their interactions : This section gives a general description of how the components are defined and how they communicate with each other  
+		\\2. Component view : This section gives detailed information of components defined in the system
+		\\3. Deployment view : This section describes how the components are deployed in order to act correctly
+		\\4. Runtime view : This section gives the sequential diagrams of how the users accomplish their requests
+		\\5. Component interfaces : The interfaces of components are described in this section
+		\\6. Selected architectural styles and patterns : This section explains the reason of choosing certain architecture and the benefits accompanied
+		\\7. Other design decisions
+		\item \textbf{Algorithm Design} : In the section, the necessary code samples are given in order to clearly demonstrate the component interaction 
+		\item \textbf{User Interface Design} : this section presents mockups and user experience explained via UX and BCE diagrams
+		\item \textbf{Requirement Traceability} : This section shows how the requirements in the RASD are accomplished in the design
+	\end{itemize}
 	\newpage
 	\section{ARCHITECTURAL DESIGN}
+	
 	\subsection{High level components and their interaction}
 	\subsection{Component view}
 	\subsection{Deployment view}
@@ -46,7 +76,7 @@ Authors:
 	\subsection{Other design decisions}
 	\newpage
 	\section{ALGORITHM DESIGN}
-	Focus on the definition of the most relevent algorithmic part
+	Focus on the definition of the most relevant algorithmic part
 	\newpage
 	\section{USER INTERFACE DESIGN}
 	\newpage
