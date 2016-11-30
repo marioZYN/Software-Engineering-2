@@ -29,7 +29,7 @@ Authors:
 	
 	\section{INTRODUCTION}
 	\subsection{Purpose}
-	The Design Document serves to describe the structure of the PowerEnJoy service. It provides all the detailed information for building the system. More precisely, it provides the information on the chosen architecture style and design pattern. It explains how the components are implemented and interacted in the system. The document also provides the verification of fulfilling the requirements listed in the RASD documents.
+	The Design Document serves to describe the structure of the PowerEnJoy service. It provides all the detailed information for building the system. More precisely, it provides the information on the chosen architecture style and design pattern. It explains how the components are implemented and interacted in the system. The document also provides the verification of fulfilling the requirements listed in the RASD documents. In general, the document is served as a guideline for program developers.
 	\subsection{Scope}
 	The Design Document shows how the system is built and explains how the functional requirements in the RASD file are realized. The document covers high level architecture design, interacting components,  algorithms and user interface design. 
 	\subsection{Definitions, Acronyms, Abbreviations}
@@ -71,6 +71,35 @@ Authors:
 	\subsection{Runtime view}
 	You can use sequence diagrams to describe the way components interact to accomplish specific tasks typically related to your use cases.
 	\subsection{Component interfaces}
+	\subsubsection{Client app}
+	\textbf{register(name, surname, email,drivingLisence,paymentInfo)}
+	\\
+	\\The register function on the Client app side receives from input all the necessary information for registering. This information is then sent to the server in the format of JSON for former processing.
+	\\
+	\\\textbf{logIn(email, password)}
+	\\
+	\\The logIn function receives from the input the user's email and corresponding password. This information is then sent to the server in the format of JSON for former processing. 
+	\\
+	\\\textbf{car[] getAvailableCars(location)}
+	\\
+	\\By providing a location, users can get all the available cars nearby. The location information is sent to the server in the format of JSON then the server sends back all the cars that are available near that location. 
+	\\
+	\\\textbf{void reserve(user, car)}
+	\\
+	\\The reserve function allows a user to reserve a car. The reserve request is then sent to the reservation Manager in the server.
+	\\
+	\\\textbf{void openTheDoor(car,location)}
+	\\
+	\\When the user gets to the reserved car, he can inform the server that he is nearby by sending his current location to the server. 
+	
+	\subsubsection{Guset Manager}
+	\textbf{User register(credentials)}
+	\\
+	\\The register function receives from clients the credentials. The Guest Manager in the server checks whether the received credentials already exist in the database or not. In the case of new coming credentials, the Guest Manager uses Gmail API to send an email to the guest with a newly generated password. Then Guest Manager creates a new tuple using credentials and password and inserts it into the database.A User object created by the Guest Manager is sent back to the client app. In the case of non valid credentials, the server sends back an error notation to the client app.
+	\\
+	\\\textbf{User signIn(email, password)}
+	\\
+	\\The signIn function checks the email and password provided by the user in the server side. If they are valid i.e. there exists a corresponding email and the password matches the email, an instance of User object is sent back to the client app.
 	\subsection{Selected architectural styles and patterns}
 	Please explain which styles/patterns you used, why and how
 	\subsection{Other design decisions}
@@ -79,6 +108,8 @@ Authors:
 	Focus on the definition of the most relevant algorithmic part
 	\newpage
 	\section{USER INTERFACE DESIGN}
+	This section will describe different interfaces for the components. Component interfaces are divided into three different aspects : Guest Manager, User Manager and Car Manager.
+	
 	\newpage
 	\section{REQUIREMENT TRACEABILITY}
 	\newpage
@@ -86,4 +117,4 @@ Authors:
 	\newpage
 	\section{REFERENCES}
 
-\end{document}}
+\end{document}
