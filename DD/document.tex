@@ -92,6 +92,18 @@ Authors:
 	\\
 	\\When the user gets to the reserved car, he can inform the server that he is nearby by sending his current location to the server. 
 	
+	\subsubsection{Car app}
+	\textbf{void startRide(user, car)}
+	\\
+	\\Car app notifies the server that a ride starts.
+	\\
+	\\\textbf{void endRide(user, car, state)}
+	\\
+	\\Car app notifies the server that a ride is finished.
+	\\
+	\\\textbf{String getCurrentPrice(user,car)}
+	\\
+	\\The working car can get the current price information from the server.
 	\subsubsection{Guset Manager}
 	\textbf{User register(credentials)}
 	\\
@@ -100,6 +112,24 @@ Authors:
 	\\\textbf{User signIn(email, password)}
 	\\
 	\\The signIn function checks the email and password provided by the user in the server side. If they are valid i.e. there exists a corresponding email and the password matches the email, an instance of User object is sent back to the client app.
+	
+	\subsubsection{User Manager}
+	\textbf{Reservation reserver(user, car)}
+	\\
+	\\User makes request to the server for a car reservation. User Manager processes the request and makes reservation to the corresponding car. 
+	\\
+	\\\textbf{Boolean reservationTimeOut(user, car)}
+	\\
+	\\When the reserved car is timing out, User Manager notifies the corresponding user and cancels the reservation.
+	
+	\subsubsection{Car Manager}
+	\textbf{Ride startRIde(user,car)}
+	\\
+	\\Car Manager on the server side receives from car app the user and car information. It checks from the database whether the ride request is valid or not. In the case of valid request, Car Manager creates a Ride object and sends it back to the car app. Also Car Manager stores the data into the database. In the case of a non-valid request, the server sends back to the car app an error notation.
+	\\
+	\\\textbf{String endRide(user,car,state)}
+	\\
+	\\Car Manager processes the request of ending a ride from the car app. It gets the ride information from the database and calculates the final price of the ride. Then Car Manager sends back to car app the price user needs to pay. 
 	\subsection{Selected architectural styles and patterns}
 	Please explain which styles/patterns you used, why and how
 	\subsection{Other design decisions}
