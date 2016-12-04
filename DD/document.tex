@@ -105,33 +105,47 @@ Authors:
 	\\
 	\\The working car can get the current price information from the server.
 	\subsubsection{Guset Manager}
-	\textbf{User register(credentials)}
+	\textbf{Boolean register(credentials)}
 	\\
-	\\The register function receives from clients the credentials. The Guest Manager in the server checks whether the received credentials already exist in the database or not. In the case of new coming credentials, the Guest Manager uses Gmail API to send an email to the guest with a newly generated password. Then Guest Manager creates a new tuple using credentials and password and inserts it into the database.A User object created by the Guest Manager is sent back to the client app. In the case of non valid credentials, the server sends back an error notation to the client app.
+	\\The register function receives from clients the credentials. The Guest Manager in the server checks whether the received credentials already exist in the database or not. In the case of new coming credentials, the Guest Manager uses Gmail API to send an email to the guest with a newly generated password. Then Guest Manager creates a new tuple using credentials and password and inserts it into the database. In the case of a successful register, a true value will be sent to the cilent app.  In the case of non valid credentials, the server sends back a false notation to the client app.
 	\\
-	\\\textbf{User signIn(email, password)}
+	\\\textbf{String signIn(email, password)}
 	\\
-	\\The signIn function checks the email and password provided by the user in the server side. If they are valid i.e. there exists a corresponding email and the password matches the email, an instance of User object is sent back to the client app.
+	\\The signIn function checks the email and password provided by the user in the server side. If they are valid i.e. there exists a corresponding email and the password matches the email, then the information of the user will be encoded into a JSON format and be sent back to the client app. 
 	
 	\subsubsection{User Manager}
-	\textbf{Reservation reserver(user, car)}
+	\textbf{String reserver(user, car)}
 	\\
-	\\User makes request to the server for a car reservation. User Manager processes the request and makes reservation to the corresponding car. 
+	\\User makes request to the server for a car reservation. User Manager processes the request and makes reservation to the corresponding car.  The reservation information is then stored into database and the corresponding car information will be sent back to client app in the format of JSON.
 	\\
 	\\\textbf{Boolean reservationTimeOut(user, car)}
 	\\
 	\\When the reserved car is timing out, User Manager notifies the corresponding user and cancels the reservation.
 	
 	\subsubsection{Car Manager}
-	\textbf{Ride startRIde(user,car)}
+	\textbf{Ride startRide(user,car)}
 	\\
-	\\Car Manager on the server side receives from car app the user and car information. It checks from the database whether the ride request is valid or not. In the case of valid request, Car Manager creates a Ride object and sends it back to the car app. Also Car Manager stores the data into the database. In the case of a non-valid request, the server sends back to the car app an error notation.
+	\\Car Manager on the server side receives from car app the user and car information. It checks from the database whether the ride request is valid or not. In the case of a valid request, server sends back to the client app a successful notation. Also Car Manager stores the data into the database. In the case of a non-valid request, the server sends back to the car app an error notation.
 	\\
 	\\\textbf{String endRide(user,car,state)}
 	\\
-	\\Car Manager processes the request of ending a ride from the car app. It gets the ride information from the database and calculates the final price of the ride. Then Car Manager sends back to car app the price user needs to pay. 
+	\\Car Manager processes the request of ending a ride from the car app. It gets the ride information from the database and calculates the final price of the ride. Then Car Manager sends back to car app the price  needs to pay. Car Manager redirects payment request to the bank service. 
 	\subsection{Selected architectural styles and patterns}
-	Please explain which styles/patterns you used, why and how
+	\subsubsection{Architecture}
+	We choose the three-tier architecture for our system. The whole system is divided into three parts : presentation tier, business tier and data tier.
+	\begin{itemize}
+		\item presentation tier : It contains Client app and Car app. It is the layer that directly interacts with the actors. 
+		\item business tier : Business tier contains all the logic. It manages request and response. Also it manages the data interaction with the database. By using the business tier, clients do not directly interact with the database. 
+		\item data tier : We use MySQL database to store all the useful data.
+	\end{itemize}
+	\begin{figure}[h]
+	\includegraphics[width=\textwidth]{architecture}
+	\end{figure}
+	The three tier architecture is used because an effective distributed client-server design is needed. It guarantees increased performance, flexibility, maintainability, reusability, and scalability, while hiding the complexity of distributed processing from the user. In our system, no direct database access from the client app is allowed. All the requests are passing through business tier first.
+	\\
+	We use a typical client-server architecture. In the client-server architecture, data is manipulated in the server side and can only be accessible to designated users. Moreover, services can be easily maintained or updated in the server side without touching Client app. 
+	\subsubsection{Pattern}
+	\textbf{MVC} Model-View-Controller is used in our system. To combine it with our three-tier architecture, the view part lies on the client app side which deals with interaction with users. Model and Controller are in the server side, which maintains business logic and manipulation of data. 
 	\subsection{Other design decisions}
 	\newpage
 	\section{ALGORITHM DESIGN}

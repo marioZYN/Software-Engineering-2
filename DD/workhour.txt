@@ -1,4 +1,4 @@
 29/11/2016 ZHOU YINAN 3h write DD basic structure and introduction part
 30/11/2016 ZHOU YINAN 1h add parts of component interface
 2/12/2016 ZHOU YINAN 1h add component interface and diagram
-
+4/12/2016 ZHOU YINAN 2h architecture and design pattern
