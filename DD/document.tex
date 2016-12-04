@@ -7,7 +7,7 @@
 \begin{titlepage}
 \begin{figure}
 	\centering
-	\includegraphics{polimi}
+%	\includegraphics{polimi}
 \end{figure}
 \maketitle
 \centering
@@ -66,7 +66,39 @@ Authors:
 	\section{ARCHITECTURAL DESIGN}
 	
 	\subsection{High level components and their interaction}
+	\begin{figure}[h]
+	\includegraphics[width=\textwidth]{High_Level}
+	\end{figure}
+	Here we choose to use the 3 tier architacture: The Presentation tier including the Client Mobile Application and the Car Application; The Bussiness tier including the Server; The Data tire including the DataBase
+	\newpage
+	
 	\subsection{Component view}
+	\begin{figure}[h]
+	\includegraphics[width=\textwidth]{CV_Server}
+	\end{figure}
+	For the Server, there should be several interfaces, which are in charge of communicating with other components: 
+	\begin{itemize}
+		\item \textbf{User Application Manager} : Component that provides the interface for the users of the system and the Google Map. User Application Manager should provides the options of checking the available car around the specified position, reserving car and canceling the reservation. With the help of the Google Map, the system can know the location of the user.
+		\item \textbf{Guest Application Manager} : Component that provides the interfaces for the unregistered guest of the system and the Google Mail. It provides the option to create an account. Finishing the register, the system would send an e-mail to the guest through the Google Mail.
+		\item \textbf{Car Application Manager} : Component that provides the interface for the car Application, Google Map and Bank Account. The Car Application Manager can know the location of the car, charge the specified bank account and send the instruction to the car.
+		\item \textbf{Database Manager} : Component that provides the interface for the Database for collecting the information which are collected by other components.   
+	\end{itemize}
+	\newpage
+	\begin{figure}[h]
+	\includegraphics[width=\textwidth]{CV_Database}
+	\end{figure}
+	For the Database, there are several component for storing the data of the system. The Database should provides the interface of the Server for information exchange. Through the interface, the Server can transmit and  store the information in the Database. The Server can also retrieve the information from the Database according to the corresponding instruction.
+
+	\begin{itemize}
+		\item \textbf{Car} : Component that stores the information of the cars. The Car should stores the position, plate, battery, capacity, 	state and the currentPosition of each car.
+		\item \textbf{User} : Component that stores the information of the users. The User should stores the credential and the paymentInfo of each user.
+		\item \textbf{Ride} : Component that stores the information of the riding. The Ride should stores the riding information, including the renting car, corresponding user and so on.
+		\item \textbf{Reservation} : Component that stores the information of the reservation. The Reservation should stores the user and the corresponding car of each reservation.
+		\item \textbf{DiscountAndPunish} : Component that stores the information of the discount and punish of each ride. For each ride, when finishing the riding, the DiscountAndPunish component should provide the information about the discount and the punish, for calculating the total charging.
+		\item \textbf{Area} : Component that stores the area of each position.
+	\end{itemize}
+	\newpage
+
 	\subsection{Deployment view}
 	\subsection{Runtime view}
 	You can use sequence diagrams to describe the way components interact to accomplish specific tasks typically related to your use cases.
