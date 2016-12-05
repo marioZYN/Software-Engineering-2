@@ -69,7 +69,9 @@ Authors:
 	\begin{figure}[h]
 	\includegraphics[width=\textwidth]{High_Level}
 	\end{figure}
-	Here we choose to use the 3 tier architacture: The Presentation tier including the Client Mobile Application and the Car Application; The Bussiness tier including the Server; The Data tire including the DataBase
+	Here we choose to use the 3 tier architecture: The Presentation tier includes the Client Mobile Application, Client Web Browser and the Car Application; The Business tier includes the Server; The Data tier includes the database.
+	\\
+	\\Here a MVC pattern is also used. The presentation tier is responsible for all the GUI part, thus it is the view part. The server maintains all the business logic and the database is responsible for data manipulation. Thus the model and controller are in the server and database side. 
 	\newpage
 	
 	\subsection{Component view}
@@ -175,9 +177,18 @@ Authors:
 	\end{figure}
 	The three tier architecture is used because an effective distributed client-server design is needed. It guarantees increased performance, flexibility, maintainability, reusability, and scalability, while hiding the complexity of distributed processing from the user. In our system, no direct database access from the client app is allowed. All the requests are passing through business tier first.
 	\\
-	We use a typical client-server architecture. In the client-server architecture, data is manipulated in the server side and can only be accessible to designated users. Moreover, services can be easily maintained or updated in the server side without touching Client app. 
+	\\We use a typical client-server architecture. In the client-server architecture, data is manipulated in the server side and can only be accessible to designated users. Moreover, services can be easily maintained or updated in the server side without touching Client app.
+	\\
+	\\The Client app is composed of a mobile application and a web browser. Users can choose to access the service by either a mobile web browser or an application. Our system uses request-response methodology. All the services are requested from the user side. The client asks for information or requests for certain services using REST and server responses in JSON format. When the server receives a certain request, it dispatches the request to corresponding responsible manager. 
+	\\
+	\\We use RESTFUL API for for our service to be processed. Each service is defined by a unique URI. By using RESTFUL API, we keep our client-server communication clear and simple. Moreover, REST style client-server architecture allows stateless session in the server. All the information transfered between server and client side is in JSON format which allows the information to be processed by different end-systems. 
 	\subsubsection{Pattern}
 	\textbf{MVC} Model-View-Controller is used in our system. To combine it with our three-tier architecture, the view part lies on the client app side which deals with interaction with users. Model and Controller are in the server side, which maintains business logic and manipulation of data. 
+	\\
+	\\\textbf{Client-Server} In our system, there are 2 clients: user application and car application. The user application can be a pure iOS or Android app or it can be a mobile web browser. In both cases, we use RESTFUL API to communicate with the server. The information sent and received is in JSON format.
+	\\
+	\\\textbf{Request-response} Our system is based on service which uses request-response methodology. All the requests are generated from the user side which can be either a user application or a cat application. Server is responsible for processing the request and sending back the response.
+	
 	\subsection{Other design decisions}
 	\newpage
 	\section{ALGORITHM DESIGN}
@@ -188,6 +199,7 @@ Authors:
 	
 	\newpage
 	\section{REQUIREMENT TRACEABILITY}
+	The design of architecture need to fulfill all the goals and requirements requested in the RASD file. Here readers can find how these specifications are completed using our component interfaces. 
 	\newpage
 	\section{EFFORT SPENT}
 	\newpage
