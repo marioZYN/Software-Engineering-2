@@ -3,5 +3,6 @@
 2/12/2016 ZHOU YINAN 1h add component interface and diagram
 4/12/2016 ZHOU YINAN 2h architecture and design pattern
 4/12/2016 ZHAO KAIXIN 4h component view and high level architecture
+4/12/2016 ZHAN YUAN 3h add deployment view and part of runtime
 5/12/2016 ZHOU YINAN 1h architecture and pattern
-
+5/12/2016 ZHAN YUAN 2.5h add part of runtime view   		
