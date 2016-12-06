@@ -4,7 +4,22 @@
 \title{PowerEnjoy Service - Design Document}
 
 \begin{document}
-	\section{deployment view}
-		I want to watch your name now
+\section{deployment view}
+\section{Runtime view}
+\subsection{Register}
+The sequence diagram shows procedure of registration. It start when a guest request the registration on the client application. After guest fulfil the form with that application given, the information will send to the server, where guest application manager checks the validation. It accesses, through the database manager, the database and check if the information has already been present into itself. In negative case, the serve send back to application interface a message with error; in the affirmative case,the server allows the database to memorize the guest's credential and password, and Guest Application Manager will send back an email to guest with Password saved.   
+		
+\subsection{Login}
+This sequence diagram shows the procedure of user to Login to system. The Client Application sent the user's email and password inserted send to the Guest Application Manager to check the correctness. Using Database Manager it go to database schema to check the existence of user with same email and password. If it is positive affirmation, the Guest Application Manager gives consent to the application; if not the server send to application a error message.
 
+\subsection{Reserve}
+This sequence diagram shows a user to reserve a car. Fist the user insert a position where he want to start the ride,it can either be inserted by user or by GPS. This information will send to User Application Manager, it go to check into database all available car within a certain distance from the position given. Then the list of cars will send back. And the application, after user confirms the car that he select,notify the User Manager,that call Database Manager to insert into the database the reservation,almost the same time call Car Manager to take reserve the car, to prevent others reserve the same car. Finally a message will send to application the information about the reserve.\\
+The reservation lasts one hour, at the end of this time, the reservation will cancel, the server(it contain all manager) update the reserve state, change the car state into Free,charge 1EUR with payment info provide by user, and at last send a email to notify the user the cancellation and charge.
+
+\subsection{Pick up}
+ When the user is near the car he use the interface to notice the serve with location furnished by GPS, Car Manager then verify whether the position received is so near to car(car's position is into database). It send back a message with positive or negative affirmation based on the result of verification, moreover   Car Manager send a signal that allow car to open the door, if in the former case.
+ 
+ \subsection{Renting}
+ The sequence car shows when the user enter car, how to interact with car application. User can optionally  choose to enable money save option. After Ignition of engine, there are some application that detect how many of passenger is presented into the car, if it's more than 2 person (exclude user), the Car Manager will apply 10 per cent of discount on the last ride.  During the ride a display shows the information(time ,cost) send from Car Manager in real time. There are some other condition for variate the price of ride, base on the state of car after ride, the serve check which one is respected, and apply the corresponding variation. The total price will calculate by Car Manager and send back a message to application, where notify the user, and, by user's payment info, charge the price calculated. 
+			
 \end{document}
