@@ -7,3 +7,5 @@
 5/12/2016 ZHOU YINAN 1h architecture and pattern
 5/12/2016 ZHAN YUAN 2.5h add part of runtime view 
 6/12/2016 ZHOU YINAN 1h document structure modified	
+6/12/2016 ZHAO KAIXIN 2h requirement traceability
+7/12/2016 ZHAO kAIXIN 1h requirement traceability
