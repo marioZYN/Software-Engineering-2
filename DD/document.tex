@@ -279,10 +279,131 @@ Authors:
 	
 	\newpage
 	\section{REQUIREMENT TRACEABILITY}
-	The design of architecture need to fulfill all the goals and requirements requested in the RASD file. Here readers can find how these specifications are completed using our component interfaces. 
+	In this section, we are going to show a precise list of all the functional requirements and their corresponding mapping to components in the architecture.(for more detailed view of how these components contact with others and the interfaces of these components, please refer to the high level architecture and the component interface)
+	\begin{itemize}
+		\item\textbf{[G1]}Users can register to the system and get the password by providing credentials and payment information
+		\newline - Guest Application Manager
+		\newline - Database Manager
+		\newline - User
+		
+		\item\textbf{[G2]}Registered users can log in by providing the correct credentials
+		\newline - User Application Manager
+		\newline - Database Manager
+		\newline - User
+		
+		\item\textbf{[G3]}Registered users can find the locations of available cars within a certain distance from their current location or from a specified address
+		\newline - User Application Manager
+		\newline - Database Manager
+		\newline - Car 
+		\newline - Area
+		
+		\item\textbf{[G4]}Among the available cars in a certain geographical region, users must be able to reserve a single car for up to one hour before they pick it up.
+		\newline - User Application Manager
+		\newline - Database Manager
+		\newline - User
+		\newline - Car
+		\newline - Reservation
+		\newline - Google Map api
+		
+		\item\textbf{[G5]}If a car is not picked‐up within one hour from the reservation, the system tags the car as available again, and the reservation expires; the user pays a fee of 1 EUR.
+		\newline - Car
+		\newline - Reservation
+		\newline - Database Manager
+		\newline - Car Application Manager
+		\newline - Bank system
+		
+		\item\textbf{[G6]}A user that reaches a reserved car must be able to tell the system she’s nearby, so the system unlocks the car and the user may enter.
+		\newline - User Application Manager
+		\newline - Database Manager
+		\newline - Reservation
+		\newline - Car
+		\newline - Google Map api
+		
+		\item\textbf{[G7]}As soon as the engine ignites, the system starts charging the user for a given amount of money per minute; the user is notified of the current charges through a screen on the car.
+		\newline - Car Application Manager
+		\newline - Database Manager
+		\newline - Ride
+		\newline - Car
+		
+		\item\textbf{[G8]}The user is notified of the current charges through the screen on the car
+		\newline - Car
+		\newline - Ride
+		\newline - Database
+		\newline - Car Application Manager
+		
+		\item\textbf{[G9]}The system stops charging the user as soon as the car is parked in a safe area and the user exits the car; at this point, the system locks the car automatically.
+		\newline - Car Application Manager 
+		\newline - Database Manager
+		\newline - Car
+		\newline - Area
+		\newline - Google Map api
+		
+		\item\textbf{[G10]}The users can know the locations of the safe areas
+		\newline - User Application Manager
+		\newline - Database Manager
+		\newline - Area
+		\newline - Google Map api
+		
+		\item\textbf{[G11]}If the system detects the user took at least two other passengers onto the car, the system applies a discount of 10\% on the last ride.
+		\newline - Car Application Manger 
+		\newline - Database Manager 
+		\newline - Ride
+		\newline - DiscountAndPunish
+		
+		\item\textbf{[G12]}If a car is left with no more than 50\% of the battery empty, the system applies a discount of 20\% on the last ride.
+		\newline - Car Application Manger 
+		\newline - Database Manager 
+		\newline - Car
+		\newline - Ride
+		\newline - DiscountAndPunish
+		
+		\item\textbf{[G13]}If a car is left at special parking areas where they can be recharged and the user takes care of plugging the car into the power grid, the system applies a discount of 30\% on the last ride.
+		\newline - Car Application Manger 
+		\newline - Database Manager 
+		\newline - Car
+		\newline - Area
+		\newline - Ride
+		\newline - DiscountAndPunish
+		\newline - Google Map api
+		
+		\item\textbf{[G14]}If a car is left at more than 3 KM from the nearest power grid station or with more than 80\% of the battery empty, the system charges 30\% more on the last ride to compensate for the cost required to re-charge the car on-site.
+		\newline - Car Application Manager
+		\newline - Database Manager
+		\newline - Car 
+		\newline - Area
+		\newline - Ride
+		\newline - DiscountAndPunish
+		\newline - Google Map api
+		
+		\item\textbf{[G15]}If the user enables the money saving option, he/she can input his/her final destination and the system provides information about the station where to leave the car to get a discount. This station is determined to ensure a uniform distribution of cars in the city and depends both on the destination of the user and on the availability of power plugs at the selected station.
+		\newline - User Application Manager
+		\newline - Database Manager
+		\newline - Car
+		\newline - Area
+		\newline - Reservation
+		\newline - Google Map api
+		
+		
+		
+	\end{itemize}
 	\newpage
 	\section{EFFORT SPENT}
+	29/11/2016 ZHOU YINAN 3h DD basic structure and introduction part\\
+	30/11/2016 ZHOU YINAN 1h add parts of component interface\\
+	2/12/2016 ZHOU YINAN 1h add component interface and diagram\\
+	4/12/2016 ZHOU YINAN 2h architecture and design pattern\\
+	4/12/2016 ZHAO KAIXIN 4h component view,high level architecture\\
+	4/12/2016 ZHAN YUAN 3h add deployment view and part of runtime\\
+	5/12/2016 ZHOU YINAN 1h architecture and pattern\\
+	5/12/2016 ZHAN YUAN 2.5h add part of runtime view \\
+	6/12/2016 ZHOU YINAN 1h document structure modified	\\
+	6/12/2016 ZHAO KAIXIN 2h requirement traceability\\
+	7/12/2016 ZHAO kAIXIN 1h requirement traceability
+	
 	\newpage
 	\section{REFERENCES}
+	- RASD v1.0 \\
+	-  Specification Document Assignments AA 2016-2017
+	
 
 \end{document}
