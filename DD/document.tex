@@ -274,8 +274,27 @@ Authors:
 	
 	
 	\end{verbatim}
+	
 	\section{USER INTERFACE DESIGN}
 	This section will describe different interfaces for the components. Component interfaces are divided into three different aspects : Guest Manager, User Manager and Car Manager.
+	\subsection{HomePage,Registration,Login}
+	\begin{figure}[!htb]
+		\includegraphics[width=\textwidth]{HomePage,Registration,Login} 
+	\end{figure}
+	In the HomePage(leftmost one) there is a menu list which contains the operation that users can do(registration, register,login).If a guest press the reservation, a window appear to notify guest to register or login. Other two interfaces are respectively Login and Register interface. After the submit, based on the result, it will open a pop-up window to notify the user.
+	\newpage
+	\subsection{Registration,Pick up}
+	\begin{figure}[h]
+		\includegraphics[width=\textwidth]{Reservation,PickUp} 
+	\end{figure}
+	In this page, user can indicate the position to start ride, and a map will show available cars near that position. There is a button to make a reservation, and another one to open the door of car(it can be pressed only you have already reserved corresponding car). There are also some pop-up windows to send message for user. 
+	\newpage
+	\subsection{Screen on the car}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.25]{Screen.png} 
+	\end{figure}
+	At the initial page of the screen, users can choose either to enable the money save option or not. For the former case, user will be notified a suggested destination. Users can use the button START RIDE to ignite the engine. The lower figure shows the corresponding information during the ride. There is also a button for users to end the ride.
 	
 	\newpage
 	\section{REQUIREMENT TRACEABILITY}
@@ -398,7 +417,9 @@ Authors:
 	5/12/2016 ZHAN YUAN 2.5h add part of runtime view \\
 	6/12/2016 ZHOU YINAN 1h document structure modified	\\
 	6/12/2016 ZHAO KAIXIN 2h requirement traceability\\
-	7/12/2016 ZHAO kAIXIN 1h requirement traceability
+	7/12/2016 ZHAO kAIXIN 1h requirement traceability\\
+	7/12/2016 ZHAN YUAN   2h user interface design
+	
 	
 	\newpage
 	\section{REFERENCES}
