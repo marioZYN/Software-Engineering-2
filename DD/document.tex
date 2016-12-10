@@ -59,7 +59,7 @@ Authors:
 		\\6. Selected architectural styles and patterns : This section explains the reason of choosing certain architecture and the benefits accompanied
 		\\7. Other design decisions
 		\item \textbf{Algorithm Design} : In the section, the necessary code samples are given in order to clearly demonstrate the component interaction 
-		\item \textbf{User Interface Design} : this section presents mockups and user experience explained via UX and BCE diagrams
+		\item \textbf{User Interface Design} : this section presents the user interface 
 		\item \textbf{Requirement Traceability} : This section shows how the requirements in the RASD are accomplished in the design
 	\end{itemize}
 	\newpage
@@ -80,23 +80,23 @@ Authors:
 	\end{figure}
 	For the Server, there should be several interfaces, which are in charge of communicating with other components: 
 	\begin{itemize}
-		\item \textbf{User Application Manager} : Component that provides the interface for the users of the system and the Google Map. User Application Manager should provides the options of checking the available car around the specified position, reserving car and canceling the reservation. With the help of the Google Map, the system can know the location of the user.
+		\item \textbf{User Application Manager} : Component that provides the interface for the users of the system and the Google Map. User Application Manager should provide the options of checking the available cars around the specified position, reserving car and canceling the reservation. With the help of the Google Map, the system can know the location of the user.
 		\item \textbf{Guest Application Manager} : Component that provides the interfaces for the unregistered guest of the system and the Google Mail. It provides the option to create an account. Finishing the register, the system would send an e-mail to the guest through the Google Mail.
-		\item \textbf{Car Application Manager} : Component that provides the interface for the car Application, Google Map and Bank Account. The Car Application Manager can know the location of the car, charge the specified bank account and send the instruction to the car.
-		\item \textbf{Database Manager} : Component that provides the interface for the Database for collecting the information which are collected by other components.   
+		\item \textbf{Car Application Manager} : Component that provides the interface for the car Application, Google Map and Bank Account. The Car Application Manager can know the location of the car, charge the specified bank account and send the instructions to the car.
+		\item \textbf{Database Manager} : Component that provides the interface for the Database for collecting the information provided by other components.   
 	\end{itemize}
 	\newpage
 	\begin{figure}[h]
 	\includegraphics[width=\textwidth]{CV_Database}
 	\end{figure}
-	For the Database, there are several component for storing the data of the system. The Database should provides the interface of the Server for information exchange. Through the interface, the Server can transmit and  store the information in the Database. The Server can also retrieve the information from the Database according to the corresponding instruction.
+	For the Database, there are several components for storing the data of the system. The Database should provide the interface of the Server for information exchange. Through the interface, the Server can transmit and  store the information in the Database. The Server can also retrieve the information from the Database according to the corresponding instruction.
 
 	\begin{itemize}
-		\item \textbf{Car} : Component that stores the information of the cars. The Car should stores the position, plate, battery, capacity, 	state and the currentPosition of each car.
+		\item \textbf{Car} : Component that stores the information of the cars. The Car should store the position, plate, battery, capacity, state and the currentPosition of each car.
 		\item \textbf{User} : Component that stores the information of the users. The User should stores the credential and the paymentInfo of each user.
-		\item \textbf{Ride} : Component that stores the information of the riding. The Ride should stores the riding information, including the renting car, corresponding user and so on.
-		\item \textbf{Reservation} : Component that stores the information of the reservation. The Reservation should stores the user and the corresponding car of each reservation.
-		\item \textbf{DiscountAndPunish} : Component that stores the information of the discount and punish of each ride. For each ride, when finishing the riding, the DiscountAndPunish component should provide the information about the discount and the punish, for calculating the total charging.
+		\item \textbf{Ride} : Component that stores the information of the riding. The Ride should store the riding information, including the renting car, corresponding user and so on.
+		\item \textbf{Reservation} : Component that stores the information of the reservation. The Reservation should store the user and the corresponding car of each reservation.
+		\item \textbf{DiscountAndPunish} : Component that stores the information of the discount and punishment of each ride. For each ride, when finishing the riding, the DiscountAndPunish component should provide the information about the discount and the punishment info for calculating the total charge.
 		\item \textbf{Area} : Component that stores the area of each position.
 	\end{itemize}
 	\newpage
@@ -107,40 +107,40 @@ Authors:
 	\end{figure}
 	\newpage
 	\subsection{Runtime view}
-	\subsection{Register}
+	\subsubsection{Register}
 	\begin{figure}[h]
 		\includegraphics[width=\textwidth]{register}
 	\end{figure}
-	The sequence diagram shows procedure of registration. It starts when a guest request the registration on the client application. After guest fulfilling the register form , the information will be sent to the server, where guest application manager checks for validation. It accesses, through the database manager, the database and checks if the information already exists. In the negative case, the serve sends back to application interface a message with error; in the affirmative case,the server allows the database to memorize the guest's credential and password, and Guest Application Manager will send back an email to guest with Password created.   
+	The sequence diagram shows procedure of registration. It starts when a guest requests the registration on the client application. After guest fulfilling the register form , the information will be sent to the server, where guest application manager checks for validation. It accesses, through the database manager, the database and checks if the information already exists. In the negative case, the server sends back to application interface a message with error; in the affirmative case,the server allows the database to memorize the guest's credential and password, and Guest Application Manager will send back an email to guest with Password created.   
 	
 	\newpage
-	\subsection{Login}
+	\subsubsection{Login}
 	\begin{figure}[h]
 		\includegraphics[width=\textwidth]{Login}
 	\end{figure}
 	This sequence diagram shows the procedure of users  logging into the system. The Client Application sends to the server  the user's email and password to check for correctness.If a corresponding tuple exists in the data base, the Guest Application Manager sends back the user information in the format of JSON;If not, the server sends to client application an error message.
 	\newpage
-	\subsection{Reserve}
+	\subsubsection{Reserve}
 	\begin{figure}[h]
 		\includegraphics[width=\textwidth]{reserve}
 	\end{figure}
 	This sequence diagram shows how a user can reserve a car. First the user inserts a position where he wants to start the ride,it can either be inserted by user or generated by GPS automatically. This information will be sent to User Application Manager, it gets all the car information form data base and selects certain cars within nearby distance. Then the list of cars will be sent back. And the Client  application, after user confirming the selection,notifies the User Manager. The User Manager then  calls Database Manager to insert into the database the reservation information. Finally a message will be sent to application, notifying the user the successful reservation.\\
 	\\The reservation lasts for one hour. At the end of this time, the reservation will be canceled. the server updates the reservation state, changes the car state into Free,charges 1EUR , and at last sends an email to notify the user the cancellation and punishment fee.
 	
-	\subsection{Pick up}
+	\subsubsection{Pick up}
 	\begin{figure}[h]
 		\includegraphics[width=\textwidth]{openDoor}
 	\end{figure}
-	When the user is near the car, he send his current location to notice the server. Car Manager then verifies whether the position received is  near enough to unlock the car. It sends back a message with positive or negative confirmation based on the result of verification. Moreover  Car Manager sends a command to the corresponding car in order to unlock it.
+	When the user is near the car, he sends his current location to notice the server. Car Manager then verifies whether the position received is  near enough to unlock the car. It sends back a message with positive or negative confirmation based on the result of verification. Moreover  Car Manager sends a command to the corresponding car in order to unlock it.
 	
 	\newpage
 
-	\subsection{Renting}
+	\subsubsection{Renting}
 	\begin{figure}[h]
 		\includegraphics[width=\textwidth]{rent}
 	\end{figure}
 	\newpage
-	The sequence  shows how to start a ride.  User can optionally  choose to enable money save option or not. After Ignition of the car engine, there are some sensors in the car that can detect how many passengers are there.  If it's more than 2 people (exclude user), the Car Manager will apply 10 percent of discount on this ride. During the ride a display shows the information(time ,cost) of the journey. There are some other conditions for discount based on the state of car after the ride. The serve checks which one is presented and applies the corresponding discount. The total price will be calculated by Car Manager and sends back to Client application.
+	The sequence  shows how to start a ride.  User can optionally  choose to enable money save option or not. After Ignition of the car engine, there are some sensors in the car that can detect how many passengers are there.  If it's more than 2 people (exclude user), the Car Manager will apply 10 percent of discount on this ride. During the ride a display shows the information(time ,cost) of the journey. There are some other conditions for discount based on the state of car after the ride. The server checks which one is presented and applies the corresponding discount. The total price will be calculated by Car Manager and sends back to Client application.
 
 	\subsection{Component interfaces}
 	\begin{figure}[h]
