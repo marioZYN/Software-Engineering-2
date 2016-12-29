@@ -28,15 +28,53 @@ Authors:
 
 \section{INTRODUCTION}
  \subsection{Revision History}
+ At this moment, this is the first version of the document.
  \subsection{Purpose and Scope}
+ This document describes how the integration should proceed. Integration testing means that we need to verify all the components needed for the overall system should work correctly not only individually but also in combination. In this document, we provide the steps needed to follow in order to get a fully functional system. More specifically, the elements need to be tested, the testing strategy, sequence of integration, test description, tools and stubs will be presented in the following parts. 
  \subsection{List of Definitions and Abbreviations}
+	 \begin{itemize}
+	 	\item RASD : Requirement Analysis and Specification Document
+	 	\item DD : Design Document
+	 	\item Guest : All the users of the system who have not performed a Log in operation yet
+	 	\item User : After a Guest logs in, he/she becomes a User
+	 	\item Subcomponent : each of the low level component realizing specific functionalities of the subsystem
+	 	\item subsystem : a functional unit of the system
+ 	 \end{itemize}
  \subsection{List of Reference Documents}
+	 \begin{itemize}
+	 	\item Assignment AA 2016-2017
+	 	\item RASD
+	 	\item DD
+	 \end{itemize}
 \newpage
 
 \section{INTEGRATION STRATEGY}
  \subsection{Entry Criteria}
+ There are several entry criteria to be completed before the integration testing phase can begin. 
+ \begin{itemize}
+	 \item RASD and DD documents are completed
+	 \item Components have to be unit tested before the integration testing
+	 \item The required driver and stub have already been developed
+	 \item database is fully functioned
+\end{itemize}
+The application subsystem may not be fully developed at this moment, however the interface between Application tier and Server tier is a must for testing to proceed.
  \subsection{Elements to be Integrated}
+ The system is divided into 3 subsystems  according to the 3 tier architecture we chose in the DD : Application, Server, Database.
+ This document mainly focuses on the integration testing for the Server side.
+ The following components needed to be integrated:
+ \begin{itemize}
+ 	\item Guest Application Manager
+ 	\item User Application Manager
+ 	\item Car Application Manager
+ 	\item Database Manager
+ \end{itemize}
+The above components are the basic low-level components required for higher level functionalities of the system. Besides the components we need to develop by ourselves, some external systems and API are used:
+ \begin{itemize}
+ 	\item Google Map API
+ 	\item Bank Service system
+ \end{itemize}
  \subsection{Integration Testing Strategy}
+ For testing the integration of components, we choose the bottom-up approach. By bottom-up approach, we start by the components which have no dependency of other components and the very fundamental components providing services to all others. In our system, we start from the Database Manager component. The reason behind it is that basically all of our functions need Database Manager. Thus it is natural and easy to begin with it (the bottom level) and add other components step by step. 
  \subsection{Sequence of Component/Function Integration}
   \subsubsection{Software Integration Sequence}
   \subsubsection{Subsystem Integration Sequence}
