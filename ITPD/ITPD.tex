@@ -76,9 +76,72 @@ The above components are the basic low-level components required for higher leve
  \subsection{Integration Testing Strategy}
  For testing the integration of components, we choose the bottom-up approach. By bottom-up approach, we start by the components which have no dependency of other components and the very fundamental components providing services to all others. In our system, we start from the Database Manager component. The reason behind it is that basically all of our functions need Database Manager. Thus it is natural and easy to begin with it (the bottom level) and add other components step by step. 
  \subsection{Sequence of Component/Function Integration}
+ Basically we have three subsystems in our system : Application side, Server side and Database side. We will focus on the first two subsystem and neglect the last one because we'll use a DBMS from outside.
   \subsubsection{Software Integration Sequence}
+  (1) Application side
+  The application subsystem is composed of two components : User application and Car application. These two components are parallel and do not have any dependency on each other. The dependency of these two components lie on the Server side. Thus, these two components can be developed separately but can only be tested after the Server side is functional. 
+  \begin{figure}[h]
+  	\centering
+  	\includegraphics[scale=0.25]{Application}
+  	\caption{figure Application subsystem}
+  \end{figure}
+\newline
+ (2) Server side
+ The Server has four components : Database Manager, Guest Application Manager, User Application Manager and Car Application Manager. We'll start from Database Manager and add other components step by step. 
+ \begin{itemize}
+ 	\item 1 Database Manager
+ \end{itemize}
+Database Manager is the most basic and fundamental component in our system, thus it will be tested firstly.
+ \begin{figure}[h]
+ 	\centering
+ 	\includegraphics[scale=0.25]{database_manager}
+ 	\caption{Database Manager}
+ \end{figure}
+
+ \begin{itemize}
+ 	\item 2.1 Gust Application Manager
+ \end{itemize}
+After testing the Database Manager, we'll proceed with our testing procedure with Guest Application Manager which is responsible for user registration and log in.
+Note the this testing can be proceeded in parallel with the Car Application Manager.
+ \begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.25]{guest}
+	\caption{Guest Application Manager}
+\end{figure}
+ 
+  \begin{itemize}
+ 	\item 2.2 Car Application Manager
+ \end{itemize}
+Car Application Manager is responsible for managing the car information with database.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.25]{car}
+	\caption{Car Application Manager}
+\end{figure}
+\begin{itemize}
+	\item 3 User Application Manager
+\end{itemize}
+All the services for the users can only be accessed after performing the log in operation. However User Application Manager and Guest Application Manager do not have dependency on each other. User Application Manager is responsible for rental services. More preciously, getting available cars, making reservations and unlocking the door.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.25]{user}
+	\caption{User Application Manager}
+\end{figure}
+\newpage
   \subsubsection{Subsystem Integration Sequence}
-  
+  After testing the components in the Server and Application sides, we can begin to test the integration of subsystems. Since a full functional requirement needs to operate on all the three subsystems, we integrate them all together.
+  \begin{figure}[h]
+  	\centering
+  	\includegraphics[scale=0.25]{subsystems}
+  	\caption{subsystems}
+  \end{figure}
+\newline
+  Here presents the overall dependency graph for the whole system.
+    \begin{figure}[h]
+  	\centering
+  	\includegraphics[scale=0.25]{system}
+  	\caption{subsystems}
+  \end{figure}
 \newpage
 
 \section{Individual Steps and Test Description}
