@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[fontsize=11pt]{scrextend}
+\title{PowerEnjoy Service - Integration Test Plan Document}
+\begin{document}
+
+	\section{Tools and Test Equipment Required}
+	
+	\subsection{Tools}
+	
+	With the purpose of using the PowerEnJoy Service more effectively, and ensure each components of this system can work appropriate, we should make a use of some effective and automated testing tools. These testing tools could help us to test the components of the system without rewrite the code and could make the testing easier.
+	\newline
+	As far as we are concerned, the main business logic component are running in the JEE runtime environment, in this case, we choose two mainly testing tools for the testing.
+	
+	\subsubsection{JUnit}
+	With no doubt, the first one is the JUnit. JUnit is a unit testing framework for the Java programming language. JUnit has a very important development in test-driven field. Nowadays, this tools is primarily devoted to unit test activities, and the people all around the world are more willing to use it in the unit testing. Because it's more easier to use, and the user can verify the interactions between components can produce the expected results. There are some characters of the JUnit.
+		\begin{itemize}
+		\item JUnit is an open source framework for writing and running tests.
+		\item Comments are provided to identify the test method.
+		\item Providing the assertions to test expected results.
+		\item JUnit tests allow you to write code faster and improve quality.
+		\item JUnit elegant and simple. Not so complicated, less time-consuming.
+		\item JUnit tests can run automatically and check their own results and provide immediate feedback. So there is no need to manually sort out the test results of the report.
+		\item JUnit tests can be organized into test suites, including test cases, and even other test kits.
+		\item JUnit displays the progress in a bar. If it works well, it would be green; if it fails, the display would turn red.
+		\end{itemize}
+	
+	\subsubsection{Arquillian}
+	There is also another widely used testing tool, called Arquillian integration testing framework.
+	Arquillian is a new test framework which is JUnit-based, and developed by JBoss. The main purpose of this testing tool is to simplify the coding in Java development project, when the developer is working with the integration test and the functional test. Thanks to this testing tool, the integration tests and the functional tests could be as simple as unit tests. Arquillian can be used in the Web container, and it interacts with the container in three main ways.
+		\begin{itemize}
+			\item 1. Embedded. Arquillian and Web containers run in the same JVM.
+			\item 2. Managed. Arquillian decides when to start, close the Web container to deploy to the container, and run the tests.
+			\item 3. Remote (remote). The developer starts the Web container in advance, Arquillian connects the container and runs the test into the container.
+		\end{itemize}
+	
+	\subsection{Test Equipmemt}
+	As we all know, the accomplishment of the code does not mean the testing is finished. further more, the integration testing activities have to be performed within the specific testing environment.
+	\newline
+	Since this PowerEnjoy Service should be used in the client side and the backend side, we should define the characteristics of the devices that have to be used in these two sides, and survey whether the performances of these devices are appropriated.
+	\newline
+	For the client side, the client uses the smartphone to reserve the car and process the requirement. Therefore, for the testing environment, the follow devices are required.
+		\begin{itemize}
+			\item At least one IOS smartphone, which is running IOS operating system.
+			\item At least one Android smartphone, which is running Android operating system.
+			\item At least One Windows smartphone, which is running Window operating system.
+			\item At least one IOS tablet, which is running IOS operating system.
+			\item At least one Windows tablet, which is running Windows operating system.
+		\end{itemize}
+	These testing devices would be used to test both the mobile applications and the Web version of the Web application. it is also should be noted that, the testing devices should be as general as possible. The range of the testing devices selection, should cover the wildest range of the possible configuration.
+	\newline
+	In fact, for satisfying the most general case, we should consider to survey the smartphone marker. If we want to get the most general testing result, we should use the most widely used devices, in order to better reflect the typical usage scenarios we would encounter in the real operating environment.
+	\newline
+	As for the backend testing, the business logic component and other components should be deployed in the real framework which would be used in the real business application. In this project, we are going to use some software component, such as:
+		\begin{itemize}
+			\item The Oracle Database Management System
+			\item The JEE runtime
+			\item Java Application Server
+		\end{itemize}
+	
+	
+	\newpage
+	
+	
+	
+	\section{Program Stubs and Test Data Required}
+	
+	\subsection{Program Stubs and Drivers}
+	In this project, we are going to use a bottom-up approach to compose the components of this service system. Therefore, we also use the bottom-up framework to component the integration and testing.
+	\newline
+	For finish the testing, we are going to use a number of drivers to drive each component for simulate the real system. What's more, we need the drivers to perform the necessary function for testing. 
+	\newline
+	Here are the list of the drivers which are used in the testing
+		\begin{itemize}
+			\item Data Access Driver: this module would help the system to retrieve the information in the DBMS, such as the client account, the location of the car. This is the critical component of the testing, since the performance of service system need the interaction of information. 
+			\item User Application Manager Driver: this module in charge of helping the User Application Manager to accomplish its work. Such as processing the user requirements, interaction of the database manager and other subcomponents.
+			\item Guest Application Manager Driver: this module would invoke the methods exposed by the Guest Application Manager subcomponent. This module is in charge of testing the interaction of the Guest and Guest Application Manager. What's more, this module would also be helpful to test the interaction of the Guest Application Manager and the Database Manager.
+			\item Car Application Manager Driver: this module would invoke the methods exposed by the Car Application Manager subcomponent. With the help of this module, we can test the function of the Car Application Manager and the interaction between Car Application Manager and other subcomponents. 
+			\item Database Manager Driver: this module would invoke the methods exposed by the Database Manager subcomponent. The main purpose of this module is to be used for testing the interaction between Database Manager subcomponent and other subcomponents.
+		\end{itemize}
+	In general, if we build a service system with the bottom-up approach, there is no need to use ant stubs in the development period. But in the testing, we could not go ahead without a few stubs. 
+	\newline
+	In fact, the main purpose of these stubs is simulating the real service environment. For example, if we want to test the interaction of User Application Manager and Database Manager, we could use the stub to simulate the function of the Database Manager and accomplish the testing without finishing the whole coding of the Database Manager. 
+	\newline 
+	Since in this project, we are supposed to finish the coding part, we do not need the stubs for several kinds of managers. But we also need a few stubs to simulate the behavior of the client and the car. We should check whether they could receive the corresponding messages correctly.
+	
+	\subsection{Test Data}
+	With the purpose of testing the corresponding functions, we should have some specified testing data.
+		\begin{itemize}
+			
+			\item A list of both valid and invalid candidate guest to test Guest Application Management component. The set should contain instances as the following:
+			\newline
+			\newline - Null object
+			\newline - Null fields
+			\newline - Guest not compliant with the legal format
+			
+			\item A list of both valid and invalid candidate guest to test User Application Management component. The set should contain instances as the following:
+			\newline
+			\newline - Null object
+			\newline - Null fields
+			\newline - Invalid e-mail address
+			\newline - Invalid password
+			
+			\item A list of both valid and invalid candidate guest to test Car Application Management component. The set should contain instances as the following:
+			\newline
+			\newline - Null object
+			\newline - Null fields
+			\newline - Location out of the range
+			
+			\item A list of both valid and invalid candidate guest to test Database Management component. The set should contain instances as the following:
+			\newline
+			\newline - Null object
+			\newline - Null fields
+			
+		\end{itemize}
+	
+	\newpage
+	
+	\subsection{WorkingTime}
+	2017-1-7 3h Tools and Test Equipment Required
+	2017-1-8 2h Tools and Test Equipment Required
+	2017-1-9 2h Program Stubs and Test Data Required
+	
+\end{document}
