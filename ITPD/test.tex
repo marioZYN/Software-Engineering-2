@@ -1,0 +1,443 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\begin{document}
+
+\section{Individual step and test description}
+
+In this chapter we will provide the description of test of functions that are used in integration of a pair of components, including the brief description of the parts get involved and possible input value and corresponding output value or effect that we expected to get for each function used.\\
+The notion (A,B) of the subtitle represents the component A will call component B with the function below it.
+
+\subsection{Gust application management system}
+\subsubsection{user application,gust application management}
+	\begin{table}[!hbp]
+	\begin{tabular}{|p{0.5\columnwidth}|p{0.5\columnwidth}|}
+	\cline{1-2}
+	\multicolumn{2}{|c|}{String register(credential)}\\
+	\hline
+	input & output value or effect\\
+	\hline
+	Null parameter in some field &  A NullArgumentException of correspondence field is raised\\
+	\hline
+	Invalid parameter's form in some field & An InvalidArgumentValueException of correspondence field is raised\\	
+	\hline
+	Valid parameters & a string will showed to notify the success\\
+	\hline
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth}| p{0.5\columnwidth}|}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{String login(email, password)}\\
+	\hline
+	input & output value or effect\\
+	\hline
+	Null parameter in some field &  A NullArgumentException of correspondence field is raised\\
+	\hline
+	Invalid parameter's form in some field & An InvalidArgumentValueException of correspondence field is raised\\	
+	\hline
+	Valid parameters & a string appears to notify the success\\
+	\hline
+	\end{tabular}
+	\end{table}
+\subsubsection{gust application manager, database manager}
+	\begin{table}[!hbp]
+	\begin{tabular}{|p{0.5\columnwidth}|p{0.5\columnwidth}|}
+	\cline{1-2}
+	\multicolumn{2}{|c|}{Boolean register(credential)}\\
+	\hline
+	 input & output \\
+	\hline
+	 A non empty credentials of user & the gust has already registered into database\\
+	\hline
+	Valid credential & The user will actually be registered into database\\
+	\hline	
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{String signIn(email,password)}\\
+	\hline
+	input & output\\
+	\hline
+	Empty email of user found & An InvalidArgumentValueException is raised\\
+	\hline
+	Invalid password of user & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid information & information of user will send back\\
+	\hline
+	\end{tabular}
+	\end{table}	
+	
+\subsection{User application manager system}
+\subsubsection{Client application, User application manager}
+	\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{car[] getCarAvailable(position)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Valid position & return the list of the car available in certain distance.\\
+	\hline
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{void reserve(car,user)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Valid argument of parameters & the reservation will be send to server\\
+	\hline 	
+	\end{tabular}
+	\end{table}
+	
+\subsubsection{User application manager,database manager}
+	\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{car[] getCarAvailable(location,DISTANCE)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Invalid/no-found/out-coverage position & An InvalidArgumentValueExption is raised\\
+	\hline
+	Valid parameter & a list of car that respect the condition will be extracted from the database \\
+	\hline
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{String setReservation(user,car)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	the car is still locked by other reservation & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid parameter & the reservation will insert into the database and a string to notify the situation\\
+	\hline
+	\end{tabular}
+
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{Reservation[] getListActiveReservation(user,car)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Inexistence reservation with parameters & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid parameters & a list of reservation still in status of active will be extracted from the database\\
+	\hline
+	\end{tabular}
+	\end{table}
+	\newpage
+	\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{String cancelReservation(user,car,reservation)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Inexistence reservation with parameters & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid parameter &  the status of the reservation will be changed into cancelled and a string to nority the situation\\
+	\hline
+	\end{tabular}
+	\end{table}
+	
+\subsection{Car application manager system}
+\subsubsection{User application, car application manager }
+	\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{void openTheDoor(car,user,location)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	The location is so far from the car & An InvalidArgumentValueException is raised\\
+	\hline
+	The car is not available for user & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid parameter & the door of the car will be unlocked\\
+	\hline
+	\end{tabular}
+	\end{table}
+
+\subsubsection{Car application, car application manager}
+	\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{void startRide(user,car,money save option)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Valid parameter & the information will be send to the server\\
+	\hline
+	\end{tabular}	
+
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{void endRide(user,car,state)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Valid parameter & the information will be send to the server\\
+	\hline
+	\end{tabular}
+	\end{table}
+	\newpage
+	\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{string getCurrentPrice(user,car)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	The car is not being renting by user & A InvalidArgumentValueException is raised\\ 
+	\hline
+	Valid parameter & the current charge will be returned and will be showed on the screen\\
+	\hline
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{void variationCost(state)} \\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	The state inexistence & A NullArgumentValueException is raised \\
+	\hline
+	Valid parameter & the variation applied will be managed by server\\
+	\hline
+	\end{tabular}
+	\end{table}
+
+\subsubsection{Car application manager, Car application}
+	\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{void sendMsg(car,string)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	The car is not in riding or renting & An InvalidArgumentValueException\\
+	\hline
+	Valid informations & the string will be showed on the screen of the car\\
+	\hline
+	\end{tabular}
+	\end{table}
+	
+\subsubsection{Car application manager, Database manager}
+	\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{startRide(user,car)}\\
+	\hline
+	input & output \\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	The car is not available for user & An InvalidArgumentValueException is raised\\
+	\hline
+	The user is not rending the car passed as parameter & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid Parameter & the ride will be inserted into the database\\
+	\hline  	
+	\end{tabular}
+	\end{table}
+
+	\begin{table}
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{updateRide(user,car,state)}\\
+	\hline
+	input & output \\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Invalid state insert & An InvalidArgumentValueException is raised\\
+	\hline
+	The ride inexistence & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid Parameter & the field of the ride is be updated using state\\
+	\hline 
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{insertCar(car)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Invalid car specification & An InvalidArgumentValueException is raised\\
+	\hline
+	The carID already exist & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid parameter & the car is inserted into database\\
+	\hline 
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{deleteCar(car)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	The carID inexist & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid parameter & the car is removed from database\\
+	\hline 
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{insertSafeArea(area)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Invalid area specification & An InvalidArgumentValueException is raised\\
+	\hline
+	The area already exist & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid parameter & the area is inserted into database\\
+	\hline 
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{deleteSafeArea(area)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	The area inexist & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid parameter & the area is removed from database\\
+	\hline 
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{updateSafeArea(area,status)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Invalid status & An InvalidArgumentValueException is raised\\
+	\hline
+	The area inexist & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid parameter & the area is updated with status\\
+	\hline 
+	\end{tabular}	
+	\end{table}
+	
+\newpage
+\subsection{Intergration with external system}
+\subsubsection{Guest manager\&User manager\&Car manager , Gmail API}
+	\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{sendMail(email,string)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Invalid email & An InvalidArgumentValueException is raised\\
+	\hline
+	The email inexist & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid parameter & the email contain the string is sent to user\\
+	\hline 
+	\end{tabular}	
+	\end{table}
+	
+\subsubsection{User manager\&Car manager , Google Map}
+	\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{double[] findCoordinates(location)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Invalid location & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid parameter & return the longitude and latitude of the location\\
+	\hline 
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{Map getMap(location)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Invalid/inexistence location & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid parameter & return the map around the location\\
+	\hline 
+	\end{tabular}
+	\end{table}
+	
+\subsubsection{Car application manager, Bank}
+	\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+	\cline{1-2}
+	\multicolumn{2}{| c |}{payment(user,motive,cost)}\\
+	\hline
+	input & output\\
+	\hline
+	Null parameter & A NullArgumentException is raised\\
+	\hline
+	Invalid motive & An InvalidArgumentValueException is raised\\
+	\hline
+	No record that user done action before & An InvalidArgumentValueException is raised\\
+	\hline
+	Valid parameter & the cost will be charge to system account\\
+	\hline 
+	\end{tabular}	
+	\end{table}
+
+\section{work hour}
+	07/01/2017   	1.5h
+	09/01/2017		1.5h
+	10/01/2017		2.5h
+	11/01/2017		1h
+\end{document}
