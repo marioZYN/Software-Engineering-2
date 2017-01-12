@@ -145,14 +145,549 @@ All the services for the users can only be accessed after performing the log in 
 \newpage
 
 \section{Individual Steps and Test Description}
+In this chapter we will provide the description of test of functions that are used in integration of a pair of components, including the brief description of the parts get involved and possible input value and corresponding output value or effect that we expected to get for each function used.\\
+The notion (A,B) of the subtitle represents the component A will call component B with the function below it.
+
+\subsection{Gust application management system}
+\subsubsection{user application,gust application management}
+\begin{table}[h]
+	\begin{tabular}[htbp]{|p{0.5\columnwidth}|p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{|c|}{String register(credential)}\\
+		\hline
+		input & output value or effect\\
+		\hline
+		Null parameter in some field &  A NullArgumentException of correspondence field is raised\\
+		\hline
+		Invalid parameter's form in some field & An InvalidArgumentValueException of correspondence field is raised\\	
+		\hline
+		Valid parameters & a string will showed to notify the success\\
+		\hline
+	\end{tabular}
+	
+	\begin{tabular}[htbp]{| p{0.5\columnwidth}| p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{String login(email, password)}\\
+		\hline
+		input & output value or effect\\
+		\hline
+		Null parameter in some field &  A NullArgumentException of correspondence field is raised\\
+		\hline
+		Invalid parameter's form in some field & An InvalidArgumentValueException of correspondence field is raised\\	
+		\hline
+		Valid parameters & a string appears to notify the success\\
+		\hline
+	\end{tabular}
+\end{table}
+\newpage
+\subsubsection{gust application manager, database manager}
+\begin{table}[!hbp]
+	\begin{tabular}{|p{0.5\columnwidth}|p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{|c|}{Boolean register(credential)}\\
+		\hline
+		input & output \\
+		\hline
+		A non empty credentials of user & the gust has already registered into database\\
+		\hline
+		Valid credential & The user will actually be registered into database\\
+		\hline	
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{String signIn(email,password)}\\
+		\hline
+		input & output\\
+		\hline
+		Empty email of user found & An InvalidArgumentValueException is raised\\
+		\hline
+		Invalid password of user & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid information & information of user will send back\\
+		\hline
+	\end{tabular}
+\end{table}	
+
+\subsection{User application manager system}
+\subsubsection{Client application, User application manager}
+\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{car[] getCarAvailable(position)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Valid position & return the list of the car available in certain distance.\\
+		\hline
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{void reserve(car,user)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Valid argument of parameters & the reservation will be send to server\\
+		\hline 	
+	\end{tabular}
+\end{table}
+
+\subsubsection{User application manager,database manager}
+\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{car[] getCarAvailable(location,DISTANCE)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Invalid/no-found/out-coverage position & An InvalidArgumentValueExption is raised\\
+		\hline
+		Valid parameter & a list of car that respect the condition will be extracted from the database \\
+		\hline
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{String setReservation(user,car)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		the car is still locked by other reservation & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & the reservation will insert into the database and a string to notify the situation\\
+		\hline
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{Reservation[] getListActiveReservation(user,car)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Inexistence reservation with parameters & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameters & a list of reservation still in status of active will be extracted from the database\\
+		\hline
+	\end{tabular}
+\end{table}
+\newpage
+\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{String cancelReservation(user,car,reservation)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Inexistence reservation with parameters & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter &  the status of the reservation will be changed into cancelled and a string to nority the situation\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsection{Car application manager system}
+\subsubsection{User application, car application manager }
+\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{void openTheDoor(car,user,location)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		The location is so far from the car & An InvalidArgumentValueException is raised\\
+		\hline
+		The car is not available for user & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & the door of the car will be unlocked\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection{Car application, car application manager}
+\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{void startRide(user,car,money save option)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Valid parameter & the information will be send to the server\\
+		\hline
+	\end{tabular}	
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{void endRide(user,car,state)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Valid parameter & the information will be send to the server\\
+		\hline
+	\end{tabular}
+\end{table}
+\newpage
+\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{string getCurrentPrice(user,car)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		The car is not being renting by user & A InvalidArgumentValueException is raised\\ 
+		\hline
+		Valid parameter & the current charge will be returned and will be showed on the screen\\
+		\hline
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{void variationCost(state)} \\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		The state inexistence & A NullArgumentValueException is raised \\
+		\hline
+		Valid parameter & the variation applied will be managed by server\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection{Car application manager, Car application}
+\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{void sendMsg(car,string)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		The car is not in riding or renting & An InvalidArgumentValueException\\
+		\hline
+		Valid informations & the string will be showed on the screen of the car\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection{Car application manager, Database manager}
+\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{startRide(user,car)}\\
+		\hline
+		input & output \\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		The car is not available for user & An InvalidArgumentValueException is raised\\
+		\hline
+		The user is not rending the car passed as parameter & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid Parameter & the ride will be inserted into the database\\
+		\hline  	
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{updateRide(user,car,state)}\\
+		\hline
+		input & output \\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Invalid state insert & An InvalidArgumentValueException is raised\\
+		\hline
+		The ride inexistence & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid Parameter & the field of the ride is be updated using state\\
+		\hline 
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{insertCar(car)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Invalid car specification & An InvalidArgumentValueException is raised\\
+		\hline
+		The carID already exist & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & the car is inserted into database\\
+		\hline 
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{deleteCar(car)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		The carID inexist & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & the car is removed from database\\
+		\hline 
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{insertSafeArea(area)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Invalid area specification & An InvalidArgumentValueException is raised\\
+		\hline
+		The area already exist & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & the area is inserted into database\\
+		\hline 
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{deleteSafeArea(area)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		The area inexist & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & the area is removed from database\\
+		\hline 
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{updateSafeArea(area,status)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Invalid status & An InvalidArgumentValueException is raised\\
+		\hline
+		The area inexist & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & the area is updated with status\\
+		\hline 
+	\end{tabular}	
+\end{table}
+
+\newpage
+\subsection{Intergration with external system}
+\subsubsection{Guest manager\&User manager\&Car manager , Gmail API}
+\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{sendMail(email,string)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Invalid email & An InvalidArgumentValueException is raised\\
+		\hline
+		The email inexist & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & the email contain the string is sent to user\\
+		\hline 
+	\end{tabular}	
+\end{table}
+
+\subsubsection{User manager\&Car manager , Google Map}
+\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{double[] findCoordinates(location)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Invalid location & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & return the longitude and latitude of the location\\
+		\hline 
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{Map getMap(location)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Invalid/inexistence location & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & return the map around the location\\
+		\hline 
+	\end{tabular}
+\end{table}
+
+\newpage
+\subsubsection{Car application manager, Bank}
+\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{payment(user,motive,cost)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Invalid motive & An InvalidArgumentValueException is raised\\
+		\hline
+		No record that user done action before & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & the cost will be charge to system account\\
+		\hline 
+	\end{tabular}	
+\end{table}
 
 \newpage
 
 \section{Tools and Test Equipment Required}
+\subsection{Tools}
+
+With the purpose of using the PowerEnJoy Service more effectively, and ensure each components of this system can work appropriately, we should make a use of some effective and automated testing tools. These testing tools could help us to test the components of the system without rewriting the code and could make the testing easier.
+\newline
+As far as we are concerned, the main business logic component are running in the JEE runtime environment, in this case, we choose two mainly testing tools for the testing.
+
+\subsubsection{JUnit}
+With no doubt, the first one is the JUnit. JUnit is a unit testing framework for the Java programming language. JUnit has a very important development in test-driven field. Nowadays, this tool is primarily devoted to unit test activities, and the people all around the world are more willing to use it in the unit testing. Because it's easy to use, and the user can verify the interactions between components can produce the expected results. There are some characters of the JUnit.
+\begin{itemize}
+	\item JUnit is an open source framework for writing and running tests.
+	\item Comments are provided to identify the test method.
+	\item Providing the assertions to test expected results.
+	\item JUnit tests allow you to write code faster and improve quality.
+	\item JUnit elegant and simple. Not so complicated, less time-consuming.
+	\item JUnit tests can run automatically and check their own results and provide immediate feedback. So there is no need to manually sort out the test results of the report.
+	\item JUnit tests can be organized into test suites, including test cases, and even other test kits.
+	\item JUnit displays the progress in a bar. If it works well, it would be green; if it fails, the display would turn red.
+\end{itemize}
+
+\subsubsection{Arquillian}
+There is also another widely used testing tool, called Arquillian integration testing framework.
+Arquillian is a new test framework which is JUnit-based, and developed by JBoss. The main purpose of this testing tool is to simplify the coding in Java development project, when the developer is working with the integration test and the functional test. Thanks to this testing tool, the integration tests and the functional tests could be as simple as unit tests. Arquillian can be used in the Web container, and it interacts with the container in three main ways.
+\begin{itemize}
+	\item 1. Embedded. Arquillian and Web containers run in the same JVM.
+	\item 2. Managed. Arquillian decides when to start, close the Web container to deploy to the container, and run the tests.
+	\item 3. Remote (remote). The developer starts the Web container in advance, Arquillian connects the container and runs the test into the container.
+\end{itemize}
+
+\subsection{Test Equipment}
+As we all know, the accomplishment of the code does not mean the testing is finished. further more, the integration testing activities have to be performed within the specific testing environment.
+\newline
+Since this PowerEnjoy Service should be used in the client side and the backend side, we should define the characteristics of the devices that have to be used in these two sides, and survey whether the performances of these devices are appropriated.
+\newline
+For the client side, the client uses the smartphone to reserve the car and process the requirement. Therefore, for the testing environment, the follow devices are required.
+\begin{itemize}
+	\item At least one IOS smartphone, which is running IOS operating system.
+	\item At least one Android smartphone, which is running Android operating system.
+	\item At least One Windows smartphone, which is running Window operating system.
+	\item At least one IOS tablet, which is running IOS operating system.
+	\item At least one Windows tablet, which is running Windows operating system.
+\end{itemize}
+These testing devices would be used to test both the mobile applications and the Web version of the Web application. it is also should be noted that, the testing devices should be as general as possible. The range of the testing devices selection, should cover the wildest range of the possible configuration.
+\newline
+In fact, for satisfying the most general case, we should consider to survey the smartphone marker. If we want to get the most general testing result, we should use the most widely used devices, in order to better reflect the typical usage scenarios we would encounter in the real operating environment.
+\newline
+As for the backend testing, the business logic component and other components should be deployed in the real framework which would be used in the real business application. In this project, we are going to use some software component, such as:
+\begin{itemize}
+	\item The Oracle Database Management System
+	\item The JEE runtime
+	\item Java Application Server
+\end{itemize}
+
 
 \newpage
+
+
+
 \section{Program Stubs and Test Data Required}
 
+\subsection{Program Stubs and Drivers}
+In this project, we are going to use a bottom-up approach to compose the components of this service system. Therefore, we also use the bottom-up framework to component the integration and testing.
+\newline
+To finish the testing, we are going to use a number of drivers to drive each component for simulate the real system. What's more, we need the drivers to perform the necessary function for testing. 
+\newline
+Here are the list of the drivers which are used in the testing
+\begin{itemize}
+	\item Data Access Driver: this module would help the system to retrieve the information in the DBMS, such as the client account, the location of the car. This is the critical component of the testing, since the performance of service system need the interaction of information. 
+	\item User Application Manager Driver: this module in charge of helping the User Application Manager to accomplish its work. Such as processing the user requirements, interaction of the database manager and other subcomponents.
+	\item Guest Application Manager Driver: this module would invoke the methods exposed by the Guest Application Manager subcomponent. This module is in charge of testing the interaction of the Guest and Guest Application Manager. What's more, this module would also be helpful to test the interaction of the Guest Application Manager and the Database Manager.
+	\item Car Application Manager Driver: this module would invoke the methods exposed by the Car Application Manager subcomponent. With the help of this module, we can test the function of the Car Application Manager and the interaction between Car Application Manager and other subcomponents. 
+	\item Database Manager Driver: this module would invoke the methods exposed by the Database Manager subcomponent. The main purpose of this module is to be used for testing the interaction between Database Manager subcomponent and other subcomponents.
+\end{itemize}
+In general, if we build a service system with the bottom-up approach, there is no need to use any stubs in the development period. But in the testing, we could not go ahead without a few stubs. 
+\newline
+In fact, the main purpose of these stubs is simulating the real service environment. For example, if we want to test the interaction of User Application Manager and Database Manager, we could use the stub to simulate the function of the Database Manager and accomplish the testing without finishing the whole coding of the Database Manager. 
+\newline 
+
+\subsection{Test Data}
+With the purpose of testing the corresponding functions, we should have some specified testing data.
+\begin{itemize}
+	
+	\item A list of both valid and invalid candidate guest to test Guest Application Management component. The set should contain instances as the following:
+	\newline
+	\newline - Null object
+	\newline - Null fields
+	\newline - Guest not compliant with the legal format
+	
+	\item A list of both valid and invalid candidate guest to test User Application Management component. The set should contain instances as the following:
+	\newline
+	\newline - Null object
+	\newline - Null fields
+	\newline - Invalid e-mail address
+	\newline - Invalid password
+	
+	\item A list of both valid and invalid candidate guest to test Car Application Management component. The set should contain instances as the following:
+	\newline
+	\newline - Null object
+	\newline - Null fields
+	\newline - Location out of the range
+	
+	\item A list of both valid and invalid candidate guest to test Database Management component. The set should contain instances as the following:
+	\newline
+	\newline - Null object
+	\newline - Null fields
+	
+\end{itemize}
 \newpage
+
 \section{Effort Spent}
+
 \end{document}
