@@ -76,8 +76,18 @@ The above components are the basic low-level components required for higher leve
  \subsection{Integration Testing Strategy}
  For testing the integration of components, we choose the bottom-up approach. By bottom-up approach, we start by the components which have no dependency of other components and the very fundamental components providing services to all others. In our system, we start from the Database Manager component. The reason behind it is that basically all of our functions need Database Manager. Thus it is natural and easy to begin with it (the bottom level) and add other components step by step. 
  \subsection{Sequence of Component/Function Integration}
- Basically we have three subsystems in our system : Application side, Server side and Database side. We will focus on the first two subsystem and neglect the last one because we'll use a DBMS from outside.
+ Basically we have three subsystems in our system : Application side, Server side and Database side. We will focus on the first two subsystem and neglect the last one because we'll use a DBMS from outside. What we will focus is the interface between the server and data base. We always assume DBMS is reliable.\\
+ \\
+ In order to implement the testing, we divide the whole system into three subsystems :
+ \begin{itemize}
+ 	\item Guest application manager system
+ 	\item User application manager system
+ 	\item Car application manager system
+ \end{itemize}
+In each subsystem, we'll proceed with the bottom-up approach.
   \subsubsection{Software Integration Sequence}
+  We will test the three subsystems separately and in each subsystem, a bottom-up approach is used. The following paragraph describes how this approach works.\\
+  \\
   (1) Application side
   The application subsystem is composed of two components : User application and Car application. These two components are parallel and do not have any dependency on each other. The dependency of these two components lie on the Server side. Thus, these two components can be developed separately but can only be tested after the Server side is functional. 
   \begin{figure}[h]
@@ -86,7 +96,7 @@ The above components are the basic low-level components required for higher leve
   	\caption{figure Application subsystem}
   \end{figure}
 \newline
- (2) Server side
+ \\(2) Server side
  The Server has four components : Database Manager, Guest Application Manager, User Application Manager and Car Application Manager. We'll start from Database Manager and add other components step by step. 
  \begin{itemize}
  	\item 1 Database Manager
@@ -102,7 +112,7 @@ Database Manager is the most basic and fundamental component in our system, thus
  	\item 2.1 Gust Application Manager
  \end{itemize}
 After testing the Database Manager, we'll proceed with our testing procedure with Guest Application Manager which is responsible for user registration and log in.
-Note the this testing can be proceeded in parallel with the Car Application Manager.
+Note that this testing can be proceeded in parallel with the Car Application Manager.
  \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.25]{guest}
@@ -112,7 +122,7 @@ Note the this testing can be proceeded in parallel with the Car Application Mana
   \begin{itemize}
  	\item 2.2 Car Application Manager
  \end{itemize}
-Car Application Manager is responsible for managing the car information with database.
+Car Application Manager is responsible for managing the car information with database and all the controls in the car, including unlocking the car. 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.25]{car}
@@ -121,7 +131,7 @@ Car Application Manager is responsible for managing the car information with dat
 \begin{itemize}
 	\item 3 User Application Manager
 \end{itemize}
-All the services for the users can only be accessed after performing the log in operation. However User Application Manager and Guest Application Manager do not have dependency on each other. User Application Manager is responsible for rental services. More preciously, getting available cars, making reservations and unlocking the door.
+All the services for the users can only be accessed after performing the log in operation. However User Application Manager and Guest Application Manager do not have dependency on each other. User Application Manager is responsible for rental services. More preciously, getting available cars, making reservations.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.25]{user}
@@ -129,58 +139,28 @@ All the services for the users can only be accessed after performing the log in 
 \end{figure}
 \newpage
   \subsubsection{Subsystem Integration Sequence}
-  After testing the components in the Server and Application sides, we can begin to test the integration of subsystems. Since a full functional requirement needs to operate on all the three subsystems, we integrate them all together.
+  After testing the components and subsystems in the Server and Application sides, we can begin to test the integration of subsystems. Since a full functional requirement needs to operate on all the three subsystems, we integrate them all together.
   \begin{figure}[h]
   	\centering
   	\includegraphics[scale=0.25]{subsystems}
   	\caption{subsystems}
   \end{figure}
 \newline
+\newpage
   Here presents the overall dependency graph for the whole system.
     \begin{figure}[h]
   	\centering
   	\includegraphics[scale=0.25]{system}
   	\caption{subsystems}
   \end{figure}
+\newline
 \newpage
-
 \section{Individual Steps and Test Description}
-In this chapter we will provide the description of test of functions that are used in integration of a pair of components, including the brief description of the parts get involved and possible input value and corresponding output value or effect that we expected to get for each function used.\\
-The notion (A,B) of the subtitle represents the component A will call component B with the function below it.
+In this chapter we will provide the description of tests on functions that are used in integration of components, including the brief description of the parts get involved and possible input values and corresponding output values. We will also include the effect that we expect to get for each function.\\
+The notion (A,B) of the subtitle represents that component A will call component B with the function below it.
 
-\subsection{Gust application management system}
-\subsubsection{user application,gust application management}
-\begin{table}[h]
-	\begin{tabular}[htbp]{|p{0.5\columnwidth}|p{0.5\columnwidth}|}
-		\cline{1-2}
-		\multicolumn{2}{|c|}{String register(credential)}\\
-		\hline
-		input & output value or effect\\
-		\hline
-		Null parameter in some field &  A NullArgumentException of correspondence field is raised\\
-		\hline
-		Invalid parameter's form in some field & An InvalidArgumentValueException of correspondence field is raised\\	
-		\hline
-		Valid parameters & a string will showed to notify the success\\
-		\hline
-	\end{tabular}
-	
-	\begin{tabular}[htbp]{| p{0.5\columnwidth}| p{0.5\columnwidth}|}
-		\cline{1-2}
-		\multicolumn{2}{| c |}{String login(email, password)}\\
-		\hline
-		input & output value or effect\\
-		\hline
-		Null parameter in some field &  A NullArgumentException of correspondence field is raised\\
-		\hline
-		Invalid parameter's form in some field & An InvalidArgumentValueException of correspondence field is raised\\	
-		\hline
-		Valid parameters & a string appears to notify the success\\
-		\hline
-	\end{tabular}
-\end{table}
-\newpage
-\subsubsection{gust application manager, database manager}
+\subsection{Guest application management system}
+\subsubsection{guest application manager, database manager}
 \begin{table}[!hbp]
 	\begin{tabular}{|p{0.5\columnwidth}|p{0.5\columnwidth}|}
 		\cline{1-2}
@@ -188,7 +168,7 @@ The notion (A,B) of the subtitle represents the component A will call component 
 		\hline
 		input & output \\
 		\hline
-		A non empty credentials of user & the gust has already registered into database\\
+		A non empty credentials of user & the guest has already registered into database\\
 		\hline
 		Valid credential & The user will actually be registered into database\\
 		\hline	
@@ -204,38 +184,30 @@ The notion (A,B) of the subtitle represents the component A will call component 
 		\hline
 		Invalid password of user & An InvalidArgumentValueException is raised\\
 		\hline
-		Valid information & information of user will send back\\
+		Valid information & information of user will be sent back\\
 		\hline
 	\end{tabular}
 \end{table}	
 
-\subsection{User application manager system}
-\subsubsection{Client application, User application manager}
-\begin{table}[!hbp]
-	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+\subsubsection{user application,guest application management}
+\begin{table}[h]
+	\begin{tabular}[htbp]{|p{0.5\columnwidth}|p{0.5\columnwidth}|}
 		\cline{1-2}
-		\multicolumn{2}{| c |}{car[] getCarAvailable(position)}\\
+		\multicolumn{2}{|c|}{String register(credential)}\\
 		\hline
-		input & output\\
+		input & output value or effect\\
 		\hline
-		Null parameter & A NullArgumentException is raised\\
+		Null parameter in some field &  A NullArgumentException of correspondence field is raised\\
 		\hline
-		Valid position & return the list of the car available in certain distance.\\
+		Invalid parameter's form in some field & An InvalidArgumentValueException of correspondence field is raised\\	
+		\hline
+		Valid parameters & a string will showed to notify the success\\
 		\hline
 	\end{tabular}
 	
-	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
-		\cline{1-2}
-		\multicolumn{2}{| c |}{void reserve(car,user)}\\
-		\hline
-		input & output\\
-		\hline
-		Null parameter & A NullArgumentException is raised\\
-		\hline
-		Valid argument of parameters & the reservation will be send to server\\
-		\hline 	
-	\end{tabular}
 \end{table}
+\newpage
+\subsection{User application manager system}
 
 \subsubsection{User application manager,database manager}
 \begin{table}[!hbp]
@@ -297,8 +269,145 @@ The notion (A,B) of the subtitle represents the component A will call component 
 		\hline
 	\end{tabular}
 \end{table}
+\subsubsection{User application, User application manager}
+\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{car[] getCarAvailable(position)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Valid position & return the list of the car available in certain distance.\\
+		\hline
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{void reserve(car,user)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Valid argument of parameters & the reservation will be send to server\\
+		\hline 	
+	\end{tabular}
+\end{table}
 
 \subsection{Car application manager system}
+\subsubsection{Car application manager, Database manager}
+\begin{table}[!hbp]
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{startRide(user,car)}\\
+		\hline
+		input & output \\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		The car is not available for user & An InvalidArgumentValueException is raised\\
+		\hline
+		The user is not rending the car passed as parameter & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid Parameter & the ride will be inserted into the database\\
+		\hline  	
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{updateRide(user,car,state)}\\
+		\hline
+		input & output \\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Invalid state insert & An InvalidArgumentValueException is raised\\
+		\hline
+		The ride inexistence & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid Parameter & the field of the ride is be updated using state\\
+		\hline 
+	\end{tabular}
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{insertCar(car)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Invalid car specification & An InvalidArgumentValueException is raised\\
+		\hline
+		The carID already exist & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & the car is inserted into database\\
+		\hline 
+	\end{tabular}
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{deleteCar(car)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		The carID inexist & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & the car is removed from database\\
+		\hline 
+	\end{tabular}
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{insertSafeArea(area)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Invalid area specification & An InvalidArgumentValueException is raised\\
+		\hline
+		The area already exist & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & the area is inserted into database\\
+		\hline 
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{deleteSafeArea(area)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		The area inexist & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & the area is removed from database\\
+		\hline 
+	\end{tabular}
+	
+	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
+		\cline{1-2}
+		\multicolumn{2}{| c |}{updateSafeArea(area,status)}\\
+		\hline
+		input & output\\
+		\hline
+		Null parameter & A NullArgumentException is raised\\
+		\hline
+		Invalid status & An InvalidArgumentValueException is raised\\
+		\hline
+		The area inexist & An InvalidArgumentValueException is raised\\
+		\hline
+		Valid parameter & the area is updated with status\\
+		\hline 
+	\end{tabular}	
+\end{table}
+
+\newpage
 \subsubsection{User application, car application manager }
 \begin{table}[!hbp]
 	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
@@ -317,7 +426,6 @@ The notion (A,B) of the subtitle represents the component A will call component 
 		\hline
 	\end{tabular}
 \end{table}
-
 \subsubsection{Car application, car application manager}
 \begin{table}[!hbp]
 	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
@@ -392,118 +500,7 @@ The notion (A,B) of the subtitle represents the component A will call component 
 	\end{tabular}
 \end{table}
 
-\subsubsection{Car application manager, Database manager}
-\begin{table}[!hbp]
-	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
-		\cline{1-2}
-		\multicolumn{2}{| c |}{startRide(user,car)}\\
-		\hline
-		input & output \\
-		\hline
-		Null parameter & A NullArgumentException is raised\\
-		\hline
-		The car is not available for user & An InvalidArgumentValueException is raised\\
-		\hline
-		The user is not rending the car passed as parameter & An InvalidArgumentValueException is raised\\
-		\hline
-		Valid Parameter & the ride will be inserted into the database\\
-		\hline  	
-	\end{tabular}
-\end{table}
 
-\begin{table}
-	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth} |}
-		\cline{1-2}
-		\multicolumn{2}{| c |}{updateRide(user,car,state)}\\
-		\hline
-		input & output \\
-		\hline
-		Null parameter & A NullArgumentException is raised\\
-		\hline
-		Invalid state insert & An InvalidArgumentValueException is raised\\
-		\hline
-		The ride inexistence & An InvalidArgumentValueException is raised\\
-		\hline
-		Valid Parameter & the field of the ride is be updated using state\\
-		\hline 
-	\end{tabular}
-	
-	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
-		\cline{1-2}
-		\multicolumn{2}{| c |}{insertCar(car)}\\
-		\hline
-		input & output\\
-		\hline
-		Null parameter & A NullArgumentException is raised\\
-		\hline
-		Invalid car specification & An InvalidArgumentValueException is raised\\
-		\hline
-		The carID already exist & An InvalidArgumentValueException is raised\\
-		\hline
-		Valid parameter & the car is inserted into database\\
-		\hline 
-	\end{tabular}
-	
-	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
-		\cline{1-2}
-		\multicolumn{2}{| c |}{deleteCar(car)}\\
-		\hline
-		input & output\\
-		\hline
-		Null parameter & A NullArgumentException is raised\\
-		\hline
-		The carID inexist & An InvalidArgumentValueException is raised\\
-		\hline
-		Valid parameter & the car is removed from database\\
-		\hline 
-	\end{tabular}
-	
-	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
-		\cline{1-2}
-		\multicolumn{2}{| c |}{insertSafeArea(area)}\\
-		\hline
-		input & output\\
-		\hline
-		Null parameter & A NullArgumentException is raised\\
-		\hline
-		Invalid area specification & An InvalidArgumentValueException is raised\\
-		\hline
-		The area already exist & An InvalidArgumentValueException is raised\\
-		\hline
-		Valid parameter & the area is inserted into database\\
-		\hline 
-	\end{tabular}
-	
-	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
-		\cline{1-2}
-		\multicolumn{2}{| c |}{deleteSafeArea(area)}\\
-		\hline
-		input & output\\
-		\hline
-		Null parameter & A NullArgumentException is raised\\
-		\hline
-		The area inexist & An InvalidArgumentValueException is raised\\
-		\hline
-		Valid parameter & the area is removed from database\\
-		\hline 
-	\end{tabular}
-	
-	\begin{tabular}{| p{0.5\columnwidth} | p{0.5\columnwidth}|}
-		\cline{1-2}
-		\multicolumn{2}{| c |}{updateSafeArea(area,status)}\\
-		\hline
-		input & output\\
-		\hline
-		Null parameter & A NullArgumentException is raised\\
-		\hline
-		Invalid status & An InvalidArgumentValueException is raised\\
-		\hline
-		The area inexist & An InvalidArgumentValueException is raised\\
-		\hline
-		Valid parameter & the area is updated with status\\
-		\hline 
-	\end{tabular}	
-\end{table}
 
 \newpage
 \subsection{Intergration with external system}
@@ -640,7 +637,7 @@ As for the backend testing, the business logic component and other components sh
 \section{Program Stubs and Test Data Required}
 
 \subsection{Program Stubs and Drivers}
-In this project, we are going to use a bottom-up approach to compose the components of this service system. Therefore, we also use the bottom-up framework to component the integration and testing.
+In this project, we are going to use a bottom-up approach to compose the components of this service system. Therefore, we also use the bottom-up framework to for integration and testing.
 \newline
 To finish the testing, we are going to use a number of drivers to drive each component for simulate the real system. What's more, we need the drivers to perform the necessary function for testing. 
 \newline
@@ -689,5 +686,17 @@ With the purpose of testing the corresponding functions, we should have some spe
 \newpage
 
 \section{Effort Spent}
+29/12/2016 ZHOU YINAN 2h introduction and strategy\\
+31/12/2016 ZHOU YINAN 2h introduction and strategy\\
+07/01/2017 ZHAN YUAN .5h Individual step and test description\\
+07/01/2017	ZHAO KAIXIN 3h Tools and Test Equipment Required\\
+08/01/2017	ZHAO KAIXIN 2h Tools and Test Equipment Required\\
+09/01/2017	ZHAO KAIXIN 2h Program Stubs and Test Data\\
+09/01/2017 ZHAN YUAN 1.5h Individual step and test description\\
+10/01/2017 ZHAN YUAN 2.5h Individual step and test description\\
+11/01/2017	ZHAN YUAN 1h  Individual step and test description\\
+13/01/2017	ZHOU YINAN 2h modification and release the v1.0 document
+
+
 
 \end{document}
