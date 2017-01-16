@@ -6,3 +6,4 @@
 ### Time
 * 13/01/2017 2h document structure and introduction
 * 14/012017	1h	Risk management
+* 16/01/2017	2h Function points

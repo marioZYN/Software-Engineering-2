@@ -70,13 +70,239 @@ finally, we are going to analyze the risk we may encounter during the developmen
 \newpage
 
 \section{Project size, cost and effort estimation}
+We use functional points to estimate the software size. A Function Point (FP) is a unit of measurement to express the amount of business functionality, an information system (as a product) provides to a user. FPs measure software size. They are widely accepted as an industry standard for functional sizing.\\
+Functional Points are based on a combination of program characteristics, more specifically :
+\begin{itemize}
+	\item Data structures
+	\item Inputs and outputs
+	\item Inquires
+	\item External interfaces
+\end{itemize}
+	\begin{figure}[h]
+	\includegraphics[width=\textwidth]{function_types}
+\end{figure}
+\begin{figure}[h!]
+	\includegraphics[width=\textwidth]{FP_table}
+\end{figure}
+A weight is associated with each of these FP counts; the total is computed by multiplying each “raw” count by the weight and summing all partial values. The weight table for different Function types is described below.
+\newpage
 \subsection{Size estimation: function points}
 	\subsubsection{Internal Logic Files(ILFs)}
+	Internal Logical File (ILF): homogeneous set of data used and managed by the application.
+	In our application, there are a few tables we need to manage in the ILFs in order to provide functional requirements.
+    \begin{itemize}
+    	\item User table : The User table maintains all the valid registered users, including the credentials and paymentInfo. More specifically, the credential must include name, email address, login code and number of driving license. Payment information includes number of bank 
+    	account or credit card, expired time, security code, holder name and Phone number.
+    	
+    	\item Car table : The table maintains all the information about the cars, including car plate, capacity, current state and onCarDev info. 
+    	
+    	\item Reservation table : The Reservation table maintains all the cars that are currently reserved. The table has a map information between user(email) and car(plate). Also the table maintains the remaining time left for the user to pick up the car.
+    	
+    	\item Ride table : The Ride table maintains all the cars that are currently under working. The table has a map between user(email) and car(plate). 
+    	
+    	\item DiscountAndPunish table : Whenever a discount or punishment happens, we store the corresponding information in it. The table has the user email, car plate, the discount or punishment amount and a short description.
+    	
+    	\item Area table : the Area table stores all the safe area information.
+    	\begin{table}[h!]
+    		\centering
+    		\caption{Internal Logic Files}
+    		\label{my-label}
+    		\begin{tabular}{|c|c|c|c|}
+    			\hline
+    			& \multicolumn{3}{c|}{Data elements} \\ \hline
+    			Record Element & 1-19      & 20-50      & 51+       \\ \hline
+    			1              & Low       & Low        & Avg       \\ \hline
+    			2-5            & Low       & Avg        & High      \\ \hline
+    			6+             & Avg       & High       & High      \\ \hline   
+    		\end{tabular}
+    	\end{table}
+    \end{itemize}
+    With the Internal Logic Files table above, we can estimate the FP for ILF.
+   \begin{table}[h]
+   	\centering
+   	\caption{ILF}
+   	\label{my-label}
+   	\begin{tabular}{|l|l|l|}
+   		\hline
+   		ILF                   & Complexity & FPs \\ \hline
+   		User                  & HIGH       & 15  \\ \hline
+   		Car                   & HIGH       & 15  \\ \hline
+   		Ride                  & AVG        & 10  \\ \hline
+   		Reservation           & AVG        & 10  \\ \hline
+   		DiscountAndPunishment & HIGH       & 15  \\ \hline
+   		\multicolumn{2}{|l|}{TOTAL}        & 65  \\ \hline
+   	\end{tabular}
+   \end{table}
+
 	\subsubsection{External Logic Files(ELFs)}
+	The external Logic Files in our application are data source from Google Map and bank services. For the bank services, our system just generate a request for remote bank service and then leave the user to interact with it. So we do not have much to do with the bank services. The Google Map external service, however, requires some modifications about the data we get. \\
+	   	\begin{table}[h!]
+		\centering
+		\caption{External Logic Files}
+		\label{my-label}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			& \multicolumn{3}{c|}{Data elements} \\ \hline
+			Record Element & 1-19      & 20-50      & 51+       \\ \hline
+			1              & Low       & Low        & Avg       \\ \hline
+			2-5            & Low       & Avg        & High      \\ \hline
+			6+             & Avg       & High       & High      \\ \hline   
+		\end{tabular}
+	\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption{ELF}
+	\label{my-label}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		ELF           & Complexity  & FPs \\ \hline
+		Bank Service  & Low         & 5   \\ \hline
+		Google Map    & Avg         & 7   \\ \hline
+		\multicolumn{2}{|l|}{Total} & 12  \\ \hline
+	\end{tabular}
+\end{table}
 	\subsubsection{External Inputs(EIs)}
+	Our service deals with several situations which require user inputs. 
+	\begin{itemize}
+		\item Register : Register operations is simple, just needs the client to fill a form and send to the server. The server will then check the validity of the info. For a positive result, a password is generated and send back to the user. The new user info will be inserted into the data base. Thus the complexity for it is low.
+		\item Login : It is simple operation, just needs the server to check the validity of the email and password. The complexity for it is low.
+		\item Get Available Cars : It is a bit complex operation. The user needs to send to the server the request. The server will need to analyze the location, look for available cars near the location. In order for this operation to proceed, several steps of interaction with different components is required. The complexity is high.
+		\item Reserve : It is a simple operation. The user sends the request to server with the information about the reservation choice. The complexity is low.
+		\item Unlock the Door : It is a simple operation. The user sends the request to the server with the info of his/her location information. The Complexity is low.
+		\item Start Ride : It is a simple operation, only needs to send the request to the server and update the corresponding table. The complexity is low.
+		\item End Ride : Unlike Start Ride, End Ride is a bit more complex. Besides sending the request to the server, the system also needs to compute the total cost, update the corresponding table, and call external bank service. The complexity for this operation is high.
+		\item Modify info : This operation includes modification of existing information in the system. It is a simple operation, since it just needs to check the validity and update the corresponding table. The complexity is low. The average atomic modification includes inserting, updating and deleting. By matching all of them to User, Car and SafeArea. The overall is 3*10 = 30 atomic modifications.
+		\begin{table}[h]
+			\centering
+			\caption{External input}
+			\label{my-label}
+			\begin{tabular}{|c|l|c|c|c|}
+				\hline
+				\multicolumn{2}{|c|}{}           & \multicolumn{3}{c|}{Data Elements} \\ \hline
+				\multicolumn{2}{|c|}{File Types} & 1-5       & 5-15       & 16+       \\ \hline
+				\multicolumn{2}{|c|}{0-1}        & Low       & Low        & Avg       \\ \hline
+				\multicolumn{2}{|c|}{2-3}        & Low       & Avg        & High      \\ \hline
+				\multicolumn{2}{|c|}{4+}         & Avg       & High       & High      \\ \hline
+			\end{tabular}
+		\end{table}
+		\begin{table}[h]
+			\centering
+			\caption{EI}
+			\label{my-label}
+			\begin{tabular}{|l|l|l|}
+				\hline
+				EI                 & Complexity & FPs \\ \hline
+				Register           & Low        & 3   \\ \hline
+				Log in             & Low        & 3   \\ \hline
+				Get Available Cars & High       & 6   \\ \hline
+				Reserve            & Low        & 3   \\ \hline
+				Unlock Door        & Low        & 3   \\ \hline
+				Start Ride         & Low        & 3   \\ \hline
+				End Ride           & High       & 6   \\ \hline
+				Modification           & Low       & 3*10  \\ \hline
+				\multicolumn{2}{|l|}{Total}     & 60  \\ \hline
+			\end{tabular}
+		\end{table}
+	\end{itemize}
 	\subsubsection{External Inquires(EQs)}
+	External quires allow users to retrieve information from the server.
+	\begin{itemize}
+		\item User retrieve his/her credentials/PaymentInfo : It is a simple operation  because it only needs to find info from data base and send back to the user. The complexity is low.
+		\item Get safeAreas : It is a simple operation which only deals with the data base. The complexity is low.
+		\item Get DiscountsAndPunishment : It is a simple operation which only deals with the data base. The complexity is low.
+	\end{itemize}
+	\begin{table}[h]
+	\centering
+	\caption{External Query}
+	\label{my-label}
+	\begin{tabular}{|c|l|c|c|c|}
+		\hline
+		\multicolumn{2}{|c|}{}           & \multicolumn{3}{c|}{Data Elements} \\ \hline
+		\multicolumn{2}{|c|}{File Types} & 1-5       & 5-15       & 16+       \\ \hline
+		\multicolumn{2}{|c|}{0-1}        & Low       & Low        & Avg       \\ \hline
+		\multicolumn{2}{|c|}{2-3}        & Low       & Avg        & High      \\ \hline
+		\multicolumn{2}{|c|}{4+}         & Avg       & High       & High      \\ \hline
+	\end{tabular}
+\end{table}
+\begin{table}[h]
+	\centering
+	\caption{EQ}
+	\label{my-label}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		EQ                           & Compexity & FPs \\ \hline
+		Retrive Info                 & Low       & 3   \\ \hline
+		Get SafeAreas                & Low       & 3   \\ \hline
+		Get Discounts and Punishment & Low       & 3   \\ \hline
+		\multicolumn{2}{|l|}{Total}                    & 9  \\ \hline
+	\end{tabular}
+\end{table}
 	\subsubsection{External Outputs(EOs)}
+	The  system needs to notify the user and the car the corresponding information. 
+	\begin{itemize}
+		\item Notify the user expired Reservation time 
+		\item Notify the user completion of the payment.
+		\item Notify the user the execution of punishment. 
+		\item Notify the car the current Location and price.
+	\end{itemize}
+All the operations are fairly simple, except for the last one which needs to interact with several IFLs and EFLs.
+	\begin{table}[h]
+	\centering
+	\caption{External Output}
+	\label{my-label}
+	\begin{tabular}{|c|l|c|c|c|}
+		\hline
+		\multicolumn{2}{|c|}{}           & \multicolumn{3}{c|}{Data Elements} \\ \hline
+		\multicolumn{2}{|c|}{File Types} & 1-5       & 5-15       & 16+       \\ \hline
+		\multicolumn{2}{|c|}{0-1}        & Low       & Low        & Avg       \\ \hline
+		\multicolumn{2}{|c|}{2-3}        & Low       & Avg        & High      \\ \hline
+		\multicolumn{2}{|c|}{4+}         & Avg       & High       & High      \\ \hline
+	\end{tabular}
+\end{table}
+\begin{table}[h]
+	\centering
+	\caption{EO}
+	\label{my-label}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		EO                                 & Compexity & FPs \\ \hline
+		Notify expired reservation time    & Low       & 4   \\ \hline
+		Notify the completion of payment   & Low       & 4   \\ \hline
+		Notify the execution of punishment & Low       & 4   \\ \hline
+		Notify the car Location and Price  & High      & 6   \\ \hline
+		\multicolumn{2}{|l|}{Total}                    & 18  \\ \hline
+	\end{tabular}
+\end{table}
+\newpage
 	\subsubsection{Overal estinamtion}
+	The following table summarize the overall estimation. \\
+	\begin{table}[h]
+		\centering
+		\caption{Overall estimation}
+		\label{my-label}
+		\begin{tabular}{|l|l|}
+			\hline
+			Function Type       & Value \\ \hline
+			Internal Logic File & 65    \\ \hline
+			External Logic File & 12    \\ \hline
+			External Input      & 60    \\ \hline
+			External Query      & 9     \\ \hline
+			External Output     & 18    \\ \hline
+			Total               & 164   \\ \hline
+		\end{tabular}
+	\end{table}
+\\Consider using JEE as the development tool, and the additional work for User and Cap Applicationm, we get the following estimated lines of code:
+\begin{table}[h]
+	\centering
+	\label{my-label}
+	\begin{tabular}{|l|}
+		\hline
+		SLOC = 164 * 67 = 12464 \\ \hline
+	\end{tabular}
+\end{table}
+
+\newpage
 \subsection{Cost and effort estimation: COCOMO II}
 	\subsubsection{Scale Drivers}
 	\subsubsection{Cost Drivers}
@@ -115,7 +341,6 @@ The project risk may arise during the software development. These risks mainly c
 	\item Requirements volatility[M] : Requirement may change during the development. The point is we can not add too much constraints on our stakeholders. Here we adopt a proactive approach by organizing frequently meetings with the stakeholders. By doing this, we may avoid the risk and  minimize the negative consequence.
 	\item Unrealistic schedule/budget[M] : This risk comes from both our own side and stakeholder side. During the development we may encounter various uncertain situations and risks which will slow down our process. Also budget may be tight. Here we adopt a reactive approach because we do not know how to come up with a efficient solution until we actually get trapped by the problem.
 \end{itemize}
-
 The third part of the risk is business risk. Some possible situations are presented below:
 \begin{itemize}
 	\item Management risk[L] : There is a possibility of losing the support of senior management due to a change in focus or a change in people. Since we assume there are three members in our development team, it is actually kind of critical issue, however the possibility is not high. So we adopt a reactive strategy here.
