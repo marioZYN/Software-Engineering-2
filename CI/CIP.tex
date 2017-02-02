@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage{graphicx}
 \usepackage[fontsize=11pt]{scrextend}
+\usepackage{hyperref}
 \title{Code Inspection}
 \begin{document}
 
@@ -51,9 +52,57 @@ The namespace patten is :
 		../apache-ofbiz-16.11.01/specialpurpose/birt/src/main/java/org/apache/ofbiz/birt\\/report/servlet/ViewerServletRequest.java \\ \hline
 	\end{tabular}
 \end{table}
-
+\newpage
 \section{Functional Role}
-sasd
+ \subsection{ProductionRun.java}
+ Instead of directly looking into the code, we first examine the online ofbiz document to get information of this class. This class belongs to \textbf{Manufacturing} section. 
+ The link to the 
+ \href{https://cwiki.apache.org/confluence/display/OFBIZ/Beginner%27s+Guide+to+the+Manufacturing+Process}{Online Documet}. \\
+\\The situation is described here. After a client makes order, configurable goods which our company provide require some type of manufacturing or production. If we do not have the requiring parts in our inventory, a production run is generated.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{web}
+\end{figure}
+If we log into the ofbiz web application, we can examine the production run section.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{productionRun}
+\end{figure}
+The ProductionRun class manages all the information of a certain production run activity. 
+\newpage
+ \subsection{ViewerServeltRequest}
+ By looking at the code, we find that ViewerservletRequest extends HttpServletRequestWrapper. A "HttpServletRequestWrapper" provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet. Thus the  role of this class is to represent a specific function of HttpServletRequest. More specifically, this function is getParameter();\\
+ \\Before looking into this function, let's recall what is a servlet. A servlet lives in a web container, and it is responsible for generating dynamic web contents. Servlet can be viewed as a special java class without main methods. After a client sends a HTTP request to the web server, the web container is responsible for :
+ \begin{itemize}
+ 	\item create an instance of a servlet
+ 	\item call specific method of a servlet
+ 	\item destroy a servlet
+ \end{itemize}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{web_container}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{handle_request}
+\end{figure}
+\newpage
+The web container knows which servlet to call because a servlet can have three names :
+\begin{itemize}
+	\item Client knows URL name
+	\item Deployer knows servlet secret internal name
+	\item Actual java class name
+\end{itemize}
+ The XML document is responsible for deployment.
+ \begin{figure}[h]
+ 	\centering
+ 	\includegraphics[scale = 0.7]{xml}
+ \end{figure}
+\newpage
+Now let's look at what function role is this class. \textbf{ServletRequest} defines an object to provide client request information to a servlet. The servlet container creates a ServletRequest object and passes it as an argument to the servlet's service method. A \textbf{ServletRequest} object provides data including parameter name and values, attributes, and an input stream.\\
+This java class file is used to form the parameter.
 \section{Check List}
  \subsection{ProductionRun.java}
   \subsubsection{Naming Conventions}
@@ -76,7 +125,6 @@ sasd
   \subsubsection{Files}
 
 \newpage
-  
  \subsection{ViewerServletRequest}
  \subsubsection{Naming Conventions}
  \subsubsection{Indention}
@@ -94,6 +142,21 @@ sasd
  \subsubsection{Output Format}
  \subsubsection{Computation, Comparisons, and Assignments}
  \subsubsection{Exceptions}
+ 1. The relevant exception is caught. 
+ \begin{verbatim}
+ try {
+ reportFileUrl = FlexibleLocation.resolveLocation(reportParam, loader);
+ } catch (MalformedURLException e) {
+ Debug.logError(e, module);
+ }
+ if (reportFileUrl == null) {
+ throw new IllegalArgumentException("Could not resolve location to URL: " 
+ + reportParam);
+ }
+ \end{verbatim}
+ The function in this code block tries to locate the file url. In case of wrong url and no file found, an exception is raised.
  \subsubsection{Flow of Control}
+ No \textbf{switch} and \textbf{loop} in this file.
  \subsubsection{Files}
+ This java class does not deal with file operations. 
 \end{document}
