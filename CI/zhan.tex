@@ -10,37 +10,37 @@
 \subsection{Initialization and Declaration}
 \begin{enumerate}
 \item
-All variable and class member are declared with correct type and the right visibility.
+All variable and class members are declared with correct type and the right visibility.
 \item
-All variable is being used only into the scope where they are declared.
+All variables are being used only in the scope where they are declared.
 \item
-We have not a constructor with empty parameter, so when declared there are not a default constructor is called. But when the class ProductionRun is initialized, there is a constructor that can be called.
+We do not have a constructor with  an empty parameter, so when declaring there is no  default constructor called. But when the class ProductionRun is initialized, there is a constructor that can be called.
 \item
-All object references are initialized before use.
+All object references are initialized before used.
 \item
-Several attributes variable have not been initialized explicitly. They may assume a standard value in phase of computation. 
+Several variable attributes have not been initialized explicitly. They may assume a standard value in phase of computation. 
 \item
-Almost declaration appear at the beginning of block, except few of them are declared after some instructions.
+Almost all declarations appear at the beginning of block, except some are declared after some instructions.
 \end{enumerate}
 \subsection{Method Calls}
 All parameters are presented in the correct order.\\
-We have found two pair of method that have same name: getEstimatedTaskTime and recalculateEstimatedCompletionDate, but each of them is refer to the same functionality.\\
-All method return correct type of value.
+We have found two pairs of method that have same name: getEstimatedTaskTime and recalculateEstimatedCompletionDate, but each of them  refers to the same functionality.\\
+All method return type is correct.
 \subsection{Array}
 There are no problem with off-by-one error or out-of-bounds, we manager the array using iterator instead of index.
 \subsection{Object Comparison}
 In class is always used == to compare a object with NULL, and just one use equals (line 85).
 \subsection{Output Format}
-The class return always the output desired.\\
-The error message is manager in the classes of exception, so from this class we can not ague on the comprehensiveness.
+The class return always the desired output.\\
+The error message is managed in the classes of exception, so from this class we can not argue on the comprehensiveness.
 \subsection{Computation, Comparisons and Assignments}
-In this java class we have not long and complex arithmetic expression or some to be take with particular attention, like division, therefore, there are not operator precedence problems.\\
-Other operators are also into correct form.\\
-The code is has no contain any explicit and implicit type conversions.
+In this java class we do not have long and complex arithmetic expressions. And there is not special arithmetic expression to be taken with particular attention(like division), therefore, there are no operator precedence problems.\\
+Other operators are also in correct form.\\
+The code does not contain any explicit and implicit type conversions.
 \subsection{Exceptions}
-For every try statement there are at least one catch statement that take over exceptions.
+For every try statement there are at least one catch statement that take care of exceptions.
 \subsection{Flow of Control}
-In the class there are not any switch statement, and for other loop they are correct instructions to form them. 
+In the class there are not any switch statement. And for loops,  they are correct.
 \subsection{Files}
 This class does not manage the files.
 \newpage
@@ -56,11 +56,11 @@ There is only one one-character variable, and it is used as parameter of catch s
 \item
 The class name is composed with three nouns, initial letter of each word is capitalized.
 \item
-We have not define any interface within the class.
+We have not defined any interface within the class.
 \item 
-There is only method in class: getParameter(), it contains a verb, also, every addition word begin with capitalized letter.
+There is only one method in class: getParameter(), it contains a verb, also, every addition word begin with capitalized letter.
 \item
-We have not attributes begin with an underscore, whatever, the initial word is lowercase, and first letter of each others is capitalized.
+We do not have attributes beginning with an underscore, whatever, the initial word is lowercase, and first letter of each others is capitalized.
 \item
 In class has a constant is written in lowercase:
 \begin{table}[hpb]

@@ -114,24 +114,87 @@ This java class file is used to form the parameter.
   \subsubsection{Java Source Files}
   \subsubsection{Package and Import Statements}
   \subsubsection{Class ans Interface Declarations}
-  \subsubsection{Initialization and Declarations}
-  \subsubsection{Method Calls}
-  \subsubsection{Arrays}
-  \subsubsection{Object Comparison}
-  \subsubsection{Output Format}
-  \subsubsection{Computation, Comparisons, and Assignments}
-  \subsubsection{Exceptions}
-  \subsubsection{Flow of Control}
-  \subsubsection{Files}
+\subsubsection{Initialization and Declaration}
+\begin{enumerate}
+	\item
+	All variable and class members are declared with correct type and the right visibility.
+	\item
+	All variables are being used only in the scope where they are declared.
+	\item
+	We do not have a constructor with  an empty parameter, so when declaring there is no  default constructor called. But when the class ProductionRun is initialized, there is a constructor that can be called.
+	\item
+	All object references are initialized before used.
+	\item
+	Several variable attributes have not been initialized explicitly. They may assume a standard value in phase of computation. 
+	\item
+	Almost all declarations appear at the beginning of block, except some are declared after some instructions.
+\end{enumerate}
+\subsubsection{Method Calls}
+All parameters are presented in the correct order.\\
+We have found two pairs of method that have same name: getEstimatedTaskTime and recalculateEstimatedCompletionDate, but each of them  refers to the same functionality.\\
+All method return type is correct.
+\subsubsection{Array}
+There are no problem with off-by-one error or out-of-bounds, we manager the array using iterator instead of index.
+\subsubsection{Object Comparison}
+In class is always used == to compare a object with NULL, and just one use equals (line 85).
+\subsubsection{Output Format}
+The class return always the desired output.\\
+The error message is managed in the classes of exception, so from this class we can not argue on the comprehensiveness.
+\subsubsection{Computation, Comparisons and Assignments}
+In this java class we do not have long and complex arithmetic expressions. And there is not special arithmetic expression to be taken with particular attention(like division), therefore, there are no operator precedence problems.\\
+Other operators are also in correct form.\\
+The code does not contain any explicit and implicit type conversions.
+\subsubsection{Exceptions}
+For every try statement there are at least one catch statement that take care of exceptions.
+\subsubsection{Flow of Control}
+In the class there are not any switch statement. And for loops,  they are correct.
+\subsubsection{Files}
+This class does not manage the files.
 
 \newpage
  \subsection{ViewerServletRequest}
- \subsubsection{Naming Conventions}
- \subsubsection{Indention}
- \subsubsection{Braces}
- \subsubsection{File Organization}
- \subsubsection{Wrapping Lines}
- \subsubsection{Comments}
+\subsubsection{Naming Conventions}
+\begin{enumerate}
+	\item 
+	The name for class ViewerServletRequest.java, and all name of its attributes, method and constant are meaningful.
+	\item
+	There is only one one-character variable, and it is used as parameter of catch statement, therefore it is "throwaway" variable.
+	\item
+	The class name is composed with three nouns, initial letter of each word is capitalized.
+	\item
+	We have not defined any interface within the class.
+	\item 
+	There is only one method in class: getParameter(), it contains a verb, also, every addition word begin with capitalized letter.
+	\item
+	We do not have attributes beginning with an underscore, whatever, the initial word is lowercase, and first letter of each others is capitalized.
+	\item
+	In class has a constant is written in lowercase:
+	\begin{table}[hpb]
+		\label{my-label}
+		\begin{tabular}{|l|}
+			\hline
+			public final static String module = ViewerServletRequest.class.getName();\\
+			\hline
+		\end{tabular}
+	\end{table} 
+	\\Where 'module' should be written using all uppercase.
+\end{enumerate}
+
+\subsubsection{Indention}
+For all indentation, we adopt the convention of four space. There are not tab used to indent. 
+\subsubsection{Braces}
+Bracing style adopted for entire class is "Kernighan and Ritchie" style. For all body of all if-else,while,do-while,try-catch and for, the curly braces are used also for only one statement.
+\subsubsection{File Organization}
+\begin{enumerate}
+	\item
+	For each section there is a blank line to separate from others.
+	\item
+	There only few line exceed 80 character (38,48,54 and 59). Neither of them exceed 120 characters.
+\end{enumerate}
+\subsubsection{Wrapping Lines}
+Every expression in the class fit on a single line, so the convention is valid.
+\subsubsection{Comments}
+The class is completely lack of comment.
  \subsubsection{Java Source Files}
  \subsubsection{Package and Import Statements}
  \subsubsection{Class ans Interface Declarations}

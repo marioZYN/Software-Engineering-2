@@ -18,3 +18,4 @@
  * Comments
 
 ### Working Hours
+* 02/02/2017 4.5h checklist
