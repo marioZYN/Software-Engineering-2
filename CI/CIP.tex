@@ -106,15 +106,134 @@ This java class file is used to form the parameter.
 \section{Check List}
  \subsection{ProductionRun.java}
   \subsubsection{Naming Conventions}
+  \begin{enumerate}
+  	\item
+  	All class names, interface names, method names, class variables, method variable, and constant used are meaningful.
+  	
+  	\item
+  	The only one one-character variable in this ProductionRun.java file is \newline
+  	GenericEntityException e \newline
+  	And it is used as a parameter for the exception, for catching the statement. Therefore it is used in the loop, and it is temporary "throwaway" variable.
+  	
+  	\item
+  	Class name of this ProductionRun.java file is: \newline
+  	ProductionRun\newline
+  	Therefore, it is with the first letter of each word in capitalized.
+  	
+  	\item
+  	There is no ant defined interface within the ProductionRun.java file.
+  	
+  	\item
+  	The methods of this file are as follow:\newline
+  	exist()\newline
+  	getGenericValue()\newline
+  	store()\newline
+  	getProductionProduced()\newline
+  	getQuantity()\newline
+  	setQuantity()\newline
+  	getEstimatedStartDate()\newline
+  	setEstimatedStartDate()\newline
+  	getEstimatedCompletionDate()\newline
+  	setEstimatedCompletionDate()\newline
+  	recalculateEstimatedCompletionDate()\newline
+  	getProductionRunName()\newline
+  	setProductionRunName()\newline
+  	getDescription()\newline
+  	setDescription()\newline
+  	getCurrentStatus()\newline
+  	getProductionRunComponents()\newline
+  	getProductionRunRoutingTasks()\newline
+  	getLastProductionRunRoutingTask()\newline
+  	clearRoutingTasksList()\newline
+  	getEstimatedTaskTime()\newline
+  	isUpdateCompletionDate()\newline
+  	All the names of methods are verbs, and with the first letter of each addition work capitalized.
+  	
+  	\item
+  	All of the class variables are as follow:\newline
+  	productionRun\newline
+  	productionRunProduct\newline
+  	productionProduced\newline
+  	quantity\newline
+  	estimatedStartDate\newline
+  	estimatedCompletionDate\newline
+  	productionRunName\newline
+  	description\newline
+  	currentStatus\newline
+  	productionRunRoutingTasks\newline
+  	dispatcher\newline
+  	There is no class variable with underscore, but all of the variables are lowercase first letter, and others with first letter capitalized.
+  	
+  	\item
+  	There are two constant:\newline
+  	\begin{table}[hpb]
+  		\label{my-label}
+  		\begin{tabular}{|l|}
+  			\hline
+  			public static final String module 
+  			= ProductionRun.class.getName();\newline\\
+  			\hline
+  		\end{tabular}
+  	\end{table} 
+  	\begin{table}[hpb]
+  		\label{my-label}
+  		\begin{tabular}{|l|}
+  			\hline
+  			public static final String resource 
+  			= "ManufacturingUiLabels";\newline\\
+  			\hline
+  		\end{tabular}
+  	\end{table} 
+  	But "module" and "resource" should be modified to "MODULE" and "RESOURCE".
+  \end{enumerate}
+  
   \subsubsection{Indention}
+  For all indention, in the file ProductionRun.java, it adopts the convention of four space and done so consistently.\newline
+  For indention, there is no tab used.
+  
   \subsubsection{Braces}
+  Bracing style adopted for entire class is ”Kernighan and Ritchie” style.\newline 
+  For all body of all if-else,while,do-while,try-catch and for, the curly braces are used also for only one statement.
+  
   \subsubsection{File Organization}
-  \subsubsection{Wrapping Lines}
+  \begin{enumerate}
+  	\item In this file, for all of the sections, there is a blank line to separate from each others.
+  	\item In this file, there is few line exceed 80 characters.
+  	\item In this file, there is no line exceed 120 characters.
+  \end{enumerate}
+  
+  \subsubsection{Wrapping Line}
+  Every expressions in the ProducationRun.java file fit on a single line, so the convention is valid.
+  
   \subsubsection{Comments}
+  In this file, all of the comments are used to adequately explain what the class, interface, methods, and blocks of code are doing.
+  What is more, there are also some comments in the method, in order to explain the detail.
+  
   \subsubsection{Java Source Files}
+  \begin{enumerate}
+  	\item In this file, contains only one single public class. \newline
+  	\item In this file, this public class is this first class in the file. \newline
+  	\item There is no external program interface. \newline
+  	\item The javadoc is completed.
+  \end{enumerate}
+  
   \subsubsection{Package and Import Statements}
-  \subsubsection{Class ans Interface Declarations}
-\subsubsection{Initialization and Declaration}
+  The package statements are in the first non-comment statement.\newline
+  And the Import statements follow with the package statements.
+  
+  \subsubsection{Class and Interface Declarations}
+  The class declarations are in the correct order. And there is no interface.\newline
+  Which is:\newline
+  \begin{enumerate}
+  	\item class documentation comment.
+  	\item class statement.
+  	\item class (static) variable.
+  	\item instance variable.
+  	\item constructors.
+  	\item methods.
+  \end{enumerate}
+  The methods are grouped by the functionality.\newline
+  
 \begin{enumerate}
 	\item
 	All variable and class members are declared with correct type and the right visibility.
@@ -196,14 +315,51 @@ Every expression in the class fit on a single line, so the convention is valid.
 \subsubsection{Comments}
 The class is completely lack of comment.
  \subsubsection{Java Source Files}
+ There is external program interface, HTTPServletRequest. 
  \subsubsection{Package and Import Statements}
- \subsubsection{Class ans Interface Declarations}
- \subsubsection{Initialization and Declarations}
- \subsubsection{Method Calls}
- \subsubsection{Arrays}
- \subsubsection{Object Comparison}
- \subsubsection{Output Format}
- \subsubsection{Computation, Comparisons, and Assignments}
+ The package statements are in the first non-comment statement. And the Import statements follow with the package statements.
+ \subsubsection{Class and Interface Declarations}
+ No problem.
+\subsubsection{Initialization and Declaration}
+\begin{enumerate}
+	\item 
+	All variables and class members are declared with correct type and the right visibility.
+	\item
+	All variables are declared in the proper scope.
+	\item
+	There is no call for the constructor.
+	\item
+	There is no object references which is used.
+	\item 
+	All variables are initialized where they are declared.
+	\item
+	All declarations appear at the beginning of block, some exceptions are declared after some instructions.
+\end{enumerate}
+
+\subsubsection{Method Calls}
+\begin{enumerate}
+	\item All of the parameters are presented in the correct order.
+	\item There is only one method: getParameter(String name), and it is been call correctly.
+	\item All method return type is correct
+\end{enumerate}
+
+\subsubsection{Arrays}
+There is no array used in this file.
+
+\subsubsection{Object Comparison}
+There are only two comparison in this ViewerServletRequest.java file, and they are used correctly.
+
+\subsubsection{Output Format}
+The class return always the desired output.
+The error message is managed in the classes of exception, so from this class we can not argue on the comprehensiveness.
+
+\subsubsection{Computation, Comparisons and Assignments}
+\begin{enumerate}
+	\item In this ViewerServletRequest.java file, we do not have long and complex arithmetic expressions.
+	\item All of the comparison and Boolean operators are correct.
+	\item For the throw-catch expression, the error condition is actually legitimate
+	\item The code does not contain any explicit and implicit type conversions.
+\end{enumerate}
  \subsubsection{Exceptions}
  1. The relevant exception is caught. 
  \begin{verbatim}
@@ -222,4 +378,12 @@ The class is completely lack of comment.
  No \textbf{switch} and \textbf{loop} in this file.
  \subsubsection{Files}
  This java class does not deal with file operations. 
+ 
+ \section{Work Time}
+ \begin{itemize}
+ 	\item 21/01/2017 ZHOU YINAN 1h document structure
+ 	\item 02/02/2017 ZHOU YINAN 3h function role and checklist
+ 	\item 02/02/2017 ZHAN YUAN	4.5h checklist
+ 	\item 04/02/2017 ZHAO KAIXIN 6h checklist
+ \end{itemize}
 \end{document}
